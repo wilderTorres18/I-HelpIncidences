@@ -1,7 +1,7 @@
-<template>
+<!-- <template>
   <div>
     <Head title="Contact" />
-    <!-- Start Hero -->
+    Start Hero
     <section class="relative z-10 overflow-hidden bg-primary pt-[120px] pb-[100px] md:pt-[130px] lg:pt-[160px]">
       <div class="container">
         <div class="-mx-4 flex flex-wrap items-center">
@@ -10,8 +10,8 @@
               <h1 class="text-4xl font-semibold text-white">{{ __(data.title) }}</h1>
             </div>
           </div>
-        </div><!--end grid-->
-      </div><!--end container-->
+        </div>end grid
+      </div>end container
       <div>
         <span class="absolute top-0 left-0 z-[-1]">
           <img src="/landing/images/header/shape-1.svg" alt="" />
@@ -20,10 +20,10 @@
           <img src="/landing/images/header/shape-2.svg" alt="" />
         </span>
       </div>
-    </section><!--end section-->
-    <!-- End Hero -->
+    </section>end section
+    End Hero 
 
-    <!-- ====== Contact Section Start -->
+     ====== Contact Section Start 
     <section class="relative z-10 overflow-hidden bg-white py-20 lg:py-[120px]">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap lg:justify-between">
@@ -133,7 +133,7 @@
         </div>
       </div>
     </section>
-    <!-- ====== Contact Section End -->
+     ====== Contact Section End 
   </div>
 </template>
 <script>
@@ -173,3 +173,4 @@ export default {
     },
 }
 </script>
+-->

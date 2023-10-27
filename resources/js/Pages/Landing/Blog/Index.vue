@@ -1,7 +1,7 @@
-<template>
+<!-- <template>
     <div>
         <Head :title="__(title)" />
-        <!-- Start Hero -->
+        Start Hero 
         <section class="relative z-10 overflow-hidden bg-primary pt-[120px] pb-[100px] md:pt-[130px] lg:pt-[160px]">
 
             <div class="container">
@@ -11,8 +11,8 @@
                             <h1 class="text-4xl font-semibold text-white">{{ __('Blogs & News') }}</h1>
                         </div>
                     </div>
-                </div><!--end grid-->
-            </div><!--end container-->
+                </div> end grid
+            </div> end container
 
             <div>
                 <span class="absolute top-0 left-0 z-[-1]">
@@ -23,10 +23,10 @@
                 </span>
             </div>
 
-        </section><!--end section-->
-        <!-- End Hero -->
+        </section> end section
+        End Hero
 
-        <!-- Start Section-->
+        Start Section
         <section class="pt-20 pb-10 lg:pt-[120px] lg:pb-20">
             <div class="container">
                 <div class="-mx-4 flex flex-wrap" v-if="posts.data.length">
@@ -53,7 +53,7 @@
                 <pagination class="mt-6" :links="posts.links" />
             </div>
         </section>
-        <!-- End -->
+         End 
     </div>
 </template>
 <script>
@@ -81,3 +81,4 @@ export default {
     }
 }
 </script>
+-->

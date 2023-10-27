@@ -1,7 +1,7 @@
-<template>
+<!--<template>
     <div>
         <Head :title="__(title)" />
-        <!-- Start Hero -->
+         Start Hero
         <section class="relative z-10 overflow-hidden bg-primary pt-[120px] pb-[100px] md:pt-[130px] lg:pt-[160px]">
             <div class="container">
                 <div class="-mx-4 flex flex-wrap items-center">
@@ -13,8 +13,8 @@
                             </ul>
                         </div>
                     </div>
-                </div><!--end grid-->
-            </div><!--end container-->
+                </div> end grid
+            </div> end container
 
             <div>
                 <span class="absolute top-0 left-0 z-[-1]">
@@ -25,10 +25,10 @@
                 </span>
             </div>
 
-        </section><!--end section-->
-        <!-- End Hero -->
+        </section> end section
+        End Hero 
 
-        <!-- Start Section-->
+        Start Section
         <section class="relative md:py-24 py-16">
             <div class="container">
                 <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
@@ -54,12 +54,12 @@
 
                         </div>
                     </div>
-                </div><!--end grid-->
-            </div><!--end container-->
+                </div> end grid
+            </div> end container
 
             <subscribe />
-        </section><!--end section-->
-        <!-- End -->
+        </section> end section
+         End 
     </div>
 </template>
 <script>
@@ -100,3 +100,4 @@ export default {
     }
 }
 </script>
+-->

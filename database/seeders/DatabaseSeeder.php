@@ -41,12 +41,12 @@ class DatabaseSeeder extends Seeder
 
         DB::table('departments')->truncate();
         Department::factory()->createMany([
-            ['name' => 'Technical'], ['name' => 'Management'], ['name' => 'Hardware'], ['name' => 'Software'], ['name' => 'Development'], ['name' => 'Admin']
+            ['name' => 'Ventas'], ['name' => 'Facturación'], ['name' => 'Soporte Técnico'], ['name' => 'Contabilidad'], ['name' => 'Sistemas'], ['name' => 'Inventario'] ,['name'=>'Otros']
         ]);
 
         DB::table('types')->truncate();
         Type::factory()->createMany([
-            ['name' => 'Service'], ['name' => 'Hardware'], ['name' => 'Software'], ['name' => 'Event'], ['name' => 'New type']
+            ['name' => 'Error en la aplicación'], ['name' => 'Problema de rendimiento'], ['name' => 'Problemas con exportación '], ['name' => 'Problemas de acceso'], ['name' => 'Consulta general'] ,['name' => 'Otros']
         ]);
     }
 }

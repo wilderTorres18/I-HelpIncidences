@@ -58,7 +58,7 @@ class TicketsController extends Controller
         if($type == 'un_assigned'){
             $whereAll[] = ['assigned_to', '=', null];
         }elseif ($type == 'open'){
-            $opened_status = Status::where('slug', 'like', '%closed%')->first();
+            $opened_status = Status::where('slug', 'like', '%cerrado%')->first();
             $whereAll[] = ['status_id', '!=', $opened_status->id];
         }elseif ($type == 'new'){
             $whereAll[] = ['created_at', '>=', date('Y-m-d').' 00:00:00'];
@@ -331,11 +331,11 @@ class TicketsController extends Controller
             return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Added the review!');
         }
 
-        $closed_status = Status::where('slug', 'like', '%close%')->first();
+        $closed_status = Status::where('slug', 'like', '%cerrado%')->first();
 
         $update_message = null;
         if($closed_status && ($ticket->status_id != $closed_status->id) && $request_data['status_id'] == $closed_status->id){
-            $update_message = 'The ticket has been closed.';
+            $update_message = 'La incidencia ha sido cerrada.';
         }elseif($ticket->status_id != $request_data['status_id']){
             $update_message = 'The status has been changed for this ticket.';
         }

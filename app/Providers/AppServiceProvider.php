@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //Español por defecto :)
         app()->setLocale('es');
 
         Inertia::share([

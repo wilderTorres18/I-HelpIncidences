@@ -45,7 +45,7 @@
                         <option v-for="s in categories" :key="s.id" :value="s.id">{{ s.name }}</option>
                     </select-input>
                     <div class="pr-6 pb-8 w-full">
-                        <label class="form-label" >Request Details:</label>
+                        <label class="form-label" >Detalles: </label>
                         <ckeditor id="ticketDetails" :editor="editor" v-model="form.details" :config="editorConfig"></ckeditor>
                     </div>
                     <input ref="file" type="file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf, .zip" class="hidden" multiple="multiple" @change="fileInputChange" />

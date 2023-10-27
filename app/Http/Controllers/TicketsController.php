@@ -134,7 +134,7 @@ class TicketsController extends Controller
         $roles = Role::pluck('id', 'slug')->all();
         $hiddenFields = Setting::where('slug', 'hide_ticket_fields')->first();
         return Inertia::render('Tickets/Create', [
-            'title' => 'Create a new ticket',
+            'title' => 'Crear una nueva incidencia',
             'hidden_fields' => $hiddenFields && $hiddenFields->value ? json_decode($hiddenFields->value) : null ,
             'customers' => User::where('role_id', $roles['customer'] ?? 0)->orWhere('id', Request::input('customer_id'))->orderBy('first_name')
                 ->limit(6)
@@ -222,7 +222,7 @@ class TicketsController extends Controller
         }
 
 
-        return Redirect::route('tickets')->with('success', 'Ticket created.');
+        return Redirect::route('tickets')->with('success', 'Incidencia Creada');
     }
 
     public function edit($uid){
@@ -392,7 +392,7 @@ class TicketsController extends Controller
             }
         }
 
-        return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Ticket updated.');
+        return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Incidencia Actualizada');
     }
 
     public function newComment(){

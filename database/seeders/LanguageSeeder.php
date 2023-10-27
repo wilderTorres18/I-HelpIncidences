@@ -15,6 +15,7 @@ class LanguageSeeder extends Seeder
      */
     public function run() {
         DB::table('languages')->truncate();
+        DB::table('languages')->insert(['name' => 'Spanish', 'code' => 'es']);
         DB::table('languages')->insert(['name' => 'English', 'code' => 'en']);
         DB::table('languages')->insert(['name' => 'German', 'code' => 'de']);
         DB::table('languages')->insert(['name' => 'Chinese', 'code' => 'cn']);
@@ -22,7 +23,6 @@ class LanguageSeeder extends Seeder
         DB::table('languages')->insert(['name' => 'Dutch', 'code' => 'nl']);
         DB::table('languages')->insert(['name' => 'Italian', 'code' => 'it']);
         DB::table('languages')->insert(['name' => 'Arabic', 'code' => 'sa']);
-        DB::table('languages')->insert(['name' => 'Spanish', 'code' => 'es']);
         DB::table('languages')->insert(['name' => 'Swedish', 'code' => 'se']);
         DB::table('languages')->insert(['name' => 'Portuguese', 'code' => 'pt']);
     }

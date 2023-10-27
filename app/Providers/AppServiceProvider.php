@@ -25,37 +25,24 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        app()->setLocale('es');
+
         Inertia::share([
             'locale' => function () {
-                $user = Auth()->user();
-                if(!empty($user['locale'])){
-                    return $user['locale'];
-                }else{
-                    return app()->getLocale();
-                }
+                return app()->getLocale();
             },
             'language' => function () {
-                $user = Auth()->user();
-                if(!empty($user['locale'])){
-                    $locale = $user['locale'];
-                }else{
-                    $locale = app()->getLocale();
-                }
+                $locale = app()->getLocale();
                 return translations(
                     resource_path('lang/'. $locale .'.json')
                 );
             },
             'dir' => function () {
-                $user = Auth()->user();
-                if(!empty($user['locale'])){
-                    $locale = $user['locale'];
-                }else{
-                    $locale = app()->getLocale();
-                }
-                $rtlCodes = ['sa','he','ur'];
+                $locale = app()->getLocale();
+                $rtlCodes = ['sa', 'he', 'ur'];
                 return in_array($locale, $rtlCodes) ? 'rtl' : 'ltr';
             }
         ]);
     }
+
 }

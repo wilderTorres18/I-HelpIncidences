@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div>
         <Head title="FAQ" />
         <section class="relative z-10 overflow-hidden bg-primary pt-[120px] pb-[100px] md:pt-[130px] lg:pt-[160px]">
@@ -10,8 +10,8 @@
                             <h1 class="text-4xl font-semibold text-white">{{ __('Frequently Asked Questions') }}</h1>
                         </div>
                     </div>
-                </div><!--end grid-->
-            </div><!--end container-->
+                </div> end grid
+            </div> end container
 
             <div>
                 <span class="absolute top-0 left-0 z-[-1]">
@@ -39,7 +39,7 @@
                         </form>
                     </div>
                 </div>
-                <!-- New Code -->
+                New Code 
 
                 <div id="accordion-open" data-accordion="open">
                     <div v-for="(faq, fi) in faqs.data" :key="faq.id">
@@ -60,7 +60,7 @@
 
                 </div>
 
-                <!-- New Code -->
+                 New Code 
             </div>
         </section>
     </div>
@@ -118,3 +118,4 @@ export default {
     }
 }
 </script>
+-->

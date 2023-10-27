@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <section class="pt-20 pb-8 lg:pt-[120px] lg:pb-[70px]">
+        <!--<section class="pt-20 pb-8 lg:pt-[120px] lg:pb-[70px]">
             <div class="container">
                 <div class="-mx-4 flex flex-wrap">
                     <div class="w-full px-4">
@@ -77,8 +77,8 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Start -->
+        </section>-->
+        <!-- Start 
         <section v-if="html.sections[2].enable_ticket_section" class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800" id="ticketSubmit">
             <div class="container">
                 <form class="card mt-2 p-4 rounded shadow-xl overflow-hidden" @submit.prevent="store" enctype="multipart/form-data">
@@ -113,7 +113,7 @@
 
                         </div>
 
-                        <!-- Attachments -->
+                        Attachments 
                         <input ref="file" type="file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf, .zip" class="hidden" multiple="multiple" @change="fileInputChange" />
                         <div class="pr-6 rtl:pl-6 pb-8 w-full lg:w-full flex-col">
                             <button type="button" class="btn flex justify-center items-center border-0" @click="fileBrowse">
@@ -127,15 +127,15 @@
                                     {{ __('Remove') }}</button>
                             </div>
                         </div>
-                        <!-- Attachments -->
+                        Attachments 
                     </div>
                     <div class="px-4 py-4 border-t border-gray-100 flex justify-end">
                         <loading-button :loading="form.processing" class="rounded-lg bg-primary py-3 px-6 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-80" type="submit">Submit</loading-button>
                     </div>
 
                 </form>
-            </div><!--end container-->
-        </section><!--end section-->
+            </div> end container
+        </section> end section-->
         <!-- End -->
 
 

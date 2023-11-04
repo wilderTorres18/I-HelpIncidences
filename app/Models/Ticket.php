@@ -13,7 +13,7 @@ class Ticket extends Model
 
     public function resolveRouteBinding($value, $field = null) {
         return $this->where($field ?? 'id', $value)->firstOrFail();
-    }
+    } 
 
     public function scopeOrderBySubject($query){
         $query->orderBy('subject');

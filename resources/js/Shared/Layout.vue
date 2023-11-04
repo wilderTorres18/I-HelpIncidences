@@ -27,7 +27,7 @@
               </div>
             </div>
             <div class="placement-top-right">
-              <dropdown class="mt-1 rtl:ml-2 language_menu_wrapper" placement="bottom-end">
+              <!-- <dropdown class="mt-1 rtl:ml-2 language_menu_wrapper" placement="bottom-end">
                 <template #default>
                   <div class="flex items-center cursor-pointer group language_menu">
                     <div class=" font-bold mr-1 rtl:mr-0 whitespace-nowrap w-[7rem]">
@@ -43,7 +43,7 @@
                     </Link>
                   </div>
                 </template>
-              </dropdown>
+              </dropdown> -->
               <dropdown class="mt-1 select_user" placement="bottom-end">
                 <template #default>
                   <div class="flex items-center cursor-pointer group">

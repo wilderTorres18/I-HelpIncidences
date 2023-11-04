@@ -142,7 +142,7 @@ class DashboardController extends Controller {
         }
 
         $unAssignedTicketQuery = Ticket::byUser($byUser)->byAssign($byAssign);
-        $openedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->where('status_id', '!=', $opened_status->id)->count();
+        $openedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->where('status_id', '!=', $opened_status?->id)->count();
         $closedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->filter(['search' => 'close'])->count();
         $totalTickets = Ticket::byUser($byUser)->byAssign($byAssign)->count();
 

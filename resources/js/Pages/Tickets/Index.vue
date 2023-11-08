@@ -102,7 +102,7 @@
                     </td>
                     <td class="border-t">
                         <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
-                            {{ __('error') === 'error' ? moment(ticket.updated_at).fromNow() : moment(ticket.updated_at).locale('zh-tw').fromNow() }}
+                            {{ ticket.updated_at }}
                         </Link>
                     </td>
                 </tr>
@@ -165,7 +165,7 @@ export default {
                 {name: 'Type', value: 'type_id', sort: true},
                 {name: 'Department', value: 'department_id', sort: true},
                 {name: 'Category', value: 'category_id', sort: true},
-                {name: 'Date', value: 'created_at', sort: true},
+                {name: 'Date', value: 'created_at', sort: true},     
                 {name: 'Updated', value: 'updated_at', sort: true},
             ],
             user_access: this.$page.props.auth.user.access,

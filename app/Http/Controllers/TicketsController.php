@@ -116,6 +116,8 @@ class TicketsController extends Controller
                         'subject' => $ticket->subject,
                         'user' => $ticket->user ? $ticket->user->first_name.' '.$ticket->user->last_name : null,
                         'priority' => $ticket->priority ? $ticket->priority->name : null,
+                        'type' => $ticket->type ? $ticket->type->name : null,
+                        'department' => $ticket->department ? $ticket->department->name : null,
                         'category' => $ticket->category ? $ticket->category->name: null,
                         'rating' => $ticket->review ? $ticket->review->rating : 0,
                         'status' => $ticket->status ? $ticket->status->name : null,
@@ -222,7 +224,7 @@ class TicketsController extends Controller
         }
 
 
-        return Redirect::route('tickets')->with('success', 'Ticket created.');
+        return Redirect::route('tickets')->with('Felicidades', 'Incidencia creada.');
     }
 
     public function edit($uid){
@@ -392,7 +394,7 @@ class TicketsController extends Controller
             }
         }
 
-        return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Ticket updated.');
+        return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Incidencia actualizada');
     }
 
     public function newComment(){

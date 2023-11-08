@@ -5,7 +5,7 @@
         <Link :href="route('home')"><logo class="block mx-auto w-full max-w-xs fill-white" height="50" /></Link>
       <form class="mt-8 bg-white dark:bg-slate-900 border border-gray-100 rounded-lg shadow-xl overflow-hidden" @submit.prevent="login">
         <div class="px-10 py-12">
-          <h2 class="text-center font-bold text-xl">{{ __('Registration') }}</h2>
+          <h2 class="text-center font-bold text-xl">{{ __('Registro') }}</h2>
           <div class="mx-auto mt-2 mb-6 w-24 border-b" />
             <flash-messages />
             <div class="flex flex-wrap -mb-8 -mr-6 p-3">
@@ -18,9 +18,9 @@
                 <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full" label="Address" type="text" autofocus autocapitalize="off" />
                 <text-input v-model="form.password" :error="form.errors.password" class="pb-8 pr-6 w-full lg:w-1/2" label="Password" type="password" :is_required="true" required />
                 <text-input v-model="form.confirm_password" :error="form.errors.confirm_password" class="pb-8 pr-6 w-full lg:w-1/2" label="Confirm Password" type="password" :is_required="true" required />
-                <loading-button :loading="form.processing" class="ml-auto btn-indigo w-full items-center justify-center" type="submit">Submit</loading-button>
+                <loading-button :loading="form.processing" class="ml-auto btn-indigo w-full items-center justify-center" type="submit">Registrate</loading-button>
             </div>
-            <div class="mt-8 flex justify-center">Already have an account? <Link class="ml-2" :href="route('login')">Login</Link></div>
+            <div class="mt-8 flex justify-center">¿Ya tienes una cuenta? <Link class="ml-2" :href="route('login')">Login</Link></div>
         </div>
       </form>
     </div>

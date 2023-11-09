@@ -25,7 +25,7 @@ class HomeController extends Controller
 
     public function index(){
         return Inertia::render('Landing/Home', [
-            'title' => 'Home - Helpdesk',
+            'title' => 'Home - I-Helpinc',
             'page' => FrontPage::where('slug', 'home')->first(),
 //            'footer' => FrontPage::where('slug', 'footer')->first(),
             'departments' => Department::orderBy('name')

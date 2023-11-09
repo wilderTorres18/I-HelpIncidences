@@ -15,7 +15,7 @@ class RolesController extends Controller {
 
     public function create(){
         return Inertia::render('Roles/Create',[
-            'title' => 'Create a new role'
+            'title' => 'Crear un nuevo rol'
         ]);
     }
 
@@ -72,7 +72,7 @@ class RolesController extends Controller {
 
     public function update(Role $role) {
         if (config('app.demo')) {
-            return Redirect::back()->with('error', 'Updating role is not allowed for the live demo.');
+            return Redirect::back()->with('error', 'No se permite actualizar el rol para la demostración en vivo.');
         }
 
         $userRequest = Request::validate([
@@ -97,9 +97,9 @@ class RolesController extends Controller {
 
     public function destroy(Role $role) {
         if (config('app.demo')) {
-            return Redirect::back()->with('error', 'Deleting role is not allowed for the live demo.');
+            return Redirect::back()->with('error', 'No se permite eliminar roles para la demostración en vivo.');
         }
         $role->delete();
-        return Redirect::route('roles')->with('success', 'The role has been deleted!');
+        return Redirect::route('roles')->with('success', '¡El rol ha sido eliminado!');
     }
 }

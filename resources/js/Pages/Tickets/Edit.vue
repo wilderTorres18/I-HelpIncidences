@@ -310,12 +310,12 @@ export default {
             this.form.comment = ''
         },
         destroy() {
-            if (confirm('Are you sure you want to delete this ticket?')) {
+            if (confirm('¿Estás seguro que quieres eliminar esta incidenicia?')) {
                 this.$inertia.delete(this.route('tickets.destroy', this.ticket.id))
             }
         },
         restore() {
-            if (confirm('Are you sure you want to restore this ticket?')) {
+            if (confirm('¿Estás seguro que quieres restaurar esta incidencia?')) {
                 this.$inertia.put(this.route('tickets.restore', this.ticket.id))
             }
         },

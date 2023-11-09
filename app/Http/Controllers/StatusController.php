@@ -34,7 +34,7 @@ class StatusController extends Controller
 
     public function create(){
         return Inertia::render('Status/Create',[
-            'title' => 'Create a new status',
+            'title' => 'Crear un nuevo estado',
         ]);
     }
 
@@ -46,7 +46,7 @@ class StatusController extends Controller
             ])
         );
 
-        return Redirect::route('status')->with('success', 'Status created.');
+        return Redirect::route('status')->with('success', 'Estado creado.');
     }
 
     public function edit(Status $status)
@@ -71,18 +71,18 @@ class StatusController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Status updated.');
+        return Redirect::back()->with('success', 'Estado actualizado.');
     }
 
     public function destroy(Status $status)
     {
         $status->delete();
-        return Redirect::route('statuses')->with('success', 'Status deleted.');
+        return Redirect::route('statuses')->with('success', 'Estado eliminado.');
     }
 
     public function restore(Status $status)
     {
         $status->restore();
-        return Redirect::back()->with('success', 'Status restored.');
+        return Redirect::back()->with('success', 'Estado restaurado.');
     }
 }

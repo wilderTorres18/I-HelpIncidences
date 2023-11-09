@@ -36,7 +36,7 @@ class TypesController extends Controller
     public function create()
     {
         return Inertia::render('Types/Create',[
-            'title' => 'Create a new type',
+            'title' => 'Crear un nuevo tipo',
         ]);
     }
 
@@ -48,7 +48,7 @@ class TypesController extends Controller
             ])
         );
 
-        return Redirect::route('types')->with('success', 'Type created.');
+        return Redirect::route('types')->with('success', 'Tipo creado.');
     }
 
     public function edit(Type $type)
@@ -71,12 +71,12 @@ class TypesController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Type updated.');
+        return Redirect::back()->with('success', 'Tipo actualizado.');
     }
 
     public function destroy(Type $type) {
         $type->delete();
-        return Redirect::route('types')->with('success', 'Type deleted.');
+        return Redirect::route('types')->with('success', 'Tipo eliminado.');
     }
 
     public function restore(Type $type){

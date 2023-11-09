@@ -10,7 +10,7 @@
         <div class="">
             <div class="mx-auto container py-6 px-2">
                 <div class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                    <div class="rounded bg-white cursor-pointer transform hover:scale-105 duration-300 transition-transform shadow-md rounded-lg border border-pink-300 mb-6 py-5 px-4" v-for="note in notes.data" :key="note.id" >
+                    <div class="bg-white cursor-pointer transform hover:scale-105 duration-300 transition-transform shadow-md rounded-lg border border-pink-300 mb-6 py-5 px-4" v-for="note in notes.data" :key="note.id">
                         <div class="w-full h-64 flex flex-col justify-between " @click="updateNote(note)">
                             <div>
                                 <h4 class=" font-bold mb-3">{{ note.name }}</h4>
@@ -115,7 +115,7 @@ export default {
             this.note_form = true
         },
         destroy() {
-            if (confirm('Are you sure you want to delete this note?')) {
+            if (confirm('¿Estás seguro que quieres eliminar esta nota?')) {
                 this.$inertia.delete(this.route('notes.delete', this.update_id),{
                     onSuccess: () => {
                         this.resetForm()

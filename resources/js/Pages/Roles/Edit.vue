@@ -120,12 +120,12 @@ export default {
             this.form.put(this.route('roles.update', this.role.id))
         },
         destroy() {
-            if (confirm('Are you sure you want to delete this role?')) {
+            if (confirm('¿Estás seguro de que deseas eliminar este rol?')) {
                 this.$inertia.delete(this.route('roles.destroy', this.role.id))
             }
         },
         restore() {
-            if (confirm('Are you sure you want to restore this role?')) {
+            if (confirm('¿Estás seguro de que deseas restaurar este rol?')) {
                 this.$inertia.put(this.route('roles.restore', this.role.id))
             }
         },

@@ -4,7 +4,7 @@
     <div class="mb-6 flex justify-between items-center">
         <search-input v-model="form.search" class="w-full max-w-md mr-4" @reset="reset"></search-input>
       <Link class="btn-indigo" :href="this.route('roles.create')">
-        <span>{{ __('Create a New Role') }}</span>
+        <span>{{ __('Crear un rol nuevo') }}</span>
       </Link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">

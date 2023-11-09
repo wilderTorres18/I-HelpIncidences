@@ -60,7 +60,7 @@ class UsersController extends Controller{
 
     public function create(){
         return Inertia::render('Users/Create',[
-            'title' => 'Create a new user',
+            'title' => 'Crear un nuevo usuario',
             'roles' => Role::orderBy('name')
                 ->get()
                 ->map
@@ -102,7 +102,7 @@ class UsersController extends Controller{
 
         event(new UserCreated(['id' => $user->id, 'password' => $userRequest['password']]));
 
-        return Redirect::route('users')->with('success', 'User created.');
+        return Redirect::route('users')->with('success', 'Usuario creado.');
     }
 
     public function edit(User $user) {
@@ -152,7 +152,7 @@ class UsersController extends Controller{
 
     public function update(User $user) {
         if (config('app.demo')) {
-            return Redirect::back()->with('error', 'Updating user is not allowed for the live demo.');
+            return Redirect::back()->with('error', 'No se permite actualizar el usuario para la demostración en vivo.');
         }
 
         Request::validate([
@@ -184,24 +184,24 @@ class UsersController extends Controller{
             $user->update(['password' => Request::get('password')]);
         }
 
-        return Redirect::back()->with('success', 'Profile updated.');
+        return Redirect::back()->with('success', 'Perfil actualizado.');
     }
 
     public function destroy(User $user) {
 
         if (config('app.demo')) {
-            return Redirect::back()->with('error', 'Deleting user is not allowed for the live demo.');
+            return Redirect::back()->with('error', 'No se permite eliminar usuarios para la demostración en vivo.');
         }
 
         $userId = $user->id;
         $user->delete();
         $this->removeUserFromRelatedTables($userId);
 
-        return Redirect::route('users')->with('success', 'User deleted!');
+        return Redirect::route('users')->with('success', 'Usuario eliminado!');
     }
     public function restore(User $user){
         $user->restore();
-        return Redirect::back()->with('success', 'User restored!');
+        return Redirect::back()->with('success', 'Usuario restaurado!');
     }
 
     private function removeUserFromRelatedTables($userId){

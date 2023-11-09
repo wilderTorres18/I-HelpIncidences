@@ -48,7 +48,7 @@ class CustomersController extends Controller {
 
     public function create(){
         return Inertia::render('Customers/Create',[
-            'title' => 'Create a new customer',
+            'title' => 'Crear un nuevo cliente',
             'countries' => Country::orderBy('name')
                 ->get()
                 ->map
@@ -78,7 +78,7 @@ class CustomersController extends Controller {
         }
         User::create($userRequest);
 
-        return Redirect::route('customers')->with('success', 'User created.');
+        return Redirect::route('customers')->with('success', 'Cliente creado.');
     }
 
     public function edit(User $user)
@@ -146,7 +146,7 @@ class CustomersController extends Controller {
             $user->update(['password' => Request::get('password')]);
         }
 
-        return Redirect::back()->with('success', 'Customer updated.');
+        return Redirect::back()->with('success', 'Cliente actualizado.');
     }
 
     public function destroy(User $user)
@@ -156,10 +156,10 @@ class CustomersController extends Controller {
         }
 
         $user->delete();
-        return Redirect::route('customers')->with('success', 'Customer deleted.');
+        return Redirect::route('customers')->with('success', 'Cliente eliminado.');
     }
     public function restore(User $user){
         $user->restore();
-        return Redirect::back()->with('success', 'Customer restored!');
+        return Redirect::back()->with('success', 'Cliente restaurado');
     }
 }

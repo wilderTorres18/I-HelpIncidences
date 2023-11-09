@@ -224,7 +224,7 @@ class TicketsController extends Controller
         }
 
 
-        return Redirect::route('tickets')->with('Felicidades', 'Incidencia creada.');
+        return Redirect::route('tickets')->with('success', 'Incidencia creada.');
     }
 
     public function edit($uid){
@@ -330,7 +330,7 @@ class TicketsController extends Controller
                 'user_id' => $user['id']
             ]);
             $ticket->update(['review_id' => $review->id]);
-            return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Added the review!');
+            return Redirect::route('tickets.edit', $ticket->uid)->with('success', '¡Agregó la reseña!');
         }
 
         $closed_status = Status::where('slug', 'like', '%close%')->first();
@@ -339,11 +339,11 @@ class TicketsController extends Controller
         if($closed_status && ($ticket->status_id != $closed_status->id) && $request_data['status_id'] == $closed_status->id){
             $update_message = 'The ticket has been closed.';
         }elseif($ticket->status_id != $request_data['status_id']){
-            $update_message = 'The status has been changed for this ticket.';
+            $update_message = 'El estado ha sido cambiado para esta incidencia.';
         }
 
         if($ticket->priority_id != $request_data['priority_id']){
-            $update_message = 'The priority has been changed for this ticket.';
+            $update_message = 'Se ha cambiado la prioridad para esta incidencia.';
         }
 
         if(empty($ticket->response) && $user['role']['slug'] === 'admin'){
@@ -421,12 +421,12 @@ class TicketsController extends Controller
     public function destroy(Ticket $ticket)
     {
         $ticket->delete();
-        return Redirect::route('tickets')->with('success', 'Ticket deleted.');
+        return Redirect::route('tickets')->with('success', 'Incidencia eliminada.');
     }
 
     public function restore(Ticket $ticket){
         $ticket->restore();
-        return Redirect::back()->with('success', 'Ticket restored.');
+        return Redirect::back()->with('success', 'Incidencia restaurada.');
     }
 
     private function sendMailCron($id, $type = null, $value = null){

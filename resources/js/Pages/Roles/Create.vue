@@ -90,7 +90,7 @@ import TextInput from '@/Shared/TextInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
-  metaInfo: { title: 'Create a New Role' },
+  metaInfo: { title: 'Crear un rol nuevo' },
   components: {
     LoadingButton,
     TextInput,

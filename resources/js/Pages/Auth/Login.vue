@@ -6,10 +6,10 @@
         <Link :href="route('home')"><logo class="block mx-auto w-full max-w-xs fill-white" height="50" /></Link>
       <form class="mt-8 bg-white dark:bg-slate-900 border border-gray-100 rounded-lg shadow-xl overflow-hidden" @submit.prevent="login">
         <div class="px-10 py-12">
-          <h2 class="text-center font-bold text-xl">{{ __('Login - Support Center!') }}</h2>
+          <h2 class="text-center font-bold text-xl">{{ __('Login - Soporte de incidencias') }}</h2>
           <div class="mx-auto mt-3 w-24 border-b" />
-          <text-input v-model="form.email" :error="form.errors.email" class="mt-10" label="Email" type="email" autofocus autocapitalize="off" />
-          <text-input v-model="form.password" :error="form.errors.password" class="mt-6" label="Password" type="password" />
+          <text-input v-model="form.email" :error="form.errors.email" class="mt-10" label="Correo Electrónico" type="email" autofocus autocapitalize="off" />
+          <text-input v-model="form.password" :error="form.errors.password" class="mt-6" label="Contraseña" type="password" />
           <label class="mt-6 select-none flex items-center" for="remember">
             <input id="remember" v-model="form.remember" class="mr-1" type="checkbox" />
             <span class="text-sm">Recuerdame</span>

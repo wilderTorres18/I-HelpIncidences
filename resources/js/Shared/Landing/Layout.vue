@@ -76,13 +76,13 @@
                                         <div class="flex justify-center mb-4">
                                             <div class="flex flex-col pr-2">
                                                 <label class="block text-gray-700 text-xs font-bold mb-2" for="firstName">
-                                                    First Name
+                                                    Nombres completos
                                                 </label>
                                                 <input v-model="init_user.firstName" class=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none" id="firstName" type="text" placeholder="First name">
                                             </div>
                                             <div class="flex flex-col pl-2">
                                                 <label class="block text-gray-700 text-xs font-bold mb-2" for="lastName">
-                                                    Last Name
+                                                    Apellidos completos
                                                 </label>
                                                 <input v-model="init_user.lastName" class=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none" id="lastName" type="text" placeholder="Last name">
                                             </div>

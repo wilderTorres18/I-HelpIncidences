@@ -9,15 +9,15 @@
           <div class="mx-auto mt-2 mb-6 w-24 border-b" />
             <flash-messages />
             <div class="flex flex-wrap -mb-8 -mr-6 p-3">
-                <text-input v-model="form.first_name" :error="form.errors.first_name" class="pb-8 pr-6 w-full lg:w-1/2" label="First name" type="text" autofocus autocapitalize="off" :is_required="true" required />
-                <text-input v-model="form.last_name" :error="form.errors.last_name" class="pb-8 pr-6 w-full lg:w-1/2" label="Last name" type="text" autofocus autocapitalize="off" :is_required="true" required />
-                <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/2" label="Email" type="email" autofocus autocapitalize="off" :is_required="true" required />
-                <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/2" label="Phone" type="text" autofocus autocapitalize="off" />
-                <text-input v-model="form.country_id" :error="form.errors.country_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Country" type="text" autofocus autocapitalize="off" />
-                <text-input v-model="form.city" :error="form.errors.city" class="pb-8 pr-6 w-full lg:w-1/2" label="City" type="text" autofocus autocapitalize="off" />
-                <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full" label="Address" type="text" autofocus autocapitalize="off" />
-                <text-input v-model="form.password" :error="form.errors.password" class="pb-8 pr-6 w-full lg:w-1/2" label="Password" type="password" :is_required="true" required />
-                <text-input v-model="form.confirm_password" :error="form.errors.confirm_password" class="pb-8 pr-6 w-full lg:w-1/2" label="Confirm Password" type="password" :is_required="true" required />
+                <text-input v-model="form.first_name" :error="form.errors.first_name" class="pb-8 pr-6 w-full lg:w-1/2" label="Nombres completos" type="text" autofocus autocapitalize="off" :is_required="true" required />
+                <text-input v-model="form.last_name" :error="form.errors.last_name" class="pb-8 pr-6 w-full lg:w-1/2" label="Apellidos completos" type="text" autofocus autocapitalize="off" :is_required="true" required />
+                <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/2" label="Email" type="Correo electrónico" autofocus autocapitalize="off" :is_required="true" required />
+                <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/2" label="Celular" type="text" autofocus autocapitalize="off" />
+                <text-input v-model="form.country_id" :error="form.errors.country_id" class="pb-8 pr-6 w-full lg:w-1/2" label="País" type="text" autofocus autocapitalize="off" />
+                <text-input v-model="form.city" :error="form.errors.city" class="pb-8 pr-6 w-full lg:w-1/2" label="Ciudad" type="text" autofocus autocapitalize="off" />
+                <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full" label="Dirección de domicilio" type="text" autofocus autocapitalize="off" />
+                <text-input v-model="form.password" :error="form.errors.password" class="pb-8 pr-6 w-full lg:w-1/2" label="Contraseña" type="password" :is_required="true" required />
+                <text-input v-model="form.confirm_password" :error="form.errors.confirm_password" class="pb-8 pr-6 w-full lg:w-1/2" label="Confirmar contraseña" type="password" :is_required="true" required />
                 <loading-button :loading="form.processing" class="ml-auto btn-indigo w-full items-center justify-center" type="submit">Registrate</loading-button>
             </div>
             <div class="mt-8 flex justify-center">¿Ya tienes una cuenta? <Link class="ml-2" :href="route('login')">Login</Link></div>

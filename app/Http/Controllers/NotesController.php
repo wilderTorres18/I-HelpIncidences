@@ -41,16 +41,16 @@ class NotesController extends Controller {
         $noteFields['user_id'] = Auth()->id();
         if(!empty($id)){
             Note::where('id', $id)->update($noteFields);
-            $message = 'Note updated!';
+            $message = '¡Nota actualizada!';
         }else{
             Note::create($noteFields);
-            $message = 'Note created!';
+            $message = '¡Nota creada!';
         }
         return Redirect::route('notes')->with('success', $message);
     }
 
     public function delete(Note $note){
         $note->delete();
-        return Redirect::back()->with('success', 'Note deleted!');
+        return Redirect::back()->with('success', '?Nota eliminada!');
     }
 }

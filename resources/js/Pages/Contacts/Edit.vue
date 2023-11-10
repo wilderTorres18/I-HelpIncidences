@@ -74,12 +74,12 @@ export default {
       this.form.put(route('contacts.update', this.contact.id))
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this contact?')) {
+      if (confirm('¿Estás seguro de que deseas eliminar este contacto?')) {
         this.$inertia.delete(route('contacts.destroy', this.contact.id))
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this contact?')) {
+      if (confirm('¿Estás seguro de que deseas restaurar este contacto')) {
         this.$inertia.put(route('contacts.restore', this.contact.id))
       }
     },

@@ -39,7 +39,7 @@ class CategoriesController extends Controller
     public function create()
     {
         return Inertia::render('Categories/Create',[
-            'title' => 'Create a new category',
+            'title' => 'Crear nueva categoria',
         ]);
     }
 
@@ -52,7 +52,7 @@ class CategoriesController extends Controller
             ])
         );
 
-        return Redirect::route('categories')->with('success', 'Category created.');
+        return Redirect::route('categories')->with('success', 'Categoria creada.');
     }
 
     public function edit(Category $category) {
@@ -76,16 +76,16 @@ class CategoriesController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Category updated.');
+        return Redirect::back()->with('success', 'Categoria actualizada.');
     }
 
     public function destroy(Category $category){
         $category->delete();
-        return Redirect::route('categories')->with('success', 'Category deleted.');
+        return Redirect::route('categories')->with('success', 'Categoria eliminada.');
     }
 
     public function restore(Category $category){
         $category->restore();
-        return Redirect::back()->with('success', 'Category restored.');
+        return Redirect::back()->with('success', 'Category restaurada.');
     }
 }

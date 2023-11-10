@@ -2,14 +2,18 @@
     <div>
         <Head :title="__(title)" />
         <div class="flex flex-col md:flex-row gap-3 mb-4 justify-between items-center ticket-filters">
-            <search-input v-model="form.search" placeholder="Search by Key, Subject, Priority, Status, Assign to..." class="w-full max-w-md search" @reset="reset"></search-input>
+            <search-input v-model="form.search" placeholder="Search by Key, Subject, Priority, Category, Type, Department, Status, Assign to..." class="w-full max-w-md search" @reset="reset"></search-input>
             <div class="filter-add-new flex flex-col gap-3 md:flex-row items-center">
                 <Link class="btn-indigo" :href="this.route('tickets.create')">
                     <span>{{ __('New Ticket') }}</span>
                 </Link>
             </div>
         </div>
+<<<<<<< HEAD
         <div class="flex flex-col gap-3 mb-4 md:flex-row w-full items-center ticket-filters">
+=======
+        <div class="flex flex-col gap-3 mb-4 md:flex-row w-full items-center ticket-filters"><!--Encabezado de tickets-->
+>>>>>>> origin/devSalvador
             <div class="mr-2 w-full">Filtrar incidencia por:</div>
             <select-input v-if="!(hidden_fields && hidden_fields.includes('ticket_type'))" v-model="form.type_id" class="mr-2 w-full">
                 <option :value="null">{{ __('Type') }}</option>
@@ -31,11 +35,11 @@
                 <option :value="null">{{ __('Status') }}</option>
                 <option v-for="s in statuses" :key="s.id" :value="s.id">{{ s.name }}</option>
             </select-input>
-            <select-input-filter :placeholder="__('Assign To')" :onInput="doFilter" @focus="doFilter" :items="assignees"
+            <select-input-filter :placeholder="__('Asignado a')" :onInput="doFilter" @focus="doFilter" :items="assignees"
                                  v-if="!(hidden_fields && hidden_fields.includes('assigned_to')) && user_access.ticket.update"
                                  v-model="form.assigned_to" class=" w-full">
             </select-input-filter>
-        </div>
+        </div> 
         <div class="bg-white rounded-md shadow overflow-x-auto">
             <table class="min-w-full whitespace-nowrap ticket_list">
                 <tr class="text-left font-bold">
@@ -82,17 +86,32 @@
                     </td>
                     <td class="border-t">
                         <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
-                            {{ __('error') === 'error' ? moment(ticket.created_at).fromNow() : moment(ticket.created_at).locale('zh-tw').fromNow() }}
+                            {{ ticket.ticket_type }}
                         </Link>
                     </td>
                     <td class="border-t">
                         <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
-                            {{ __('error') === 'error' ? moment(ticket.updated_at).fromNow() : moment(ticket.updated_at).locale('zh-tw').fromNow() }}
+                            {{ ticket.department }}
+                        </Link>
+                    </td>
+                    <td class="border-t">
+                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
+                            {{ ticket.category }}
+                        </Link>
+                    </td>
+                    <td class="border-t">
+                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
+                            {{ ticket.created_at }}
+                        </Link>
+                    </td>
+                    <td class="border-t">
+                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
+                            {{ ticket.updated_at }}
                         </Link>
                     </td>
                 </tr>
                 <tr v-if="tickets.data.length === 0">
-                    <td class="border-t px-6 py-4" colspan="9">{{ __('No ticket found.') }}</td>
+                    <td class="border-t px-6 py-4" colspan="9">{{ __('Incidencias no encontradas.') }}</td>
                 </tr>
             </table>
         </div>
@@ -147,7 +166,10 @@ export default {
                 {name: 'Subject', value: 'subject', sort: true},
                 {name: 'Priority', value: 'priority_id', sort: true},
                 {name: 'Status', value: 'status_id', sort: true},
-                {name: 'Date', value: 'created_at', sort: true},
+                {name: 'Type', value: 'type_id', sort: true},
+                {name: 'Department', value: 'department_id', sort: true},
+                {name: 'Category', value: 'category_id', sort: true},
+                {name: 'Date', value: 'created_at', sort: true},     
                 {name: 'Updated', value: 'updated_at', sort: true},
             ],
             user_access: this.$page.props.auth.user.access,

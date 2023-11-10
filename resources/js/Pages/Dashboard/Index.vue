@@ -86,7 +86,7 @@
               </div>
           </div>
           <div class="w-full">
-              <div class="r__wrapper flex flex-col pl-5 pl-5 pb-5 bg-white items-center rounded-lg shadow-lg rd">
+              <div class="r__wrapper flex flex-col pl-5 pb-5 bg-white items-center rounded-lg shadow-lg rd">
                   <h2 class="th__ttl font-bold text-lg pt-3">{{ __('Top ticket creator') }}</h2>
                   <div class="th__info flex flex-col pt-3">
                       <vc-donut

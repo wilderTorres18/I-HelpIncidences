@@ -1,6 +1,6 @@
-<template>
+<!-- <template>
     <div>
-        <!-- Start Hero -->
+        Start Hero
         <Head title="Home" />
         <section class="relative z-10 overflow-hidden bg-primary pt-[120px] pb-[100px] md:pt-[130px] lg:pt-[160px]">
             <div class="container">
@@ -10,8 +10,8 @@
                             <h1 class="text-4xl font-semibold text-white">{{ 'Open a ticket' }}</h1>
                         </div>
                     </div>
-                </div><!--end grid-->
-            </div><!--end container-->
+                </div>end grid
+            </div>end container
 
             <div>
                 <span class="absolute top-0 left-0 z-[-1]">
@@ -22,9 +22,9 @@
                 </span>
             </div>
 
-        </section><!--end section-->
+        </section>end section
 
-        <!-- Start -->
+         Start 
         <section class="pt-20 pb-10 lg:pt-[120px] lg:pb-20 bg-gray-50">
             <div class="container">
                 <form class="card mt-2 p-4 rounded shadow-xl overflow-hidden" @submit.prevent="store" enctype="multipart/form-data">
@@ -57,7 +57,7 @@
 
                         </div>
 
-                        <!-- Attachments -->
+                        Attachments 
                         <input ref="file" type="file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf, .zip" class="hidden" multiple="multiple" @change="fileInputChange" />
                         <div class="pr-6 pb-8 w-full lg:w-full flex-col">
                             <button type="button" class="btn flex justify-center items-center border-0" @click="fileBrowse">
@@ -71,7 +71,7 @@
                                     {{ __('Remove') }}</button>
                             </div>
                         </div>
-                        <!-- Attachments -->
+                        Attachments 
                     </div>
                     <div class="px-4 py-4 border-t border-gray-100 flex justify-end">
                         <loading-button :loading="form.processing" class="rounded-lg bg-primary py-3 px-6 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-80" type="submit">Submit</loading-button>
@@ -174,6 +174,6 @@ export default {
 }
 </script>
 
-
+-->
 
 

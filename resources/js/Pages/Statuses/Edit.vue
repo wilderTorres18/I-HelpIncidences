@@ -52,12 +52,12 @@ export default {
       this.form.put(this.route('statuses.update', this.status.id))
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this status?')) {
+      if (confirm('¿Estás seguro de que deseas eliminar este estado?')) {
         this.$inertia.delete(this.route('statuses.destroy', this.status.id))
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this status?')) {
+      if (confirm('¿Estás seguro de que deseas restaurar este estado?')) {
         this.$inertia.put(this.route('statuses.restore', this.status.id))
       }
     },

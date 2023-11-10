@@ -45,7 +45,7 @@ class ContactsController extends Controller
     public function create()
     {
         return Inertia::render('Contacts/Create', [
-            'title' => 'Create a new contact',
+            'title' => 'Crear nuevo contacto',
             'countries' => Country::orderBy('name')
                 ->get()
                 ->map
@@ -78,7 +78,7 @@ class ContactsController extends Controller
             ])
         );
 
-        return Redirect::route('contacts')->with('success', 'Contact created.');
+        return Redirect::route('contacts')->with('success', 'Contacto creado.');
     }
 
     public function edit(Contact $contact)
@@ -134,16 +134,16 @@ class ContactsController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Contact updated.');
+        return Redirect::back()->with('success', 'Contacto actualizado.');
     }
 
     public function destroy(Contact $contact) {
         $contact->delete();
-        return Redirect::route('contact')->with('success', 'Contact deleted.');
+        return Redirect::route('contact')->with('success', 'Contacto eliminado.');
     }
 
     public function restore(Contact $contact) {
         $contact->restore();
-        return Redirect::back()->with('success', 'Contact restored.');
+        return Redirect::back()->with('success', 'Contacto restaurado.');
     }
 }

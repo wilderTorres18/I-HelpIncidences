@@ -45,7 +45,7 @@
           </td>
         </tr>
         <tr v-if="contacts.data.length === 0">
-          <td class="px-6 py-4 border-t" colspan="4">{{__('No contacts found.')}}</td>
+          <td class="px-6 py-4 border-t" colspan="4">{{__('No se encontraron contactos.')}}</td>
         </tr>
       </table>
     </div>

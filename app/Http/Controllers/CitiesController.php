@@ -38,7 +38,7 @@ class CitiesController extends Controller
             ])
         );
 
-        return Redirect::route('cities')->with('success', 'City created.');
+        return Redirect::route('cities')->with('success', 'Ciudad creada.');
     }
 
     public function edit(City $city) {
@@ -57,11 +57,11 @@ class CitiesController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'City updated.');
+        return Redirect::back()->with('success', 'Ciudad actualizada.');
     }
 
     public function destroy(City $city) {
         $city->delete();
-        return Redirect::route('cities')->with('success', 'City deleted.');
+        return Redirect::route('cities')->with('success', 'Ciudad eliminada.');
     }
 }

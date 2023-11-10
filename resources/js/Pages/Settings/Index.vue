@@ -59,7 +59,7 @@
             <div class="assigned_user pr-6 pb-8 w-full lg:w-full flex flex-col">
                 <div class="font-bold text-sm mb-1">{{ __('Cron Job Instruction') }} </div>
                 <p class="mt-2 font-light">If you would like to send mail without delaying you need to set a cron job for that with once every 3 minute.</p>
-                <code class="mt-5 mb-5 prose block whitespace-pre mt-1 text-sm">*/2 * * * * /usr/bin/php artisan queue:work --queue=high,default --stop-when-empty</code>
+                <code class="mt-5 mb-5 prose block whitespace-pre text-sm">*/2 * * * * /usr/bin/php artisan queue:work --queue=high,default --stop-when-empty</code>
                 <p>After adding the above cron job you need to add <code>QUEUE_ENABLE=true</code> on the .env file </p>
             </div>
             <div class=" pr-6 pb-1 w-full lg:w-full flex flex-col">
@@ -148,7 +148,7 @@ export default {
           const vm = this;
           const enableChat = this.form.enable_options.find(o=>o.slug='chat')
           if(!!enableChat.value && !this.pusher){
-              alert('Please setup the pusher configuration to enable chat.');
+              alert('Configure el empujador para habilitar el chat.');
               return
           }
           this.form.post(this.route('global.update'), {

@@ -60,7 +60,7 @@ class SettingsController extends Controller {
         $requests = Request::all();
 
         if (config('app.demo')) {
-            return Redirect::back()->with('error', 'Updating global settings are not allowed for the live demo.');
+            return Redirect::back()->with('error', 'No se permite actualizar la configuración global para la demostración en vivo.');
         }
 
         if(!empty($requests['custom_css'])){
@@ -96,7 +96,7 @@ class SettingsController extends Controller {
             Request::file('favicon')->storeAs('/', 'favicon.png', ['disk' => 'public_path']);
         }
 
-        return Redirect::back()->with('success', 'Settings updated.');
+        return Redirect::back()->with('success', 'Ajustes actualizados.');
     }
 
     public function smtp(){
@@ -112,7 +112,7 @@ class SettingsController extends Controller {
 
     public function updateSmtp(){
         if (config('app.demo')) {
-            return Redirect::back()->with('error', 'Updating pusher setup is not allowed for the live demo.');
+            return Redirect::back()->with('error', 'No se permite actualizar la configuración del empujador para la demostración en vivo.');
         }
 
         $mailVariables = Request::validate([

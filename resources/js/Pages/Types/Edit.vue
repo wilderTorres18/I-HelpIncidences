@@ -49,12 +49,12 @@ export default {
             this.form.put(this.route('types.update', this.type.id))
         },
         destroy() {
-            if (confirm('Are you sure you want to delete this type?')) {
+            if (confirm('¿Está seguro de que desea eliminar este tipo?')) {
                 this.$inertia.delete(this.route('types.destroy', this.type.id))
             }
         },
         restore() {
-            if (confirm('Are you sure you want to restore this type?')) {
+            if (confirm('¿Estás seguro de que quieres restaurar este tipo?')) {
                 this.$inertia.put(this.route('types.restore', this.type.id))
             }
         },

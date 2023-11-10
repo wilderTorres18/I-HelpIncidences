@@ -9,7 +9,11 @@
                 </Link>
             </div>
         </div>
+<<<<<<< HEAD
+        <div class="flex flex-col gap-3 mb-4 md:flex-row w-full items-center ticket-filters">
+=======
         <div class="flex flex-col gap-3 mb-4 md:flex-row w-full items-center ticket-filters"><!--Encabezado de tickets-->
+>>>>>>> origin/devSalvador
             <div class="mr-2 w-full">Filtrar incidencia por:</div>
             <select-input v-if="!(hidden_fields && hidden_fields.includes('ticket_type'))" v-model="form.type_id" class="mr-2 w-full">
                 <option :value="null">{{ __('Type') }}</option>

@@ -17,7 +17,11 @@
         "jackiedo/dotenv-editor": "^2.0",
         "laravel/framework": "^8.65",
         "laravel/passport": "^10.4",
+<<<<<<< HEAD
+        "laravel/sanctum": "^2.15",
+=======
         "laravel/sanctum": "^2.11",
+>>>>>>> origin/devSalvador
         "laravel/tinker": "^2.5",
         "league/glide-laravel": "^1.0",
         "phpmailer/phpmailer": "^6.6",

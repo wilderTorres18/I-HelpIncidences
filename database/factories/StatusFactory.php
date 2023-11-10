@@ -15,7 +15,7 @@ class StatusFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->unique()->randomElement(['Pending', 'Processing','Completed','Delay processing', 'Waiting for confirmation', 'Closed']);
+        $name = $this->faker->unique()->randomElement(['Pendiente', 'Procesando','Completado','Procesamiento de retraso', 'Esperando por confirmación', 'Cerrado']);
         return [
             'name' => $name,
             'slug' => strtolower(str_replace(' ','_',$name)),

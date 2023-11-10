@@ -16,6 +16,6 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->truncate();
-        Category::factory(7)->create();
+        Category::factory(10)->create();
     }
 }

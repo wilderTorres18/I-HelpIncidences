@@ -29,7 +29,7 @@ class DashboardController extends Controller {
         $byUser = null;
         $byAssign = null;
         $avgWhere = [];
-        $opened_status = Status::where('slug', 'like', '%closed%')->first();
+        $opened_status = Status::where('slug', 'like', '%cerrado%')->first();
         $newTicketQuery = Ticket::select(DB::raw('*'));
         if(!empty($opened_status)){
             $avgWhere[] = ['status_id', '!=', $opened_status->id];
@@ -143,7 +143,11 @@ class DashboardController extends Controller {
 
         $unAssignedTicketQuery = Ticket::byUser($byUser)->byAssign($byAssign);
         $openedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->where('status_id', '!=', $opened_status?->id)->count();
+<<<<<<< HEAD
+        $closedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->filter(['search' => 'cerrado'])->count();
+=======
         $closedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->filter(['search' => 'close'])->count();
+>>>>>>> origin/devSalvador
         $totalTickets = Ticket::byUser($byUser)->byAssign($byAssign)->count();
 
         $customer_role = Role::where('slug', 'customer')->first();

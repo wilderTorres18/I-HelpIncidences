@@ -170,15 +170,15 @@ export default {
         generateGreetings(){
             const currentHour = this.moment().format('HH')
             if (currentHour >= 3 && currentHour < 12){
-                return 'Good Morning'
+                return 'Buenos Dias'
             } else if (currentHour >= 12 && currentHour < 15){
-                return 'Good Noon'
+                return 'Buen Mediodía'
             }else if (currentHour >= 15 && currentHour < 18){
-                return 'Good Afternoon'
+                return 'Buenas Tardes'
             }   else if (currentHour >= 18 && currentHour < 20){
-                return 'Good Evening'
+                return 'Buenas Noches'
             } else {
-                return 'Hello'
+                return 'Hola'
             }
         },
         switchMode(){

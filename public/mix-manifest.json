@@ -1,11 +1,5 @@
 {
-<<<<<<< HEAD
-    "/js/app.js": "/js/app.js?id=215a6eb8618f7c8a224785481e518d90",
+    "/js/app.js": "/js/app.js?id=580d5740bd4e31f19dd3f4a88a30b513",
     "/css/app.css": "/css/app.css?id=e3e00832b9b4846c0891576c9cb38d59",
     "/installer/css/style.css": "/installer/css/style.css?id=f10874aa10852351fd088ac67053bec8"
-=======
-    "/js/app.js": "/js/app.js?id=a9cc382a706ec31cf7f89b33022ff320",
-    "/css/app.css": "/css/app.css?id=e3e00832b9b4846c0891576c9cb38d59",
-    "/installer/css/style.css": "/installer/css/style.css?id=bd2975c8e5e5613c2a41f80828bd2288"
->>>>>>> origin/devT
 }

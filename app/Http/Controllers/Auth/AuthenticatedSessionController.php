@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -15,31 +16,37 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
      * Display the login view.
      *
-     * @return \Inertia\Response
+     * @return Response
      */
-    public function create() {
+    public function create(): Response
+    {
         $is_demo = (int)config('app.demo');
         return Inertia::render('Auth/Login', ['is_demo' => $is_demo]);
     }
 
-    public function register() {
+    public function register(): Response
+    {
         $is_demo = (int)config('app.demo');
         return Inertia::render('Auth/Register', ['is_demo' => $is_demo]);
     }
 
-    public function forgotPassword() {
+    public function forgotPassword(): Response
+    {
         $is_demo = (int)config('app.demo');
         return Inertia::render('Auth/ForgotPassword', ['is_demo' => $is_demo]);
     }
 
-    public function forgotPasswordMail(Request $request) {
+    public function forgotPasswordMail(Request $request): RedirectResponse
+    {
         $requestData = $request->validate(['email' => 'required|email|exists:users']);
 
         $token = Str::random(64);
@@ -54,11 +61,13 @@ class AuthenticatedSessionController extends Controller
         return back()->with('success', 'We have e-mailed your password reset link!');
     }
 
-    public function forgotPasswordToken($token){
+    public function forgotPasswordToken($token): Response
+    {
         return Inertia::render('Auth/ForgotPasswordInput', ['token' => $token]);
     }
 
-    public function forgotPasswordStore(Request $request){
+    public function forgotPasswordStore(Request $request): RedirectResponse
+    {
         $requestData = $request->validate([
             'email' => 'required|email|exists:users',
             'password' => 'required|string|min:6|confirmed',
@@ -86,13 +95,13 @@ class AuthenticatedSessionController extends Controller
     }
 
 
-
     /**
      * Handle an incoming authentication request.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
+     * @throws ValidationException
      */
-    public function store(LoginRequest $request)
+    public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
         $request->session()->regenerate();
@@ -101,16 +110,16 @@ class AuthenticatedSessionController extends Controller
     }
 
 
-    public function registerStore(Request $request) {
+    public function registerStore(Request $request): RedirectResponse
+    {
 
         $requestData = $request->validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'min:10'],
+            'password' => ['required', 'min:6'],
             'phone' => ['nullable', 'max:20'],
-            'country_id' => ['nullable', 'max:20'],
-            'city' => ['nullable', 'max:30'],
+            'company' => ['nullable', 'max:40'],
             'address' => ['nullable'],
         ]);
 
@@ -132,9 +141,10 @@ class AuthenticatedSessionController extends Controller
     /**
      * Destroy an authenticated session.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
 

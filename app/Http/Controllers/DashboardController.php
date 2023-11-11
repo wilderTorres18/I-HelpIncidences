@@ -24,7 +24,7 @@ class DashboardController extends Controller {
         if(empty($user['role'])){
             $customerRole = $this->getCustomerRole();
             User::where('id', $user['id'])->update(['role_id' => $customerRole->id]);
-            return Auth::guard('web')->logout()->with('error', 'You need to login again!');
+            return Auth::guard('web')->logout()->with('error', '¡Necesitas iniciar sesión nuevamente!');
         }
         $byUser = null;
         $byAssign = null;

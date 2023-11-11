@@ -61,7 +61,7 @@ class TicketsController extends Controller
             $opened_status = Status::where('slug', 'like', '%cerrado%')->first();
             $whereAll[] = ['status_id', '!=', $opened_status->id];
         }elseif ($type == 'new'){
-            $whereAll[] = ['created_at', '>=', date('Y-m-d').' 00:00:00'];
+            $whereAll[] = ['created_at', '>=', date('Y-m-d')];
         }
 
         $ticketQuery = Ticket::where($whereAll);
@@ -347,7 +347,7 @@ class TicketsController extends Controller
         }
 
         if(empty($ticket->response) && $user['role']['slug'] === 'admin'){
-            $request_data['response'] = date('Y-m-d H:i:s');
+            $request_data['response'] = date('Y-m-d');
         }
 
         if(isset($request_data['due']) && !empty($request_data['due'])){

@@ -224,11 +224,7 @@ class TicketsController extends Controller
         }
 
 
-<<<<<<< HEAD
         return Redirect::route('tickets')->with('success', 'Incidencia Creada');
-=======
-        return Redirect::route('tickets')->with('success', 'Incidencia creada.');
->>>>>>> origin/devSalvador
     }
 
     public function edit($uid){
@@ -398,11 +394,7 @@ class TicketsController extends Controller
             }
         }
 
-<<<<<<< HEAD
         return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Incidencia Actualizada');
-=======
-        return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Incidencia actualizada');
->>>>>>> origin/devSalvador
     }
 
     public function newComment(){

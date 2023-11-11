@@ -12,19 +12,11 @@
           <text-input v-model="form.password" :error="form.errors.password" class="mt-6" label="Contraseña" type="password" />
           <label class="mt-6 select-none flex items-center" for="remember">
             <input id="remember" v-model="form.remember" class="mr-1" type="checkbox" />
-<<<<<<< HEAD
             <span class="text-sm">Recuérdame</span>
           </label>
             <loading-button :loading="form.processing" class="ml-auto btn-indigo w-full items-center justify-center mt-8" type="submit">{{ __('Login') }}</loading-button>
             <div class="mt-5 flex justify-center"><Link class="ml-2 " :href="route('password.reset')">{{ __('Forgot your password?') }}</Link></div>
             <div class="mt-5 flex justify-center">¿No tienes una cuenta? <Link class="ml-2 " :href="route('register')">{{ __('Register') }}</Link></div>
-=======
-            <span class="text-sm">Recuerdame</span>
-          </label>
-            <loading-button :loading="form.processing" class="ml-auto btn-indigo w-full items-center justify-center mt-8" type="submit">{{ __('Login') }}</loading-button>
-            <div class="mt-5 flex justify-center"><Link class="ml-2 " :href="route('password.reset')">{{ __('¿Olvidaste tu contraseña?') }}</Link></div>
-            <div class="mt-5 flex justify-center">¿No tienes una cuenta? <Link class="ml-2 " :href="route('register')">{{ __('Registrate') }}</Link></div>
->>>>>>> origin/devSalvador
         </div>
           <div class=" py-4 bg-gray-100 dark:bg-slate-900 border-t border-gray-100 dark:border-gray-700 flex flex-col gap-1 login-as items-center" v-if="is_demo">
               <h2 class="text-sm font-bold mb-3">Login As: </h2>

@@ -14,41 +14,41 @@
                 </div>
                 <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-3/12">
                     <div class="mb-10 w-full">
-                        <h4 class="mb-9 text-lg font-semibold text-white">Company</h4>
+                        <h4 class="mb-9 text-lg font-semibold text-white">Empresa</h4>
                         <ul>
                             <li v-if="!!this.enable_option && this.enable_option.show_login">
                                 <a :href="route('login')" class="mb-2 inline-block text-base leading-loose text-[#f3f4fe] hover:text-primary"> Login</a>
                             </li>
                             <li v-if="!!this.enable_option && this.enable_option.show_login">
-                                <a :href="route('register')" class="mb-2 inline-block text-base leading-loose text-[#f3f4fe] hover:text-primary"> Register</a>
+                                <a :href="route('register')" class="mb-2 inline-block text-base leading-loose text-[#f3f4fe] hover:text-primary"> Registrate</a>
                             </li>
-                            <li v-if="!!this.enable_option && this.enable_option.blog">
+                            <!-- <li v-if="!!this.enable_option && this.enable_option.blog">
                                 <a :href="route('blog')" class="mb-2 inline-block text-base leading-loose text-[#f3f4fe] hover:text-primary">
                                     Blog
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
                 <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-3/12">
                     <div class="mb-10 w-full">
-                        <h4 class="mb-9 text-lg font-semibold text-white">Usefull Links</h4>
+                        <h4 class="mb-9 text-lg font-semibold text-white">Enlaces útiles</h4>
                         <ul>
                             <li>
-                                <a :href="route('terms_service')" class="mb-2 inline-block text-base leading-loose text-[#f3f4fe] hover:text-primary"> Terms of Services</a>
+                                <a :href="route('terms_service')" class="mb-2 inline-block text-base leading-loose text-[#f3f4fe] hover:text-primary"> Terminos y condiciones</a>
                             </li>
                             <li>
-                                <a :href="route('privacy')" class="mb-2 inline-block text-base leading-loose text-[#f3f4fe] hover:text-primary"> Privacy Policy</a>
+                                <a :href="route('privacy')" class="mb-2 inline-block text-base leading-loose text-[#f3f4fe] hover:text-primary"> Políticas de privacidad</a>
                             </li>
-                            <li v-if="!!this.enable_option && this.enable_option.kb">
+                            <!-- <li v-if="!!this.enable_option && this.enable_option.kb">
                                 <a :href="route('kb')" class="mb-2 inline-block text-base leading-loose text-[#f3f4fe] hover:text-primary">
                                     Knowledge Base
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
-                <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-3/12">
+                <!-- <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-3/12">
                     <div class="mb-10 w-full">
                         <h4 class="mb-9 text-lg font-semibold text-white">Newsletter</h4>
                         <p class="mt-5 text-white">Join our newsletter service.</p>
@@ -65,8 +65,8 @@
                                 <loading-button :loading="form.processing" class="rounded-lg bg-primary py-3 px-6 text-base font-medium justify-center text-white duration-300 ease-in-out hover:bg-opacity-80" type="submit">{{ __('Submit') }}</loading-button>
                             </div>
                         </form>
-                    </div><!--end col-->
-                </div>
+                    </div>end col
+                </div> -->
             </div>
         </div>
 
@@ -111,7 +111,7 @@ export default {
     data() {
         return {
             footer_content: this.footer ? JSON.parse(this.footer.html) : [],
-            footer_text: this.footer ? JSON.parse(this.footer.html).text: 'Start working with HelpDesk that can provide everything you need to generate awareness, drive traffic, connect.',
+            footer_text: this.footer ? JSON.parse(this.footer.html).text: 'Comience a trabajar con I-Helpinc que puede brindarle todo lo que necesita para generar conciencia, generar tráfico y conectarse.',
             form: this.$inertia.form({
                 email: '',
             }),

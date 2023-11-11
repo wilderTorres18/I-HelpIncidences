@@ -9,7 +9,7 @@
                 </Link>
             </div>
         </div>
-        <div class="flex flex-col gap-3 mb-4 md:flex-row w-full items-center ticket-filters"><!--Encabezado de tickets-->
+        <div class="flex flex-col gap-3 mb-4 md:flex-row w-full items-center ticket-filters">
             <div class="mr-2 w-full">Filtrar incidencia por:</div>
             <select-input v-if="!(hidden_fields && hidden_fields.includes('ticket_type'))" v-model="form.type_id" class="mr-2 w-full">
                 <option :value="null">{{ __('Type') }}</option>
@@ -35,7 +35,7 @@
                                  v-if="!(hidden_fields && hidden_fields.includes('assigned_to')) && user_access.ticket.update"
                                  v-model="form.assigned_to" class=" w-full">
             </select-input-filter>
-        </div> 
+        </div>
         <div class="bg-white rounded-md shadow overflow-x-auto">
             <table class="min-w-full whitespace-nowrap ticket_list">
                 <tr class="text-left font-bold">
@@ -165,7 +165,7 @@ export default {
                 {name: 'Type', value: 'type_id', sort: true},
                 {name: 'Department', value: 'department_id', sort: true},
                 {name: 'Category', value: 'category_id', sort: true},
-                {name: 'Date', value: 'created_at', sort: true},     
+                {name: 'Date', value: 'created_at', sort: true},
                 {name: 'Updated', value: 'updated_at', sort: true},
             ],
             user_access: this.$page.props.auth.user.access,

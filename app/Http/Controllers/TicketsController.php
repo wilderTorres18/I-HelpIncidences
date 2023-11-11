@@ -224,7 +224,7 @@ class TicketsController extends Controller
         }
 
 
-        return Redirect::route('tickets')->with('success', 'Incidencia creada.');
+        return Redirect::route('tickets')->with('success', 'Incidencia Creada');
     }
 
     public function edit($uid){
@@ -394,7 +394,7 @@ class TicketsController extends Controller
             }
         }
 
-        return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Incidencia actualizada');
+        return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Incidencia Actualizada');
     }
 
     public function newComment(){

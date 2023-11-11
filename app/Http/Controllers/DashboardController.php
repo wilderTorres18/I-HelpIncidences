@@ -141,6 +141,8 @@ class DashboardController extends Controller {
             $months[$tkey] = $total;
         }
 
+        //@TODO corregir este Bug wilder18.
+
         $unAssignedTicketQuery = Ticket::byUser($byUser)->byAssign($byAssign);
         $openedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->where('status_id', '!=', $opened_status?->id)->count();
         $closedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->filter(['search' => 'close'])->count();

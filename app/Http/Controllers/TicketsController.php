@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class TicketsController extends Controller
 {
@@ -35,7 +36,8 @@ class TicketsController extends Controller
         $this->middleware(RedirectIfNotParmitted::class.':ticket');
     }
 
-    public function index(){
+    public function index(): Response
+    {
         $byCustomer = null;
         $byAssign = null;
         $user = Auth()->user();
@@ -58,7 +60,7 @@ class TicketsController extends Controller
         if($type == 'un_assigned'){
             $whereAll[] = ['assigned_to', '=', null];
         }elseif ($type == 'open'){
-            $opened_status = Status::where('slug', 'like', '%cerrado%')->first();
+            $opened_status = Status::where('slug', 'like', '%closed%')->first();
             $whereAll[] = ['status_id', '!=', $opened_status->id];
         }elseif ($type == 'new'){
             $whereAll[] = ['created_at', '>=', date('Y-m-d').' 00:00:00'];
@@ -333,7 +335,7 @@ class TicketsController extends Controller
             return Redirect::route('tickets.edit', $ticket->uid)->with('success', '¡Agregó la reseña!');
         }
 
-        $closed_status = Status::where('slug', 'like', '%cerrado%')->first();
+        $closed_status = Status::where('slug', 'like', '%closed%')->first();
 
         $update_message = null;
         if($closed_status && ($ticket->status_id != $closed_status->id) && $request_data['status_id'] == $closed_status->id){

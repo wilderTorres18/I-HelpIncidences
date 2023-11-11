@@ -9,7 +9,7 @@
                 <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
 
 
-                    <select-input-filter placeholder="Start typing" :onInput="doFilter" :items="customers"
+                    <select-input-filter placeholder="Empezar a escribir" :onInput="doFilter" :items="customers"
                                          v-if="user_access.ticket.update"
                                          v-model="form.user_id" :error="form.errors.user_id"
                                          class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Customer')">
@@ -29,7 +29,7 @@
                         <option v-for="s in departments" :key="s.id" :value="s.id">{{ s.name }}</option>
                     </select-input>
 
-                    <select-input-filter placeholder="Start typing" :onInput="doFilterUsersExceptCustomer" :items="usersExceptCustomers"
+                    <select-input-filter placeholder="Empezar a escribir" :onInput="doFilterUsersExceptCustomer" :items="usersExceptCustomers"
                                          v-if="user_access.ticket.update && !(hidden_fields && hidden_fields.includes('assigned_to'))"
                                          v-model="form.assigned_to" :error="form.errors.assigned_to"
                                          class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Assigned to')">

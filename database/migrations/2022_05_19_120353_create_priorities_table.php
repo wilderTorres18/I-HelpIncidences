@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreatePrioritiesTable extends Migration
@@ -19,6 +20,14 @@ class CreatePrioritiesTable extends Migration
             $table->string('name', 50);
             $table->softDeletes();
         });
+
+        DB::table('priorities')->insert([
+            ['name'=>'Generalmente'],
+            ['name'=>'Urgente'],
+            ['name'=>'Muy Urgente'],
+            ['name'=>'Menos Urgente'],
+        ]);
+
     }
 
     /**

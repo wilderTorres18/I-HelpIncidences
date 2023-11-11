@@ -34,19 +34,19 @@ class DatabaseSeeder extends Seeder
             FrontPageSeeder::class,
             LanguageSeeder::class,
             SettingSeeder::class,
-            CategorySeeder::class,
-            PrioritySeeder::class,
-            StatusSeeder::class,
+            //CategorySeeder::class,
+            //PrioritySeeder::class,
+            //StatusSeeder::class,
         ]);
 
-        DB::table('departments')->truncate();
-        Department::factory()->createMany([
-            ['name' => 'Ventas'], ['name' => 'Facturación'], ['name' => 'Soporte Técnico'], ['name' => 'Contabilidad'], ['name' => 'Sistemas'], ['name' => 'Inventario'] ,['name'=>'Otros']
-        ]);
+//        DB::table('departments')->truncate();
+//        Department::factory()->createMany([
+//            ['name' => 'Ventas'], ['name' => 'Facturación'], ['name' => 'Soporte Técnico'], ['name' => 'Contabilidad'], ['name' => 'Sistemas'], ['name' => 'Inventario'] ,['name'=>'Otros']
+//        ]);
 
-        DB::table('types')->truncate();
-        Type::factory()->createMany([
-            ['name' => 'Error en la aplicación'], ['name' => 'Problema de rendimiento'], ['name' => 'Problemas con exportación '], ['name' => 'Problemas de acceso'], ['name' => 'Consulta general'] ,['name' => 'Otros']
-        ]);
+//        DB::table('types')->truncate();
+//        Type::factory()->createMany([
+//            ['name' => 'Error en la aplicación'], ['name' => 'Problema de rendimiento'], ['name' => 'Problemas con exportación '], ['name' => 'Problemas de acceso'], ['name' => 'Consulta general'] ,['name' => 'Otros']
+//        ]);
     }
 }

@@ -29,7 +29,7 @@ class DashboardController extends Controller {
         $byUser = null;
         $byAssign = null;
         $avgWhere = [];
-        $opened_status = Status::where('slug', 'like', '%closed%')->first();
+        $opened_status = Status::where('slug', 'like', '%cerrado%')->first();
         $newTicketQuery = Ticket::select(DB::raw('*'));
         if(!empty($opened_status)){
             $avgWhere[] = ['status_id', '!=', $opened_status->id];

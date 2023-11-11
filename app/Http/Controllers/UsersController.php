@@ -19,6 +19,7 @@ use App\Models\Review;
 use App\Models\Role;
 use App\Models\Ticket;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -76,7 +77,8 @@ class UsersController extends Controller{
         ]);
     }
 
-    public function store(){
+    public function store(): RedirectResponse
+    {
         $userRequest = Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
@@ -187,7 +189,8 @@ class UsersController extends Controller{
         return Redirect::back()->with('success', 'Perfil actualizado.');
     }
 
-    public function destroy(User $user) {
+    public function destroy(User $user): RedirectResponse
+    {
 
         if (config('app.demo')) {
             return Redirect::back()->with('error', 'No se permite eliminar usuarios para la demostración en vivo.');
@@ -199,12 +202,14 @@ class UsersController extends Controller{
 
         return Redirect::route('users')->with('success', 'Usuario eliminado!');
     }
-    public function restore(User $user){
+    public function restore(User $user): RedirectResponse
+    {
         $user->restore();
         return Redirect::back()->with('success', 'Usuario restaurado!');
     }
 
-    private function removeUserFromRelatedTables($userId){
+    private function removeUserFromRelatedTables($userId): void
+    {
         Note::where('user_id', $userId)->update(['user_id' => null]);
         PendingEmail::where('user_id', $userId)->update(['user_id' => null]);
         Review::where('user_id', $userId)->update(['user_id' => null]);

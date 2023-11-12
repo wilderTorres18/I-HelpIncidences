@@ -21,6 +21,8 @@ use App\Models\Ticket;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
@@ -118,7 +120,7 @@ class TicketsController extends Controller
                         'subject' => $ticket->subject,
                         'user' => $ticket->user ? $ticket->user->first_name.' '.$ticket->user->last_name : null,
                         'priority' => $ticket->priority ? $ticket->priority->name : null,
-                        'type' => $ticket->type ? $ticket->type->name : null,
+                        'type' => $ticket->ticketType ? $ticket->ticketType->name : null,
                         'department' => $ticket->department ? $ticket->department->name : null,
                         'category' => $ticket->category ? $ticket->category->name: null,
                         'rating' => $ticket->review ? $ticket->review->rating : 0,
@@ -133,7 +135,8 @@ class TicketsController extends Controller
         ]);
     }
 
-    public function create(){
+    public function create(): Response
+    {
         $user = Auth()->user();
         $roles = Role::pluck('id', 'slug')->all();
         $hiddenFields = Setting::where('slug', 'hide_ticket_fields')->first();
@@ -173,7 +176,8 @@ class TicketsController extends Controller
         ]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request): RedirectResponse
+    {
         $user = Auth()->user();
         $request_data = Request::validate([
             'user_id' => ['nullable', Rule::exists('users', 'id')],
@@ -229,7 +233,8 @@ class TicketsController extends Controller
         return Redirect::route('tickets')->with('success', 'Incidencia Creada');
     }
 
-    public function edit($uid){
+    public function edit($uid): Response
+    {
         $ticket = Ticket::where('uid', $uid)->orWhere('id', $uid)->first();
         $hiddenFields = Setting::where('slug', 'hide_ticket_fields')->first();
         $comment_access = 'read';
@@ -308,7 +313,8 @@ class TicketsController extends Controller
         ]);
     }
 
-    public function update(Ticket $ticket){
+    public function update(Ticket $ticket): RedirectResponse
+    {
         $user = Auth()->user();
         $request_data = Request::validate([
             'user_id' => ['nullable', Rule::exists('users', 'id')],
@@ -399,7 +405,8 @@ class TicketsController extends Controller
         return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Incidencia Actualizada');
     }
 
-    public function newComment(){
+    public function newComment(): JsonResponse
+    {
         $request = Request::all();
         $ticket = Comment::where('ticket_id', $request['ticket_id'])->count();
         if(empty($ticket)){
@@ -420,18 +427,20 @@ class TicketsController extends Controller
         return response()->json($newComment);
     }
 
-    public function destroy(Ticket $ticket)
+    public function destroy(Ticket $ticket): RedirectResponse
     {
         $ticket->delete();
         return Redirect::route('tickets')->with('success', 'Incidencia eliminada.');
     }
 
-    public function restore(Ticket $ticket){
+    public function restore(Ticket $ticket): RedirectResponse
+    {
         $ticket->restore();
         return Redirect::back()->with('success', 'Incidencia restaurada.');
     }
 
-    private function sendMailCron($id, $type = null, $value = null){
+    private function sendMailCron($id, $type = null, $value = null): void
+    {
         PendingEmail::create(['ticket_id' => $id, 'type' => $type, 'value' => $value]);
     }
 }

@@ -82,7 +82,7 @@
                     </td>
                     <td class="border-t">
                         <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
-                            {{ ticket.ticket_type }}
+                            {{ ticket.type }}
                         </Link>
                     </td>
                     <td class="border-t">
@@ -191,6 +191,9 @@ export default {
         },
     },
     methods: {
+        created() {
+            this.moment = moment
+        },
         doFilter(e){
             this.axios.get(this.route('filter.assignees', {search: e.target.value})).then((res)=>{
                 this.assignees.splice(0, this.assignees.length, ...res.data);
@@ -204,8 +207,6 @@ export default {
             this.form = mapValues(this.form, () => null)
         },
     },
-    created() {
-        this.moment = moment;
-    }
+
 }
 </script>

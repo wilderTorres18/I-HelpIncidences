@@ -191,6 +191,9 @@ export default {
         },
     },
     methods: {
+        created() {
+            this.moment = moment
+        },
         doFilter(e){
             this.axios.get(this.route('filter.assignees', {search: e.target.value})).then((res)=>{
                 this.assignees.splice(0, this.assignees.length, ...res.data);
@@ -204,8 +207,6 @@ export default {
             this.form = mapValues(this.form, () => null)
         },
     },
-    created() {
-        this.moment = moment;
-    }
+
 }
 </script>

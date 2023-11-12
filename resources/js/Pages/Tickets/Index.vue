@@ -68,7 +68,7 @@
                 </span>
               </span>
             </span>
-
+            
                     </td>
                     <td class="border-t">
                         <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">

@@ -8,7 +8,7 @@
             class="relative overflow-hidden bg-primary pt-[120px] md:pt-[130px] lg:pt-[160px]"
         >
             <div class="container">
-                <div class="-mx-4 flex flex-wrap items-center">
+                <div class="-mx-4 flex flex-wrap items-center"> 
                     <div class="w-full px-4">
                         <div
                             class="hero-content wow fadeInUp mx-auto max-w-[780px] text-center"

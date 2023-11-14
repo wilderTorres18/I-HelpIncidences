@@ -1,7 +1,7 @@
-<!--<template>
+<template>
     <div>
         <Head title="Contact" />
-         Start Hero 
+        <!-- Start Hero -->
         <section class="relative z-10 overflow-hidden bg-primary pt-[120px] pb-[100px] md:pt-[130px] lg:pt-[160px]">
             <div class="container">
                 <div class="-mx-4 flex flex-wrap items-center">
@@ -10,8 +10,8 @@
                             <h1 class="text-4xl font-semibold text-white">{{ __(data.title) }}</h1>
                         </div>
                     </div>
-                </div>end grid
-            </div>end container
+                </div><!--end grid-->
+            </div><!--end container-->
             <div>
                 <span class="absolute top-0 left-0 z-[-1]">
                     <img src="/landing/images/header/shape-1.svg" alt="" />
@@ -20,15 +20,15 @@
                     <img src="/landing/images/header/shape-2.svg" alt="" />
                 </span>
             </div>
-        </section>end section
-         End Hero 
+        </section><!--end section-->
+        <!-- End Hero -->
 
-         ====== Services Section Start 
+        <!-- ====== Services Section Start -->
         <section class="pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
             <div class="container mx-auto">
                 <div class="-mx-4 flex flex-wrap">
 
-                    New Code 
+                    <!-- New Code -->
                     <div v-for="service in page.services" class="w-full px-4 md:w-1/2 lg:w-1/3">
                         <div
                             class="mb-8 rounded-[20px] bg-white p-10 shadow-md hover:shadow-lg md:px-7 xl:px-10"
@@ -46,11 +46,11 @@
                             </p>
                         </div>
                     </div>
-                    New Code 
+                    <!-- New Code -->
                 </div>
             </div>
         </section>
-         ====== Services Section End 
+        <!-- ====== Services Section End -->
 
     </div>
 </template>
@@ -91,4 +91,3 @@ export default {
     },
 }
 </script>
--->

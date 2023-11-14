@@ -114,7 +114,7 @@ class Ticket extends Model
             $statusIds = Status::where('slug', 'like', '%'.$search.'%')->pluck('id');
             $priorityIds = Priority::where('name', 'like', '%'.$search.'%')->pluck('id');
             $assignedIds = User::where('first_name', 'like', '%'.$search.'%')->orWhere('last_name', 'like', '%'.$search.'%')->pluck('id');
-            $query
+            $query 
                 ->where('subject', 'like', '%'.$search.'%')
                 ->orWhere('uid', 'like', '%'.$search.'%')
                 ->orWhereIn('status_id', $statusIds)

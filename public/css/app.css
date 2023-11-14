@@ -3613,7 +3613,7 @@ input:checked ~ .toggle__dot {
 }
 .bg-primary {
   --tw-bg-opacity: 1;
-  background-color: rgb(48 86 211/var(--tw-bg-opacity));
+  background-color: currentColor;
 }
 .text-primary {
   --tw-bg-opacity: 1;
@@ -4007,7 +4007,7 @@ body .dark.layout_landing .sticky {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgb(48 86 211/var(--tw-bg-opacity));
+  background-color: currentColor;
 }
 .sticky .signUpBtn:hover{
   --tw-bg-opacity: 1;

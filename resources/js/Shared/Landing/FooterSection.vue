@@ -24,7 +24,7 @@
                             </li>
                             <!-- <li v-if="!!this.enable_option && this.enable_option.blog">
                                 <a :href="route('blog')" class="mb-2 inline-block text-base leading-loose text-[#f3f4fe] hover:text-primary">
-                                    Blog
+                                    Blog   
                                 </a>
                             </li> -->
                         </ul>

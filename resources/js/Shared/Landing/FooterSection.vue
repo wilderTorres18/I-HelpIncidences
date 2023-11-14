@@ -71,7 +71,7 @@
         </div>
 
         <div class="mt-12 border-t border-opacity-40 py-8 lg:mt-[60px]">
-            <div class="container">
+            <div class="container">  
                 <div class="-mx-4 flex flex-wrap justify-center">
                     <div class="my-1 flex justify-center ">
                         <p class="text-base text-center text-[#f3f4fe]" v-html="footer_content.copyright"></p>

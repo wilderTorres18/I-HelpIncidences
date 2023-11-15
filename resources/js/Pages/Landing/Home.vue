@@ -138,9 +138,6 @@
         </section> end section-->
         <!-- End -->
 
-
-
-
     </div>
 </template>
 

@@ -71,7 +71,7 @@
 
                     </td>
                     <td class="border-t">
-                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
+                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :class="getPriorityClass(ticket.priority)" :href="route('tickets.edit', ticket.uid || ticket.id)">
                             {{ ticket.priority }}
                         </Link>
                     </td>
@@ -114,6 +114,22 @@
         <pagination class="mt-4" :links="tickets.links" />
     </div>
 </template>
+
+<style>
+.priority-general {
+    color: blue;
+}
+.priority-less-urgent {
+    color: green;
+}
+.priority-very-urgent {
+    color: red;
+}
+.priority-urgent {
+    color: orange;
+}
+
+</style>
 
 <script>
 import { Link, Head } from '@inertiajs/inertia-vue3'
@@ -181,6 +197,24 @@ export default {
                 department_id: this.filters.department_id ?? null,
             },
         }
+    },
+    computed: {
+        getPriorityClass() {
+            return function(priority) {
+                switch(priority) {
+                    case 'Generalmente':
+                        return 'priority-general'
+                    case 'Menos Urgente':
+                        return 'priority-less-urgent'
+                    case 'Muy Urgente':
+                        return 'priority-very-urgent'
+                    case 'Urgente':
+                        return 'priority-urgent'
+                    default:
+                        return ''
+                }
+            }
+        },
     },
     watch: {
         form: {

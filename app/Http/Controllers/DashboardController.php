@@ -11,12 +11,14 @@ use App\Models\Ticket;
 use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class DashboardController extends Controller {
     public function index() {
@@ -29,7 +31,7 @@ class DashboardController extends Controller {
         $byUser = null;
         $byAssign = null;
         $avgWhere = [];
-        $opened_status = Status::where('slug', 'like', '%cerrado%')->first();
+        $opened_status = Status::where('slug', 'like', '%close%')->first();
         $newTicketQuery = Ticket::select(DB::raw('*'));
         if(!empty($opened_status)){
             $avgWhere[] = ['status_id', '!=', $opened_status->id];
@@ -179,7 +181,8 @@ class DashboardController extends Controller {
         ]);
     }
 
-    public function setLocale($language){
+    public function setLocale($language): RedirectResponse
+    {
         $rtlCodes = ['sa'];
         $user = Auth()->user();
         Session()->put('locale', $language);
@@ -200,7 +203,8 @@ class DashboardController extends Controller {
         return $items;
     }
 
-    public function editProfile() {
+    public function editProfile(): Response
+    {
         $user_id = Auth()->id();
         $user = User::where('id', $user_id)->first();
 

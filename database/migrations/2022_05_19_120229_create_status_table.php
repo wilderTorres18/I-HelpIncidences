@@ -25,10 +25,9 @@ class CreateStatusTable extends Migration
         DB::table('status')->insert([
             ['name'=>'Pendiente','slug'=>'pending'],
             ['name'=>'Procesando','slug'=>'processing'],
-            ['name'=>'Completado','slug'=>'completed'],
+            ['name'=>'Completado','slug'=>'closed'],
             ['name'=>'Procesamiento de retraso','slug'=>'delay_processing'],
             ['name'=>'Esperando por confirmación','slug'=>'waiting_for_confirmation'],
-            ['name'=>'Cerrado','slug'=>'closed'],
         ]);
     }
 

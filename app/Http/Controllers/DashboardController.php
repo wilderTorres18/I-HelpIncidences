@@ -26,7 +26,7 @@ class DashboardController extends Controller {
         if(empty($user['role'])){
             $customerRole = $this->getCustomerRole();
             User::where('id', $user['id'])->update(['role_id' => $customerRole->id]);
-            return Auth::guard('web')->logout()->with('error', 'You need to login again!');
+            return Auth::guard('web')->logout()->with('error', '¡Necesitas iniciar sesión nuevamente!');
         }
         $byUser = null;
         $byAssign = null;
@@ -143,9 +143,11 @@ class DashboardController extends Controller {
             $months[$tkey] = $total;
         }
 
+        //@TODO corregir este Bug wilder18.
+
         $unAssignedTicketQuery = Ticket::byUser($byUser)->byAssign($byAssign);
         $openedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->where('status_id', '!=', $opened_status?->id)->count();
-        $closedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->filter(['search' => 'cerrado'])->count();
+        $closedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->filter(['search' => 'close'])->count();
         $totalTickets = Ticket::byUser($byUser)->byAssign($byAssign)->count();
 
         $customer_role = Role::where('slug', 'customer')->first();

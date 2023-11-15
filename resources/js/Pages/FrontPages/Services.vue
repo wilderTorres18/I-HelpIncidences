@@ -17,10 +17,10 @@
                         <div class="tab-content">
                             <div class=" p-4 t-content" :class="{'active': tabs[0].active}">
                                 <span class="btn-indigo border-gray-200 float-right inline-block rounded-full mt-1 mb-1 cursor-pointer" @click="newService">
-                                    + Add New
+                                    + Nuevo servicio
                                 </span>
                                 <fieldset class="border border-solid border-gray-200 p-4 w-full mb-3 relative" v-for="(service, si) in form.html.services" :key="si">
-                                    <legend class="text-sm">Service {{ si+1 }}</legend>
+                                    <legend class="text-sm">Servicio {{ si+1 }}</legend>
                                     <span class="remove cursor-pointer items-center bg-red-700 rounded-full w-6 h-6 inline-flex justify-center absolute top-[-20px] right-[-10px] fill-white" @click="removeService(si)"><icon name="dash" class="w-4 h-5" /></span>
                                     <div class="flex flex-col md:flex-row">
                                         <text-input v-model="service.name" class="pr-6 w-full lg:w-2/3" :label="__('Name')" />
@@ -77,7 +77,7 @@ export default {
     data() {
         return {
             tabs:[
-                {'name': 'Services', 'active': true},
+                {'name': 'Servicios', 'active': true},
                 // {'name': 'Contact', 'active': false},
             ],
             services:[

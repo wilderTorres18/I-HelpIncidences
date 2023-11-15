@@ -2,7 +2,7 @@
     <div>
         <Head :title="__(title)" />
         <div class="flex flex-col md:flex-row gap-3 mb-4 justify-between items-center ticket-filters">
-            <search-input v-model="form.search" placeholder="Search by Key, Subject, Priority, Category, Type, Department, Status, Assign to..." class="w-full max-w-md search" @reset="reset"></search-input>
+            <search-input v-model="form.search" placeholder="Search by Key, Subject, Priority, Category, Type to, Department, Status, Assign to..." class="w-full max-w-md search" @reset="reset"></search-input>
             <div class="filter-add-new flex flex-col gap-3 md:flex-row items-center">
                 <Link class="btn-indigo" :href="this.route('tickets.create')">
                     <span>{{ __('New Ticket') }}</span>
@@ -68,7 +68,7 @@
                 </span>
               </span>
             </span>
-
+            
                     </td>
                     <td class="border-t">
                         <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :class="getPriorityClass(ticket.priority)" :href="route('tickets.edit', ticket.uid || ticket.id)">

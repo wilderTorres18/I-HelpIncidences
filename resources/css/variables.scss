@@ -38,7 +38,7 @@
 }
 .bg-primary{
     --tw-bg-opacity: 1;
-    background-color: rgb(48 86 211 / var(--tw-bg-opacity));
+    background-color: currentColor;
 }
 .text-primary {
     --tw-bg-opacity: 1;
@@ -67,7 +67,7 @@
     .card{
         background-color: #262932;
     }
-    .hover-bg-gray{
+    .hover-bg-gray{  
         &:hover{
             background-color: #1d1e26;
         }

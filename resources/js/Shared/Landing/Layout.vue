@@ -106,7 +106,7 @@
                     </div>
                 </div>
             </div>
-            <button class="chat_bubble " @click="toggleChat">
+            <!-- <button class="chat_bubble " @click="toggleChat">
                 <span v-if="unread_count" class="notification_badge">1</span>
                 <span class="chat__icn hover:scale-125 duration-300" v-if="!open_chat">
                     <img src="/images/svg/chat-logo-v2.svg" alt="Live Chat" />
@@ -115,7 +115,7 @@
                     <img src="/images/svg/close.svg" alt="Close Chat" />
                 </span>
                 <span class="bottom_text">let's talk</span>
-            </button>
+            </button> -->
         </div>
         <!-- Public Chat -->
 

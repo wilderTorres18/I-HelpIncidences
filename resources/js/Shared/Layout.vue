@@ -152,7 +152,6 @@ export default {
     },
     updated() {
         this.detectCurrentUrl()
-        console.log(this.selected_language)
     },
     created() {
         this.moment = moment

@@ -23,7 +23,7 @@
             />
             <select-edit-input
               v-if="!(hidden_fields && hidden_fields.includes('department'))"
-              v-model="form.department_id" placeholder="Search department"
+              v-model="form.department_id" placeholder="Buscar departamento"
               :items="departments" :error="form.errors.department_id"
               class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Department')"
               :value="ticket.department"
@@ -41,7 +41,7 @@
             />
 
             <select-edit-input
-              v-model="form.status_id" placeholder="Select status to change"
+              v-model="form.status_id" placeholder="Seleccionar estado "
               :items="statuses" :error="form.errors.status_id"
               class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Status')"
               :value="ticket.status?ticket.status.name:'N/A'"
@@ -50,7 +50,7 @@
 
             <select-edit-input
               v-if="!(hidden_fields && hidden_fields.includes('ticket_type'))"
-              v-model="form.type_id" placeholder="Search type"
+              v-model="form.type_id" placeholder="Buscar tipo"
               :items="types" :error="form.errors.type_id"
               class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Ticket type')"
               :value="ticket.type"
@@ -59,7 +59,7 @@
 
             <select-edit-input
               v-if="!(hidden_fields && hidden_fields.includes('category'))"
-              v-model="form.category_id" placeholder="Search category"
+              v-model="form.category_id" placeholder="Buscar categoría"
               :items="categories" :error="form.errors.category_id"
               class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Category')"
               :value="ticket.category"
@@ -428,7 +428,7 @@ export default {
             this.form.comment = ''
         },
         destroy() {
-            if (confirm('¿Estás seguro que quieres eliminar esta incidenicia?')) {
+            if (confirm('¿Estás seguro que quieres eliminar esta incidencia?')) {
                 this.$inertia.delete(this.route('tickets.destroy', this.ticket.id))
             }
         },

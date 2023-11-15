@@ -1,60 +1,61 @@
 <template>
-    <div>
-        <Head :title="__(title)" />
-        <div class="flex flex-col md:flex-row gap-3 mb-4 justify-between items-center ticket-filters">
-            <search-input v-model="form.search" placeholder="Search by Key, Subject, Priority, Category, Type to, Department, Status, Assign to..." class="w-full max-w-md search" @reset="reset"></search-input>
-            <div class="filter-add-new flex flex-col gap-3 md:flex-row items-center">
-                <Link class="btn-indigo" :href="this.route('tickets.create')">
-                    <span>{{ __('New Ticket') }}</span>
-                </Link>
-            </div>
-        </div>
-        <div class="flex flex-col gap-3 mb-4 md:flex-row w-full items-center ticket-filters">
-            <div class="mr-2 w-full">Filtrar incidencia por:</div>
-            <select-input v-if="!(hidden_fields && hidden_fields.includes('ticket_type'))" v-model="form.type_id" class="mr-2 w-full">
-                <option :value="null">{{ __('Type') }}</option>
-                <option v-for="s in types" :key="s.id" :value="s.id">{{ s.name }}</option>
-            </select-input>
-            <select-input v-if="!(hidden_fields && hidden_fields.includes('category'))" v-model="form.category_id" class="mr-2 w-full">
-                <option :value="null">{{ __('Category') }}</option>
-                <option v-for="s in categories" :key="s.id" :value="s.id">{{ s.name }}</option>
-            </select-input>
-            <select-input v-if="!(hidden_fields && hidden_fields.includes('department'))" v-model="form.department_id" class="mr-2 w-full">
-                <option :value="null">{{ __('Department') }}</option>
-                <option v-for="s in departments" :key="s.id" :value="s.id">{{ s.name }}</option>
-            </select-input>
-            <select-input v-model="form.priority_id" class=" mr-2 w-full">
-                <option :value="null">{{ __('Priority') }}</option>
-                <option v-for="s in priorities" :key="s.id" :value="s.id">{{ s.name }}</option>
-            </select-input>
-            <select-input v-model="form.status_id" class="mr-2 w-full">
-                <option :value="null">{{ __('Status') }}</option>
-                <option v-for="s in statuses" :key="s.id" :value="s.id">{{ s.name }}</option>
-            </select-input>
-            <select-input-filter :placeholder="__('Asignado a')" :onInput="doFilter" @focus="doFilter" :items="assignees"
-                                 v-if="!(hidden_fields && hidden_fields.includes('assigned_to')) && user_access.ticket.update"
-                                 v-model="form.assigned_to" class=" w-full">
-            </select-input-filter>
-        </div>
-        <div class="bg-white rounded-md shadow overflow-x-auto">
-            <table class="min-w-full whitespace-nowrap ticket_list">
-                <tr class="text-left font-bold">
-                    <th v-for="(h, i) in headers" :key="i">
+  <div>
+    <Head :title="__(title)" />
+    <div class="flex flex-col md:flex-row gap-3 mb-4 justify-between items-center ticket-filters">
+      <search-input v-model="form.search" placeholder="Search by Key, Subject, Priority, Category, Type to, Department, Status, Assign to..." class="w-full max-w-md search" @reset="reset" />
+      <div class="filter-add-new flex flex-col gap-3 md:flex-row items-center">
+        <Link class="btn-indigo" :href="route('tickets.create')">
+          <span>{{ __('New Ticket') }}</span>
+        </Link>
+      </div>
+    </div>
+    <div class="flex flex-col gap-3 mb-4 md:flex-row w-full items-center ticket-filters">
+      <div class="mr-2 w-full">Filtrar incidencia por:</div>
+      <select-input v-if="!(hidden_fields && hidden_fields.includes('ticket_type'))" v-model="form.type_id" class="mr-2 w-full">
+        <option :value="null">{{ __('Type') }}</option>
+        <option v-for="s in types" :key="s.id" :value="s.id">{{ s.name }}</option>
+      </select-input>
+      <select-input v-if="!(hidden_fields && hidden_fields.includes('category'))" v-model="form.category_id" class="mr-2 w-full">
+        <option :value="null">{{ __('Category') }}</option>
+        <option v-for="s in categories" :key="s.id" :value="s.id">{{ s.name }}</option>
+      </select-input>
+      <select-input v-if="!(hidden_fields && hidden_fields.includes('department'))" v-model="form.department_id" class="mr-2 w-full">
+        <option :value="null">{{ __('Department') }}</option>
+        <option v-for="s in departments" :key="s.id" :value="s.id">{{ s.name }}</option>
+      </select-input>
+      <select-input v-model="form.priority_id" class=" mr-2 w-full">
+        <option :value="null">{{ __('Priority') }}</option>
+        <option v-for="s in priorities" :key="s.id" :value="s.id">{{ s.name }}</option>
+      </select-input>
+      <select-input v-model="form.status_id" class="mr-2 w-full">
+        <option :value="null">{{ __('Status') }}</option>
+        <option v-for="s in statuses" :key="s.id" :value="s.id">{{ s.name }}</option>
+      </select-input>
+      <select-input-filter
+        v-if="!(hidden_fields && hidden_fields.includes('assigned_to')) && user_access.ticket.update" v-model="form.assigned_to" :placeholder="__('Asignado a')" :on-input="doFilter"
+        :items="assignees"
+        class=" w-full" @focus="doFilter"
+      />
+    </div>
+    <div class="bg-white rounded-md shadow overflow-x-auto">
+      <table class="min-w-full whitespace-nowrap ticket_list">
+        <tr class="text-left font-bold">
+          <th v-for="(h, i) in headers" :key="i">
             <span :class="{'sort': h.sort, 'active' : form.field === h.name},form.direction">{{ __(h.name) }}
               <span v-if="h.sort" class="icons">
                 <icon class="fill-gray-300" :class="{'fill-gray-800': (form.direction === 'desc' && form.field === h.value)}" name="up" @click="sort(h.value)" />
                 <icon class="fill-gray-300" :class="{'fill-gray-800': form.direction === 'asc' && form.field === h.value}" name="down" @click="sort(h.value)" />
               </span>
             </span>
-                    </th>
-                </tr>
-                <tr v-for="ticket in tickets.data" :key="ticket.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-                    <td class="border-t">
-                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
-                            #{{ ticket.uid || ticket.id }}
-                        </Link>
-                    </td>
-                    <td class="border-t">
+          </th>
+        </tr>
+        <tr v-for="ticket in tickets.data" :key="ticket.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
+              #{{ ticket.uid || ticket.id }}
+            </Link>
+          </td>
+          <td class="border-t">
             <span class="s__details flex flex-col">
               <span class="subject_t">{{ ticket.subject }}</span>
               <span class="user__d flex text-xs items-center pt-1">
@@ -68,68 +69,51 @@
                 </span>
               </span>
             </span>
-            
-                    </td>
-                    <td class="border-t">
-                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :class="getPriorityClass(ticket.priority)" :href="route('tickets.edit', ticket.uid || ticket.id)">
-                            {{ ticket.priority }}
-                        </Link>
-                    </td>
-                    <td class="border-t">
-                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
-                            {{ ticket.status }}
-                        </Link>
-                    </td>
-                    <td class="border-t">
-                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
-                            {{ ticket.type }}
-                        </Link>
-                    </td>
-                    <td class="border-t">
-                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
-                            {{ ticket.department }}
-                        </Link>
-                    </td>
-                    <td class="border-t">
-                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
-                            {{ ticket.category }}
-                        </Link>
-                    </td>
-                    <td class="border-t">
-                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
-                            {{ ticket.created_at }}
-                        </Link>
-                    </td>
-                    <td class="border-t">
-                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
-                            {{ ticket.updated_at }}
-                        </Link>
-                    </td>
-                </tr>
-                <tr v-if="tickets.data.length === 0">
-                    <td class="border-t px-6 py-4" colspan="9">{{ __('Incidencias no encontradas.') }}</td>
-                </tr>
-            </table>
-        </div>
-        <pagination class="mt-4" :links="tickets.links" />
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :class="getPriorityClass(ticket.priority)" :href="route('tickets.edit', ticket.uid || ticket.id)">
+              {{ ticket.priority }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
+              {{ ticket.status }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
+              {{ ticket.type }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
+              {{ ticket.department }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
+              {{ ticket.category }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
+              {{ ticket.created_at }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
+              {{ ticket.updated_at }}
+            </Link>
+          </td>
+        </tr>
+        <tr v-if="tickets.data.length === 0">
+          <td class="border-t px-6 py-4" colspan="9">{{ __('Incidencias no encontradas.') }}</td>
+        </tr>
+      </table>
     </div>
+    <pagination class="mt-4" :links="tickets.links" />
+  </div>
 </template>
-
-<style>
-.priority-general {
-    color: blue;
-}
-.priority-less-urgent {
-    color: green;
-}
-.priority-very-urgent {
-    color: red;
-}
-.priority-urgent {
-    color: orange;
-}
-
-</style>
 
 <script>
 import { Link, Head } from '@inertiajs/inertia-vue3'
@@ -230,12 +214,12 @@ export default {
         },
         doFilter(e){
             this.axios.get(this.route('filter.assignees', {search: e.target.value})).then((res)=>{
-                this.assignees.splice(0, this.assignees.length, ...res.data);
+                this.assignees.splice(0, this.assignees.length, ...res.data)
             })
         },
         sort(field) {
-            this.form.field = field;
-            this.form.direction = this.form.direction === 'asc' ? 'desc' : 'asc';
+            this.form.field = field
+            this.form.direction = this.form.direction === 'asc' ? 'desc' : 'asc'
         },
         reset() {
             this.form = mapValues(this.form, () => null)
@@ -244,3 +228,19 @@ export default {
 
 }
 </script>
+
+<style>
+.priority-general {
+    color: blue;
+}
+.priority-less-urgent {
+    color: green;
+}
+.priority-very-urgent {
+    color: red;
+}
+.priority-urgent {
+    color: orange;
+}
+
+</style>

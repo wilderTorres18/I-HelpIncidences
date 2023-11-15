@@ -127,8 +127,8 @@ class TicketsController extends Controller
                         'status' => $ticket->status ? $ticket->status->name : null,
                         'due' => $ticket->due,
                         'assigned_to' => $ticket->assignedTo? $ticket->assignedTo->first_name.' '.$ticket->assignedTo->last_name : null,
-                        'created_at' => $ticket->created_at,
-                        'updated_at' => $ticket->updated_at,
+                        'created_at' => $ticket->created_at->format('Y-m-d'),
+                        'updated_at' => $ticket->updated_at->format('Y-m-d'),
                         'deleted_at' => $ticket->deleted_at
                     ];
                 }),
@@ -360,7 +360,7 @@ class TicketsController extends Controller
 
         if(isset($request_data['due']) && !empty($request_data['due'])){
             $request_data['due'] = date('Y-m-d', strtotime($request_data['due']));
-        } 
+        }
 
         $assigned = (!empty($request_data['assigned_to']) && ($ticket->assigned_to != $request_data['assigned_to']))??false;
 

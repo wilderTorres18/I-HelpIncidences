@@ -71,12 +71,12 @@
             </span>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :class="getPriorityClass(ticket.priority)" :href="route('tickets.edit', ticket.uid || ticket.id)">
+            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :class="getPriorityClass(ticket)" :href="route('tickets.edit', ticket.uid || ticket.id)">
               {{ ticket.priority }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('tickets.edit', ticket.uid || ticket.id)">
+            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :class="getStatusClass(ticket)" :href="route('tickets.edit', ticket.uid || ticket.id)">
               {{ ticket.status }}
             </Link>
           </td>
@@ -165,7 +165,7 @@ export default {
                 {name: 'Type', value: 'type_id', sort: true},
                 {name: 'Department', value: 'department_id', sort: true},
                 {name: 'Category', value: 'category_id', sort: true},
-                {name: 'Date', value: 'created_at', sort: true},
+                {name: 'Created', value: 'created_at', sort: true},
                 {name: 'Updated', value: 'updated_at', sort: true},
             ],
             user_access: this.$page.props.auth.user.access,
@@ -182,24 +182,6 @@ export default {
             },
         }
     },
-    computed: {
-        getPriorityClass() {
-            return function(priority) {
-                switch(priority) {
-                    case 'Generalmente':
-                        return 'priority-general'
-                    case 'Menos Urgente':
-                        return 'priority-less-urgent'
-                    case 'Muy Urgente':
-                        return 'priority-very-urgent'
-                    case 'Urgente':
-                        return 'priority-urgent'
-                    default:
-                        return ''
-                }
-            }
-        },
-    },
     watch: {
         form: {
             deep: true,
@@ -209,6 +191,29 @@ export default {
         },
     },
     methods: {
+        getPriorityClass(ticket) {
+            if (ticket.status === 'Completado') {
+                return 'priority-completed'
+            }
+            switch(ticket.priority) {
+                case 'Generalmente':
+                    return 'priority-general'
+                case 'Menos Urgente':
+                    return 'priority-less-urgent'
+                case 'Muy Urgente':
+                    return 'priority-very-urgent'
+                case 'Urgente':
+                    return 'priority-urgent'
+                default:
+                    return ''
+            }
+        },
+        getStatusClass(ticket) {
+            if (ticket.status === 'Completado') {
+                return 'priority-less-urgent'
+            }
+            return ''
+        },
         created() {
             this.moment = moment
         },
@@ -241,6 +246,9 @@ export default {
 }
 .priority-urgent {
     color: orange;
+}
+.priority-completed {
+    color: grey;
 }
 
 </style>

@@ -28,12 +28,14 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class UsersController extends Controller{
     public function __construct(){
         $this->middleware(RedirectIfNotParmitted::class.':user');
     }
-    public function index(){
+    public function index(): Response
+    {
         return Inertia::render('Users/Index', [
             'title' => 'Users',
             'filters' => Request::all(['search','role_id']),
@@ -59,7 +61,8 @@ class UsersController extends Controller{
         ]);
     }
 
-    public function create(){
+    public function create(): Response
+    {
         return Inertia::render('Users/Create',[
             'title' => 'Crear un nuevo usuario',
             'roles' => Role::orderBy('name')
@@ -107,7 +110,8 @@ class UsersController extends Controller{
         return Redirect::route('users')->with('success', 'Usuario creado.');
     }
 
-    public function edit(User $user) {
+    public function edit(User $user): Response|RedirectResponse
+    {
         $a_user = Auth()->user();
 
         $roles = Role::pluck('id', 'slug')->all();
@@ -152,7 +156,8 @@ class UsersController extends Controller{
         ]);
     }
 
-    public function update(User $user) {
+    public function update(User $user): RedirectResponse
+    {
         if (config('app.demo')) {
             return Redirect::back()->with('error', 'No se permite actualizar el usuario para la demostración en vivo.');
         }
@@ -160,6 +165,7 @@ class UsersController extends Controller{
         Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
+            'company' => ['required', 'max:50'],
             'phone' => ['nullable', 'max:25'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => ['nullable'],
@@ -169,7 +175,7 @@ class UsersController extends Controller{
             'photo' => ['nullable', 'image'],
         ]);
 
-        $user->update(Request::only(['first_name', 'last_name', 'phone', 'email', 'city', 'address', 'country_id']));
+        $user->update(Request::only(['first_name', 'last_name', 'phone', 'email', 'city', 'address', 'country_id','company']));
 
         if(!empty(Request::get('role_id'))){
             $user->update(['role_id' => Request::get('password')]);

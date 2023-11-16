@@ -8,17 +8,19 @@
           <text-input v-model="form.last_name" :error="form.errors.last_name" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Apellidos completos')" />
           <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Email')" />
           <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Phone')" />
-            <text-input v-model="form.city" :error="form.errors.city" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('City')" />
-            <select-input v-model="form.country_id" :error="form.errors.country_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Country')">
-                <option :value="null" />
-                <option v-for="c in countries" :key="c.id" :value="c.id">{{ __(c.name) }}</option>
-            </select-input>
+          <text-input v-model="form.city" :error="form.errors.city" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('City')" />
+          <text-input v-model="form.company" :error="form.errors.company" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Company')" />
+
+          <!--          <select-input v-model="form.country_id" :error="form.errors.country_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Country')">
+            <option :value="null" />
+            <option v-for="c in countries" :key="c.id" :value="c.id">{{ __(c.name) }}</option>
+          </select-input>-->
           <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full" :label="__('Address')" />
           <text-input v-model="form.password" :error="form.errors.password" class="pb-8 pr-6 w-full lg:w-1/3" type="password" autocomplete="new-password" :label="__('Password')" />
           <file-input v-model="form.photo" :error="form.errors.photo" class="pb-8 pr-6 w-full lg:w-1/3" type="file" accept="image/*" label="Photo" />
-            <div class="w-full lg:w-1/3 flex items-center justify-start">
-                <img v-if="user.photo_path" class="block mb-2 w-8 h-8 rounded-full" :src="user.photo_path" />
-            </div>
+          <div class="w-full lg:w-1/3 flex items-center justify-start">
+            <img v-if="user.photo_path" class="block mb-2 w-8 h-8 rounded-full" :src="user.photo_path" />
+          </div>
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
           <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">{{ __('Update User') }} </loading-button>
@@ -64,11 +66,12 @@ export default {
         phone: this.user.phone,
         city: this.user.city,
         address: this.user.address,
+        company: this.user.company,
         country_id: this.user.country_id,
         password: '',
         role: this.user.role,
         role_id: this.user.role_id,
-        photo: null
+        photo: null,
       }),
     }
   },
@@ -77,7 +80,7 @@ export default {
   },
   methods: {
     setDefaultValue(arr, key, value){
-      const find = arr.find(i=>i.name.match(new RegExp(value + ".*")))
+      const find = arr.find(i=>i.name.match(new RegExp(value + '.*')))
       if(find){
         this.form[key] = find['id']
       }

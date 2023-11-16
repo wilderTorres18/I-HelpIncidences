@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,7 +52,8 @@ class User extends Authenticatable
         return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
 
-    public function country(){
+    public function country(): BelongsTo
+    {
         return $this->belongsTo(Country::class, 'country_id');
     }
 
@@ -58,7 +61,7 @@ class User extends Authenticatable
 //        return $this->belongsTo(City::class, 'city_id');
 //    }
 
-    public function getNameAttribute()
+    public function getNameAttribute(): string
     {
         return $this->first_name.' '.$this->last_name;
     }
@@ -75,48 +78,55 @@ class User extends Authenticatable
         }
     }
 
-    public function getCreatedAtAttribute($date){
+    public function getCreatedAtAttribute($date): string
+    {
         return Carbon::parse($date)->format('jS F, Y');
     }
 
-    public function role() {
+    public function role(): BelongsTo
+    {
         return $this->belongsTo(Role::class);
     }
 
-    public function setPasswordAttribute($password)
+    public function setPasswordAttribute($password): void
     {
         $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
     }
 
-    public function isDemoUser()
+    public function isDemoUser(): bool
     {
         return $this->email === 'johndoe@example.com';
     }
 
-    public function scopeOrderByName($query)
+    public function scopeOrderByName($query): void
     {
         $query->orderBy('last_name')->orderBy('first_name');
     }
 
-    public function scopeByRole($query, array $filters){
+    public function scopeByRole($query, array $filters): void
+    {
         $query->when($filters['role'] ?? null, function ($query, $role) {
             $query->whereRole($role);
         });
     }
 
-    public function contacts() {
+    public function contacts(): HasMany
+    {
         return $this->hasMany(Contact::class);
     }
 
-    public function comments() {
+    public function comments(): HasMany
+    {
         return $this->hasMany(Comment::class);
     }
 
-    public function tickets(){
+    public function tickets(): HasMany
+    {
         return $this->hasMany(Ticket::class);
     }
 
-    public function organizations() {
+    public function organizations(): HasMany
+    {
         return $this->hasMany(Organization::class);
     }
 
@@ -125,7 +135,7 @@ class User extends Authenticatable
      *
      * @return mixed
      */
-    public function getJWTIdentifier()
+    public function getJWTIdentifier(): mixed
     {
         return $this->getKey();
     }
@@ -135,16 +145,18 @@ class User extends Authenticatable
      *
      * @return array
      */
-    public function getJWTCustomClaims()
+    public function getJWTCustomClaims(): array
     {
         return [];
     }
 
-    public function getFullNameAttribute(){
+    public function getFullNameAttribute(): string
+    {
         return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
 
-    public function scopeFilter($query, array $filters) {
+    public function scopeFilter($query, array $filters): void
+    {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
                 $query->where('first_name', 'like', '%'.$search.'%')

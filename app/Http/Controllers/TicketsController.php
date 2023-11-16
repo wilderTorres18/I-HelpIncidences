@@ -119,6 +119,7 @@ class TicketsController extends Controller
                         'uid' => $ticket->uid,
                         'subject' => $ticket->subject,
                         'user' => $ticket->user ? $ticket->user->first_name.' '.$ticket->user->last_name : null,
+                        'company' => $ticket->user ? $ticket->user->company : null,
                         'priority' => $ticket->priority ? $ticket->priority->name : null,
                         'type' => $ticket->ticketType ? $ticket->ticketType->name : null,
                         'department' => $ticket->department ? $ticket->department->name : null,

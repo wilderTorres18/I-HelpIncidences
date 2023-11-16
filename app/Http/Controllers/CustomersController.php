@@ -8,6 +8,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
@@ -15,12 +16,14 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class CustomersController extends Controller {
     public function __construct(){
         $this->middleware(RedirectIfNotParmitted::class.':customer');
     }
-    public function index(){
+    public function index(): Response
+    {
         $customerRole = Role::where('slug', 'customer')->first();
         return Inertia::render('Customers/Index', [
             'title' => 'Customers',
@@ -37,6 +40,7 @@ class CustomersController extends Controller {
                     'country' => $user->country_id ? $user->country->name: null,
                     'email' => $user->email,
                     'phone' => $user->phone,
+                    'company'=>$user->company,
                     'role' => $user->role,
                     'role_id' => $user->role_id,
                     'photo' => $user->photo_path,
@@ -46,7 +50,8 @@ class CustomersController extends Controller {
         ]);
     }
 
-    public function create(){
+    public function create(): Response
+    {
         return Inertia::render('Customers/Create',[
             'title' => 'Crear un nuevo cliente',
             'countries' => Country::orderBy('name')
@@ -56,10 +61,12 @@ class CustomersController extends Controller {
         ]);
     }
 
-    public function store(){
+    public function store(): RedirectResponse
+    {
         $userRequest = Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
+            'company' => ['required', 'max:50'],
             'phone' => ['nullable', 'max:25'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')],
             'password' => ['nullable'],
@@ -81,7 +88,7 @@ class CustomersController extends Controller {
         return Redirect::route('customers')->with('success', 'Cliente creado.');
     }
 
-    public function edit(User $user)
+    public function edit(User $user): Response
     {
         $can_delete = 0;
         $logged_user = Auth()->user();
@@ -94,6 +101,7 @@ class CustomersController extends Controller {
                 'id' => $user->id,
                 'first_name' => $user->first_name,
                 'last_name' => $user->last_name,
+                'company' => $user->company,
                 'email' => $user->email,
                 'phone' => $user->phone,
                 'city' => $user->city,
@@ -114,7 +122,7 @@ class CustomersController extends Controller {
         ]);
     }
 
-    public function update(User $user)
+    public function update(User $user): RedirectResponse
     {
         if (config('app.demo')) {
             return Redirect::back()->with('error', 'Updating customer is not allowed for the live demo.');
@@ -123,6 +131,7 @@ class CustomersController extends Controller {
         Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
+            'company' => ['required', 'max:50'],
             'phone' => ['nullable', 'max:25'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => ['nullable'],
@@ -133,7 +142,7 @@ class CustomersController extends Controller {
             'photo' => ['nullable', 'image'],
         ]);
 
-        $user->update(Request::only('first_name', 'last_name', 'phone', 'email', 'city', 'address', 'country_id', 'role_id'));
+        $user->update(Request::only('first_name', 'last_name','company', 'phone', 'email', 'city', 'address', 'country_id', 'role_id'));
 
         if(Request::file('photo')){
             if(isset($user->photo_path) && !empty($user->photo_path) && File::exists(public_path($user->photo_path))){
@@ -149,7 +158,7 @@ class CustomersController extends Controller {
         return Redirect::back()->with('success', 'Cliente actualizado.');
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
         if (config('app.demo')) {
             return Redirect::back()->with('error', 'Deleting customer is not allowed for the live demo.');
@@ -158,7 +167,8 @@ class CustomersController extends Controller {
         $user->delete();
         return Redirect::route('customers')->with('success', 'Cliente eliminado.');
     }
-    public function restore(User $user){
+    public function restore(User $user): RedirectResponse
+    {
         $user->restore();
         return Redirect::back()->with('success', 'Cliente restaurado');
     }

@@ -24,7 +24,7 @@
                         <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/2"
                                     label="Celular" type="text" autofocus autocapitalize="off"/>
                         <text-input v-model="form.company" :error="form.errors.company" class="pb-8 pr-6 w-full lg:w-1/2"
-                                    label="Empresa" type="text" autofocus autocapitalize="off"/>
+                                    label="Empresa" type="text" autofocus autocapitalize="off" :is_required="true" required/>
                         <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full lg:w-1/2"
                                     label="Dirección de domicilio" type="text" autofocus autocapitalize="off"/>
                         <text-input v-model="form.password" :error="form.errors.password"

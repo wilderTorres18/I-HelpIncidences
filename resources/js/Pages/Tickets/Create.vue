@@ -8,13 +8,11 @@
       <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <select-input-filter
-            v-if="user_access.ticket.update" v-model="form.user_id" placeholder="Empezar a escribir"
+            v-if="!isCustomer && user_access.ticket.update" v-model="form.user_id" placeholder="Empezar a escribir"
             :on-input="doFilter"
             :items="customers" :error="form.errors.user_id"
             class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Customer')"
           />
-
-
           <select-input v-if="user_access.ticket.update" v-model="form.priority_id" :error="form.errors.priority_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Priority')">
             <option :value="null" />
             <option v-for="s in priorities" :key="s.id" :value="s.id">{{ s.name }}</option>
@@ -108,6 +106,7 @@ export default {
         categories: Array,
         auth: Object,
         hidden_fields: Object,
+        isCustomer: Boolean,
     },
     remember: false,
     data() {

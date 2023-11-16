@@ -11,7 +11,7 @@
               :items="customers" :error="form.errors.user_id"
               class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Customer')"
               :value="ticket.user"
-              :editable="user_access.ticket.update && ticket.status.slug !== 'closed'"
+              :editable="!isCustomer && user_access.ticket.update && ticket.status.slug !== 'closed'"
             />
 
             <select-edit-input
@@ -346,6 +346,7 @@ export default {
         comments: Array,
         auth: Object,
         hidden_fields: Object,
+        isCustomer: Boolean,
     },
     remember: false,
     data() {

@@ -143,6 +143,7 @@ class TicketsController extends Controller
         $hiddenFields = Setting::where('slug', 'hide_ticket_fields')->first();
         return Inertia::render('Tickets/Create', [
             'title' => 'Crear una nueva incidencia',
+            'isCustomer' => Auth::user()->role->slug === 'customer',
             'hidden_fields' => $hiddenFields && $hiddenFields->value ? json_decode($hiddenFields->value) : null ,
             'customers' => User::where('role_id', $roles['customer'] ?? 0)->orWhere('id', Request::input('customer_id'))->orderBy('first_name')
                 ->limit(6)
@@ -251,6 +252,7 @@ class TicketsController extends Controller
         return Inertia::render('Tickets/Edit', [
             'hidden_fields' => $hiddenFields ? json_decode($hiddenFields->value) : null ,
             'title' => $ticket->subject,
+            'isCustomer' => Auth::user()->role->slug === 'customer',
             'customers' => User::where('role_id', $roles['customer'] ?? 0)->orWhere('id', Request::input('customer_id'))->orderBy('first_name')
                 ->limit(6)
                 ->get()

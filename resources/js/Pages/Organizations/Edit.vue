@@ -9,21 +9,22 @@
           <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('Phone')" />
           <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('Address')" />
           <text-input v-model="form.city" :error="form.errors.city" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('City')" />
-          <text-input v-model="form.region" :error="form.errors.region" class="pb-8 pr-6 w-full lg:w-1/2" label="Province/State" />
+          <!--          <text-input v-model="form.region" :error="form.errors.region" class="pb-8 pr-6 w-full lg:w-1/2" label="Province/State" />
           <select-input v-model="form.country" :error="form.errors.country" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('Country')">
-              <option :value="null" />
-              <option v-for="c in countries" :key="c.id" :value="c.id">{{ __(c.name) }}</option>
+            <option :value="null" />
+            <option v-for="c in countries" :key="c.id" :value="c.id">{{ __(c.name) }}</option>
           </select-input>
-          <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pb-8 pr-6 w-full lg:w-1/2" label="Postal code" />
+          <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pb-8 pr-6 w-full lg:w-1/2" label="Postal code" />-->
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
           <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">
-            {{ __('Delete') }} Organization</button>
+            {{ __('Delete') }} Organization
+          </button>
           <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">{{ __('Update') }} Organization</loading-button>
         </div>
       </form>
     </div>
-    <h2 class="mt-12 text-2xl font-bold">{{  __('Contacts') }}</h2>
+    <h2 class="mt-12 text-2xl font-bold">{{ __('Contacts') }}</h2>
     <div class="mt-6 bg-white rounded shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">

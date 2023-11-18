@@ -26,7 +26,7 @@ class SettingSeeder extends Seeder
                 ['name' => 'Chat', 'slug' => 'chat', 'value' => false],
                 ['name' => 'FAQ', 'slug' => 'faq', 'value' => false],
                 ['name' => 'Knowledge Base', 'slug' => 'kb', 'value' => false],
-                ['name' => 'Blog', 'slug' => 'blog', 'value' => true],
+                ['name' => 'Blog', 'slug' => 'blog', 'value' => false],
                 ['name' => 'Contacts', 'slug' => 'contact', 'value' => false],
                 ['name' => 'Organizations', 'slug' => 'organization', 'value' => true],
                 ['name' => 'Notes', 'slug' => 'note', 'value' => false],

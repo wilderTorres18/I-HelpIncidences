@@ -26,7 +26,9 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        'company'
+        'company',
+        'organization_id'
+
     ];
 
     /**
@@ -129,6 +131,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Organization::class);
     }
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

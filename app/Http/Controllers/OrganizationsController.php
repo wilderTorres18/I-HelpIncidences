@@ -42,7 +42,7 @@ class OrganizationsController extends Controller
     public function create()
     {
         return Inertia::render('Organizations/Create',[
-            'title' => 'Create a new organization',
+            'title' => 'Crear una nueva Empresa',
             'countries' => Country::orderBy('name')
                 ->get()
                 ->map

@@ -3,7 +3,7 @@
   <div class="p-6 min-h-screen flex justify-center items-center light">
     <flash-messages />
     <div class="w-full max-w-md">
-      <Link :href="route('home')"><logo class="block mx-auto w-full max-w-xs fill-white" height="50" /></Link>
+      <Link :href="route('login')"><logo class="block mx-auto w-1/2 max-w-xs fill-white" height="5" /></Link>
       <form class="mt-8 bg-white dark:bg-slate-900 border border-gray-100 rounded-lg shadow-xl overflow-hidden" @submit.prevent="login">
         <div class="px-10 py-12">
           <h2 class="text-center font-bold text-xl">{{ __('Login - Soporte de incidencias') }}</h2>
@@ -15,7 +15,7 @@
             <span class="text-sm">Recuérdame</span>
           </label>
           <loading-button :loading="form.processing" class="ml-auto btn-indigo w-full items-center justify-center mt-8" type="submit">{{ __('Login') }}</loading-button>
-          <div class="mt-5 flex justify-center"><Link class="ml-2 " :href="route('password.reset')">{{ __('Forgot your password?') }}</Link></div>
+          <!--          <div class="mt-5 flex justify-center"><Link class="ml-2 " :href="route('password.reset')">{{ __('Forgot your password?') }}</Link></div>-->
           <div class="mt-5 flex justify-center">¿No tienes una cuenta? <Link class="ml-2 " :href="route('register')">{{ __('Register') }}</Link></div>
         </div>
         <div v-if="is_demo" class=" py-4 bg-gray-100 dark:bg-slate-900 border-t border-gray-100 dark:border-gray-700 flex flex-col gap-1 login-as items-center">

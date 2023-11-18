@@ -6,9 +6,11 @@ use App\Http\Middleware\RedirectIfCustomer;
 use App\Http\Middleware\RedirectIfNotParmitted;
 use App\Models\KnowledgeBase;
 use App\Models\Type;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class KnowledgeBaseController extends Controller {
 
@@ -16,7 +18,8 @@ class KnowledgeBaseController extends Controller {
         $this->middleware(RedirectIfNotParmitted::class.':knowledge_base');
     }
 
-    public function index() {
+    public function index(): Response
+    {
         return Inertia::render('KnowledgeBase/Index', [
             'title' => 'Knowledge base',
             'filters' => Request::all('search'),
@@ -35,7 +38,7 @@ class KnowledgeBaseController extends Controller {
         ]);
     }
 
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('KnowledgeBase/Create',[
             'title' => 'Create a new knowledge base',
@@ -46,7 +49,7 @@ class KnowledgeBaseController extends Controller {
         ]);
     }
 
-    public function store()
+    public function store(): RedirectResponse
     {
         KnowledgeBase::create(
             Request::validate([
@@ -59,7 +62,7 @@ class KnowledgeBaseController extends Controller {
         return Redirect::route('knowledge_base')->with('success', 'Knowledge base created.');
     }
 
-    public function edit(KnowledgeBase $knowledge_base)
+    public function edit(KnowledgeBase $knowledge_base): Response
     {
         return Inertia::render('KnowledgeBase/Edit', [
             'title' => $knowledge_base->title,
@@ -76,7 +79,7 @@ class KnowledgeBaseController extends Controller {
         ]);
     }
 
-    public function update(KnowledgeBase $knowledge_base)
+    public function update(KnowledgeBase $knowledge_base): RedirectResponse
     {
         $knowledge_base->update(
             Request::validate([
@@ -89,7 +92,7 @@ class KnowledgeBaseController extends Controller {
         return Redirect::back()->with('success', 'Knowledge base updated.');
     }
 
-    public function destroy(KnowledgeBase $knowledge_base)
+    public function destroy(KnowledgeBase $knowledge_base): RedirectResponse
     {
         $knowledge_base->delete();
         return Redirect::route('knowledge_base')->with('success', 'Knowledge base deleted.');

@@ -12,24 +12,24 @@ class SettingSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('settings')->truncate();
         DB::table('settings')->insert(['name' => 'App Name', 'slug' => 'app_name', 'type' => 'text', 'value' => 'Help Desk']);
-        DB::table('settings')->insert(['name' => 'Default Language', 'slug' => 'default_language', 'type' => 'text', 'value' => 'en']);
+        DB::table('settings')->insert(['name' => 'Default Language', 'slug' => 'default_language', 'type' => 'text', 'value' => 'es']);
         DB::table('settings')->insert(['name' => 'Main_logo', 'slug' => 'main_logo', 'type' => 'text', 'value' => '/images/logo.png']);
         DB::table('settings')->insert(['name' => 'Main_favicon', 'slug' => 'main_favicon', 'type' => 'text', 'value' => '/favicon.png']);
         DB::table('settings')->insert(['name' => 'Hide_ticket_fields', 'slug' => 'hide_ticket_fields', 'type' => 'json', 'value' => \json_encode([])]);
         DB::table('settings')->insert(['name' => 'Footer Text', 'slug' => 'footer_text', 'type' => 'text', 'value' => 'Help Desk © 2022 - Powered by W3BD']);
         DB::table('settings')->insert(['name' => 'Enable Options', 'slug' => 'enable_options', 'type' => 'json',
             'value' => json_encode([
-                ['name' => 'Chat', 'slug' => 'chat', 'value' => true],
-                ['name' => 'FAQ', 'slug' => 'faq', 'value' => true],
-                ['name' => 'Knowledge Base', 'slug' => 'kb', 'value' => true],
+                ['name' => 'Chat', 'slug' => 'chat', 'value' => false],
+                ['name' => 'FAQ', 'slug' => 'faq', 'value' => false],
+                ['name' => 'Knowledge Base', 'slug' => 'kb', 'value' => false],
                 ['name' => 'Blog', 'slug' => 'blog', 'value' => true],
-                ['name' => 'Contacts', 'slug' => 'contact', 'value' => true],
+                ['name' => 'Contacts', 'slug' => 'contact', 'value' => false],
                 ['name' => 'Organizations', 'slug' => 'organization', 'value' => true],
-                ['name' => 'Notes', 'slug' => 'note', 'value' => true],
+                ['name' => 'Notes', 'slug' => 'note', 'value' => false],
                 ['name' => 'Show Login on front page', 'slug' => 'show_login', 'value' => true],
                 ['name' => 'Email to tickets(piping)', 'slug' => 'enable_piping', 'value' => true],
             ])

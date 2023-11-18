@@ -72,7 +72,8 @@
             </div>
 
             <text-input
-              v-if="user_access.ticket.update" v-model="form.subject" :error="form.errors.subject"
+              v-if="user_access.ticket.update"
+              v-model="form.subject" :disabled="ticket.status.slug === 'closed'" :error="form.errors.subject"
               class="pr-6 pb-8 w-full lg:w-2/3" :label="__('Subject')"
             />
             <div v-else class="assigned_user pr-6 pb-8 w-full lg:w-full flex flex-col">
@@ -95,6 +96,7 @@
             <div class="pr-6 pb-8 w-full lg:w-full flex-col">
               <button
                 type="button" class="btn flex justify-center items-center pb-3 border-0 pl-0"
+                :disabled="ticket.status.slug === 'closed'"
                 @click="fileBrowse"
               >
                 <icon name="file" class="flex-shrink-0 h-5 fill-gray-400 pr-1" />
@@ -124,6 +126,7 @@
                     {{ __('Download') }}
                   </button>
                   <button
+                    v-if="ticket.status.slug !== 'closed'"
                     type="button" class="btn flex items-center ml-3"
                     @click="removeAttachment(file, fi)"
                   >
@@ -142,7 +145,8 @@
                   }})</span>
                 </div>
                 <button
-                  v-if="ticket.status && ticket.status.slug !== 'closed'" type="button"
+                  v-if="ticket.status && ticket.status.slug !== 'closed'"
+                  type="button"
                   class="btn flex justify-center items-center" @click="fileRemove(file, fi)"
                 >
                   {{ __('Remove') }}
@@ -190,12 +194,18 @@
           </div>
           <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
             <button
-              v-if="user_access.ticket.delete" class="text-red-600 hover:underline" tabindex="-1"
+              v-if="user_access.ticket.delete && ticket.status.slug !== 'closed'"
+              class="text-red-600 hover:underline" tabindex="-1"
               type="button" @click="destroy"
             >
               {{ __('Delete') }}
             </button>
-            <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">
+            <loading-button
+              v-if="ticket.status.slug !== 'closed'"
+              :loading="form.processing"
+              class="btn-indigo ml-auto"
+              type="submit"
+            >
               {{ __('Save') }}
             </loading-button>
           </div>

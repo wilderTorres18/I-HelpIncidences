@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Middleware\RedirectIfNotParmittedMultiple;
 use App\Models\Language;
 use App\Models\Setting;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Inertia\Response;
 use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 
 class SettingsController extends Controller {
@@ -18,7 +21,8 @@ class SettingsController extends Controller {
         $this->middleware(RedirectIfNotParmittedMultiple::class.':global,smtp,pusher');
     }
 
-    private function configExist($array){
+    private function configExist($array): bool
+    {
         $hasValue = true;
         $envLoad = DotenvEditor::load();
         $keys = $envLoad->getKeys($array);
@@ -31,7 +35,8 @@ class SettingsController extends Controller {
         return $hasValue;
     }
 
-    public function index(){
+    public function index(): Response
+    {
         $pusher_setup = $this->configExist(['PUSHER_APP_ID','PUSHER_APP_KEY','PUSHER_APP_SECRET']);
         $piping_setup = $this->configExist(['IMAP_HOST','IMAP_PORT','IMAP_PROTOCOL','IMAP_ENCRYPTION','IMAP_USERNAME','IMAP_PASSWORD']);
         $settings = Setting::orderBy('id')->get();
@@ -56,7 +61,8 @@ class SettingsController extends Controller {
         ]);
     }
 
-    public function update(){
+    public function update(): RedirectResponse
+    {
         $requests = Request::all();
 
         if (config('app.demo')) {
@@ -99,7 +105,8 @@ class SettingsController extends Controller {
         return Redirect::back()->with('success', 'Ajustes actualizados.');
     }
 
-    public function smtp(){
+    public function smtp(): Response
+    {
         $demo = config('app.demo');
         $env = DotenvEditor::load();
         $keys = $env->getKeys(['MAIL_HOST','MAIL_PORT','MAIL_USERNAME','MAIL_PASSWORD','MAIL_ENCRYPTION','MAIL_FROM_ADDRESS','MAIL_FROM_NAME']);
@@ -110,7 +117,8 @@ class SettingsController extends Controller {
         ]);
     }
 
-    public function updateSmtp(){
+    public function updateSmtp(): RedirectResponse
+    {
         if (config('app.demo')) {
             return Redirect::back()->with('error', 'No se permite actualizar la configuración del empujador para la demostración en vivo.');
         }
@@ -128,7 +136,8 @@ class SettingsController extends Controller {
         return Redirect::back()->with('success', 'SMTP configuration updated!');
     }
 
-    public function updatePusher(){
+    public function updatePusher(): RedirectResponse
+    {
 
         if (config('app.demo')) {
             return Redirect::back()->with('error', 'Updating pusher setup is not allowed for the live demo.');
@@ -147,7 +156,8 @@ class SettingsController extends Controller {
         return Redirect::back()->with('success', 'Pusher configuration updated!');
     }
 
-    private function setEnvVariableToJsFile(){
+    private function setEnvVariableToJsFile(): void
+    {
         $env = DotenvEditor::load();
         $pusherAppKey = $env->getKey('PUSHER_APP_KEY');
         $pusherAppCluster = $env->getKey('PUSHER_APP_CLUSTER');
@@ -172,7 +182,8 @@ class SettingsController extends Controller {
         }
     }
 
-    private function setEnvVariables($data) {
+    private function setEnvVariables($data): void
+    {
         $env = DotenvEditor::load();
         foreach ($data as $data_key => $data_value){
             $env->setKey($data_key, $data_value);
@@ -180,7 +191,8 @@ class SettingsController extends Controller {
         $env->save();
     }
 
-    public function pusher(){
+    public function pusher(): Response
+    {
         $env = DotenvEditor::load();
         $keys = $env->getKeys(['PUSHER_APP_ID','PUSHER_APP_KEY','PUSHER_APP_SECRET','PUSHER_APP_CLUSTER']);
 
@@ -222,7 +234,8 @@ class SettingsController extends Controller {
         ]);
     }
 
-    public function updatePiping(){
+    public function updatePiping(): RedirectResponse
+    {
 
         if (config('app.demo')) {
             return Redirect::back()->with('error', 'Updating piping setup is not allowed for the live demo.');
@@ -252,7 +265,8 @@ class SettingsController extends Controller {
         return Redirect::back()->with('success', 'Piping settings are updated!');
     }
 
-    public function clearCache($slug){
+    public function clearCache($slug): JsonResponse
+    {
         // php artisan optimize && php artisan cache:clear && php artisan route:cache && php artisan view:clear && php artisan config:cache
         $slugArray = [
             'config' => 'config:cache', 'optimize' => 'optimize', 'cache' => 'cache:clear',

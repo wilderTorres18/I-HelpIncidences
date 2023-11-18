@@ -11,7 +11,8 @@ class Language extends Model
     protected $table = 'languages';
     public $timestamps = false;
 
-    public function scopeFilter($query, array $filters){
+    public function scopeFilter($query, array $filters): void
+    {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
                 $query->where('name', 'like', '%'.$search.'%');

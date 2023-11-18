@@ -2,8 +2,8 @@
   <div>
     <Head :title="__(title)" />
     <div class="mb-6 flex justify-between items-center">
-        <search-input v-model="form.search" class="w-full max-w-md mr-4" @reset="reset"></search-input>
-      <Link class="btn-indigo" :href="this.route('roles.create')">
+      <search-input v-model="form.search" class="w-full max-w-md mr-4" @reset="reset" />
+      <Link class="btn-indigo" :href="route('roles.create')">
         <span>{{ __('Crear un rol nuevo') }}</span>
       </Link>
     </div>
@@ -15,23 +15,23 @@
           <th class="px-6 pt-6 pb-4">{{ __('Slug') }}</th>
         </tr>
         <tr v-for="role in roles.data" :key="role.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-            <td class="border-t">
-                <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="this.route('roles.edit', role.id)">
-                    {{ role.id }}
-                </Link>
-            </td>
           <td class="border-t">
-            <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="this.route('roles.edit', role.id)">
+            <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('roles.edit', role.id)">
+              {{ role.id }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('roles.edit', role.id)">
               {{ role.name }}
             </Link>
           </td>
-            <td class="border-t">
-                <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="this.route('roles.edit', role.id)">
-                    {{ role.slug }}
-                </Link>
-            </td>
+          <td class="border-t">
+            <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('roles.edit', role.id)">
+              {{ role.slug }}
+            </Link>
+          </td>
           <td class="border-t w-px">
-            <Link class="px-4 flex items-center" :href="this.route('roles.edit', role.id)" tabindex="-1">
+            <Link class="px-4 flex items-center" :href="route('roles.edit', role.id)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
             </Link>
           </td>

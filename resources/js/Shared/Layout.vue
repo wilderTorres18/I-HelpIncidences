@@ -6,7 +6,7 @@
         <div class="md:flex md:shrink-0 ">
           <div class="md:shrink-0 md:py-2 md:w-60 flex items-center justify-between md:justify-center sidebar-left-top">
             <Link class="mt-1" href="/">
-              <logo class="help-desk-logo" />
+              <logo class="block mx-auto" style="width: 45%;" max-w-xs fill-white />
             </Link>
             <dropdown class=" md:hidden" class-name="small-menu" placement="bottom-end">
               <template #default>

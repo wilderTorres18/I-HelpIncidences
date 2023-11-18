@@ -3,7 +3,7 @@
   <div class="p-6 min-h-screen flex justify-center items-center light">
     <flash-messages />
     <div class="w-full max-w-md">
-      <Link :href="route('login')"><logo class="block mx-auto w-1/2 max-w-xs fill-white" height="5" /></Link>
+      <Link :href="route('login')"><logo class="block mx-auto w-1/2 max-w-xs fill-white" /></Link>
       <form class="mt-8 bg-white dark:bg-slate-900 border border-gray-100 rounded-lg shadow-xl overflow-hidden" @submit.prevent="login">
         <div class="px-10 py-12">
           <h2 class="text-center font-bold text-xl">{{ __('Login - Soporte de incidencias') }}</h2>

@@ -196,14 +196,12 @@ export default {
                 return 'priority-completed'
             }
             switch(ticket.priority) {
-                case 'Generalmente':
-                    return 'priority-general'
-                case 'Menos Urgente':
+                case 'Alta':
+                  return 'priority-very-urgent'
+              case 'Media':
+                return 'priority-medium '
+                case 'Baja':
                     return 'priority-less-urgent'
-                case 'Muy Urgente':
-                    return 'priority-very-urgent'
-                case 'Urgente':
-                    return 'priority-urgent'
                 default:
                     return ''
             }
@@ -235,16 +233,13 @@ export default {
 </script>
 
 <style>
-.priority-general {
-    color: blue;
-}
 .priority-less-urgent {
     color: green;
 }
 .priority-very-urgent {
     color: red;
 }
-.priority-urgent {
+.priority-medium {
     color: orange;
 }
 .priority-completed {

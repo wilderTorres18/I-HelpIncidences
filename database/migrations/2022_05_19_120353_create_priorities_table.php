@@ -22,10 +22,9 @@ class CreatePrioritiesTable extends Migration
         });
 
         DB::table('priorities')->insert([
-            ['name'=>'Generalmente'],
-            ['name'=>'Urgente'],
-            ['name'=>'Muy Urgente'],
-            ['name'=>'Menos Urgente'],
+            ['name'=>'Baja'],
+            ['name'=>'Alta'],
+            ['name'=>'Media'],
         ]);
 
     }

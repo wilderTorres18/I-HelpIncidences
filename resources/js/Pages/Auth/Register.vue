@@ -2,7 +2,7 @@
   <Head title="Login" />
   <div class="p-6 min-h-screen flex justify-center items-center light">
     <div class="w-full max-w-xl	">
-      <Link :href="route('home')">
+      <Link :href="route('login')">
         <logo class="block mx-auto w-full max-w-xs fill-white" height="50" />
       </Link>
       <form

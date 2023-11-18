@@ -5,7 +5,7 @@
       <form @submit.prevent="update">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
           <text-input v-model="form.name" :error="form.errors.name" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('Name')" />
-          <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('Email')" />
+          <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('Organization Email')" />
           <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('Phone')" />
           <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('Address')" />
           <text-input v-model="form.city" :error="form.errors.city" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('City')" />
@@ -18,9 +18,9 @@
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
           <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">
-            {{ __('Delete') }} Organization
+            {{ __('Delete Organization') }}
           </button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">{{ __('Update') }} Organization</loading-button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">{{ __('Update Organization') }}</loading-button>
         </div>
       </form>
     </div>

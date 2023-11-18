@@ -54,10 +54,10 @@ class CustomersController extends Controller {
     {
         return Inertia::render('Customers/Create',[
             'title' => 'Crear un nuevo cliente',
-            'countries' => Country::orderBy('name')
+/*            'countries' => Country::orderBy('name')
                 ->get()
                 ->map
-                ->only('id', 'name')
+                ->only('id', 'name')*/
         ]);
     }
 
@@ -72,7 +72,7 @@ class CustomersController extends Controller {
             'password' => ['nullable'],
             'city' => ['nullable'],
             'address' => ['nullable'],
-            'country_id' => ['nullable'],
+//            'country_id' => ['nullable'],
             'role_id' => ['nullable'],
         ]);
         if(Request::file('photo')){
@@ -107,7 +107,7 @@ class CustomersController extends Controller {
                 'city' => $user->city,
                 'can_delete' => $can_delete,
                 'address' => $user->address,
-                'country_id' => $user->country_id,
+//                'country_id' => $user->country_id,
                 'photo_path' => $user->photo_path,
                 'deleted_at' => $user->deleted_at,
             ],
@@ -137,7 +137,7 @@ class CustomersController extends Controller {
             'password' => ['nullable'],
             'city' => ['nullable'],
             'address' => ['nullable'],
-            'country_id' => ['nullable'],
+//            'country_id' => ['nullable'],
             'role_id' => ['nullable'],
             'photo' => ['nullable', 'image'],
         ]);

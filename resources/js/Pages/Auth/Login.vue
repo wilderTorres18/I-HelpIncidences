@@ -16,7 +16,7 @@
           </label>
           <loading-button :loading="form.processing" class="ml-auto btn-indigo w-full items-center justify-center mt-8" type="submit">{{ __('Login') }}</loading-button>
           <!--          <div class="mt-5 flex justify-center"><Link class="ml-2 " :href="route('password.reset')">{{ __('Forgot your password?') }}</Link></div>-->
-                    <div class="mt-5 flex justify-center">¿No tienes una cuenta? <Link class="ml-2 " :href="route('register')">{{ __('Register') }}</Link></div>
+          <!--          <div class="mt-5 flex justify-center">¿No tienes una cuenta? <Link class="ml-2 " :href="route('register')">{{ __('Register') }}</Link></div>-->
         </div>
         <div v-if="is_demo" class=" py-4 bg-gray-100 dark:bg-slate-900 border-t border-gray-100 dark:border-gray-700 flex flex-col gap-1 login-as items-center">
           <h2 class="text-sm font-bold mb-3">Login As: </h2>

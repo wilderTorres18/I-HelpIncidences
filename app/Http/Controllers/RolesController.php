@@ -4,22 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\RedirectIfNotAdmin;
 use App\Models\Role;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class RolesController extends Controller {
     public function __construct(){
         $this->middleware(RedirectIfNotAdmin::class);
     }
 
-    public function create(){
+    public function create(): Response
+    {
         return Inertia::render('Roles/Create',[
             'title' => 'Crear un nuevo rol'
         ]);
     }
 
-    public function index(){
+    public function index(): Response
+    {
         return Inertia::render('Roles/Index', [
             'title' => 'User Roles',
             'filters' => Request::all(['search', 'role_id']),
@@ -36,7 +40,8 @@ class RolesController extends Controller {
         ]);
     }
 
-    public function store(){
+    public function store(): RedirectResponse
+    {
         $userRequest = Request::validate([
             'name' => ['required', 'max:50'],
             'slug' => ['required', 'max:50'],
@@ -54,10 +59,11 @@ class RolesController extends Controller {
         }
 
         Role::create(['access' => json_encode($accessData), 'slug' => $userRequest['slug'], 'name' => $userRequest['name']]);
-        return Redirect::route('roles')->with('success', 'Role created.');
+        return Redirect::route('roles')->with('success', 'Rol Creado.');
     }
 
-    public function edit(Role $role) {
+    public function edit(Role $role): Response
+    {
         return Inertia::render('Roles/Edit', [
             'title' => $role->name,
             'role' => [
@@ -70,7 +76,8 @@ class RolesController extends Controller {
         ]);
     }
 
-    public function update(Role $role) {
+    public function update(Role $role): RedirectResponse
+    {
         if (config('app.demo')) {
             return Redirect::back()->with('error', 'No se permite actualizar el rol para la demostración en vivo.');
         }
@@ -92,10 +99,11 @@ class RolesController extends Controller {
         }
 
         $role->update(['access' => $accessData, 'slug' => $userRequest['slug'], 'name' => $userRequest['name']]);
-        return Redirect::back()->with('success', 'Role updated.');
+        return Redirect::back()->with('success', 'Rol Actualizado');
     }
 
-    public function destroy(Role $role) {
+    public function destroy(Role $role): RedirectResponse
+    {
         if (config('app.demo')) {
             return Redirect::back()->with('error', 'No se permite eliminar roles para la demostración en vivo.');
         }

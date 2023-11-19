@@ -2,10 +2,10 @@
   <div>
     <Head :title="title" />
     <div class="flex items-center justify-between mb-6">
-        <search-input v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset"></search-input>
+      <search-input v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset"></search-input>
       <Link class="btn-indigo" :href="route('organizations.create')">
         <span>{{ __('Create') }}</span>
-        <span class="hidden md:inline">&nbsp;Organization</span>
+        <span class="hidden md:inline">&nbsp;Empresa</span>
       </Link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
@@ -41,7 +41,7 @@
             </td>
           </tr>
           <tr v-if="organizations.data.length === 0">
-            <td class="px-6 py-4 border-t" colspan="4">No organizations found.</td>
+            <td class="px-6 py-4 border-t" colspan="4">Empresa no encontrada.</td>
           </tr>
         </tbody>
       </table>

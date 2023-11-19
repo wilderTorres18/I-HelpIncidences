@@ -37,11 +37,11 @@
             <option :value="null" />
             <option v-for="s in types" :key="s.id" :value="s.id">{{ s.name }}</option>
           </select-input>
-          <text-input v-model="form.subject" :error="form.errors.subject" class="pr-6 pb-8 w-full lg:w-2/3" :label="__('Subject')" />
           <select-input v-if="!(hidden_fields && hidden_fields.includes('category'))" v-model="form.category_id" :error="form.errors.category_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Category')" :required="true">
             <option :value="null" />
             <option v-for="s in categories" :key="s.id" :value="s.id">{{ s.name }}</option>
           </select-input>
+          <text-input v-model="form.subject" :error="form.errors.subject" class="pr-6 pb-8 w-full lg:w-2/3" :label="__('Subject')" />
           <div class="pr-6 pb-8 w-full">
             <label class="form-label">Detalles: </label>
             <ckeditor id="ticketDetails" v-model="form.details" :editor="editor" :config="editorConfig" />

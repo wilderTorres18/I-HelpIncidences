@@ -6,6 +6,7 @@ use App\Http\Middleware\RedirectIfCustomer;
 use App\Http\Middleware\RedirectIfNotParmitted;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Organization;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -54,6 +55,10 @@ class CustomersController extends Controller {
     {
         return Inertia::render('Customers/Create',[
             'title' => 'Crear un nuevo cliente',
+            'organizations' => Organization::orderBy('name')
+            ->get()
+            ->map
+            ->only('id', 'name'),
 /*            'countries' => Country::orderBy('name')
                 ->get()
                 ->map
@@ -69,6 +74,7 @@ class CustomersController extends Controller {
             'company' => ['required', 'max:50'],
             'phone' => ['nullable', 'max:25'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')],
+            'organization_id' => ['nullable', Rule::exists('organizations', 'id')],
             'password' => ['nullable'],
             'city' => ['nullable'],
             'address' => ['nullable'],
@@ -103,6 +109,7 @@ class CustomersController extends Controller {
                 'last_name' => $user->last_name,
                 'company' => $user->company,
                 'email' => $user->email,
+                'organization_id' => $user->organization_id,
                 'phone' => $user->phone,
                 'city' => $user->city,
                 'can_delete' => $can_delete,
@@ -118,7 +125,11 @@ class CustomersController extends Controller {
             'cities' => City::orderBy('name')
                 ->get()
                 ->map
-                ->only('id', 'name')
+                ->only('id', 'name'),
+            'organizations' => Organization::orderBy('name')
+                ->get()
+                ->map
+                ->only('id', 'name'),
         ]);
     }
 
@@ -134,6 +145,10 @@ class CustomersController extends Controller {
             'company' => ['required', 'max:50'],
             'phone' => ['nullable', 'max:25'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')->ignore($user->id)],
+            'organization_id' => [
+                'nullable',
+                Rule::exists('organizations', 'id'),
+            ],
             'password' => ['nullable'],
             'city' => ['nullable'],
             'address' => ['nullable'],
@@ -142,7 +157,7 @@ class CustomersController extends Controller {
             'photo' => ['nullable', 'image'],
         ]);
 
-        $user->update(Request::only('first_name', 'last_name','company', 'phone', 'email', 'city', 'address', 'country_id', 'role_id'));
+        $user->update(Request::only('first_name', 'last_name','company', 'phone', 'email', 'city', 'address', 'country_id', 'role_id','password','organization_id'));
 
         if(Request::file('photo')){
             if(isset($user->photo_path) && !empty($user->photo_path) && File::exists(public_path($user->photo_path))){

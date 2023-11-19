@@ -50,7 +50,7 @@ export default {
   props: {
     contact: Object,
     organizations: Array,
-      countries: Array,
+    countries: Array,
     title: String,
   },
   remember: 'form',

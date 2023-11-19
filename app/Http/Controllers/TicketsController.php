@@ -11,6 +11,7 @@ use App\Models\Attachment;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Department;
+use App\Models\Organization;
 use App\Models\PendingEmail;
 use App\Models\Priority;
 use App\Models\Review;
@@ -107,6 +108,10 @@ class TicketsController extends Controller
                 ->get()
                 ->map
                 ->only('id', 'name'),
+            'organizations' => Organization::orderBy('name')
+                ->get()
+                ->map
+                ->only('id', 'name'),
             'tickets' => $ticketQuery
                 ->filter(Request::only(['search', 'priority_id', 'status_id', 'type_id', 'category_id', 'department_id']))
                 ->byCustomer($byCustomer)
@@ -123,6 +128,7 @@ class TicketsController extends Controller
                         'priority' => $ticket->priority ? $ticket->priority->name : null,
                         'type' => $ticket->ticketType ? $ticket->ticketType->name : null,
                         'department' => $ticket->department ? $ticket->department->name : null,
+                        'organization' => $ticket->organization ? $ticket->organization->name : null,
                         'category' => $ticket->category ? $ticket->category->name: null,
                         'rating' => $ticket->review ? $ticket->review->rating : 0,
                         'status' => $ticket->status ? $ticket->status->name : null,

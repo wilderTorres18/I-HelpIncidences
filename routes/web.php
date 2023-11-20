@@ -628,17 +628,17 @@ Route::prefix('dashboard')->group(function () {
 // End - Global Settings
 
     /** Front Page Setup */
-    Route::get('front_pages/{slug}', [FrontPagesController::class, 'page'])
-        ->name('front_pages.page')
-        ->middleware('auth');
+    // Route::get('front_pages/{slug}', [FrontPagesController::class, 'page'])
+    //     ->name('front_pages.page')
+    //     ->middleware('auth');
+  
+    // Route::put('front_pages/{slug}', [FrontPagesController::class, 'update'])
+    //     ->name('front_pages.update')
+    //     ->middleware('auth');
 
-    Route::put('front_pages/{slug}', [FrontPagesController::class, 'update'])
-        ->name('front_pages.update')
-        ->middleware('auth');
-
-    Route::post('/upload/image', [FrontPagesController::class, 'uploadImage'])
-        ->name('upload.image')
-        ->middleware('auth');
+    // Route::post('/upload/image', [FrontPagesController::class, 'uploadImage'])
+    //     ->name('upload.image')
+    //     ->middleware('auth');
 
     /** User Roles */
     Route::get('settings/roles', [RolesController::class, 'index'])
@@ -663,8 +663,8 @@ Route::prefix('dashboard')->group(function () {
 
 });
 
-Route::get('language/flag/{code}', [PageController::class, 'getFlag'])
-    ->name('language.flag');
+// Route::get('language/flag/{code}', [PageController::class, 'getFlag'])
+//     ->name('language.flag');
 
 
 // Reports

@@ -18,7 +18,7 @@ class FrontPagesController extends Controller {
     public function __construct(){
         $this->middleware(RedirectIfNotParmitted::class.':front_page');
     }
-
+  
     public function page($slug){
         $page = FrontPage::where('slug', $slug)->first();
         $components = [

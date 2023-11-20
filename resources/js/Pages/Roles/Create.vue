@@ -14,19 +14,19 @@
                 <thead class="border-b">
                   <tr>
                     <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                      Functions
+                      Funciones
                     </th>
                     <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                      Read
+                      Leer
                     </th>
                     <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                      Update
+                      Editar
                     </th>
                     <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                      Create
+                      Crear
                     </th>
                     <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                      Delete
+                      Eliminar
                     </th>
                   </tr>
                 </thead>

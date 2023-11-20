@@ -58,26 +58,26 @@
                 </template>
                 <template #dropdown>
                   <div class="shadow-xl bg-white rounded text-sm">
-                    <Link class="block px-6 py-2 hover:bg-indigo-500 hover:text-white" :href="route('users.edit.profile')">{{ __('Edit Profile') }}</Link>
-                    <Link class="block px-6 py-2 hover:bg-indigo-500 hover:text-white w-full text-left" :href="route('logout')" method="delete" as="button">{{ __('Logout') }}</Link>
+                    <Link class="block px-6 py-2 hover:bg-indigo-500 hover:text-white" :href="route('users.edit.profile')">{{ ('Editar Perfil') }}</Link>
+                    <Link class="block px-6 py-2 hover:bg-indigo-500 hover:text-white w-full text-left" :href="route('logout')" method="delete" as="button">{{ ('Salir') }}</Link>
                   </div>
                 </template>
               </dropdown>
             </div>
           </div>
-        </div>
+        </div>  
         <div class="md:flex md:flex-grow md:overflow-hidden">
           <main-menu class="hidden md:block sidebar shrink-0 md:w-60 overflow-y-auto" />
           <div class="md:flex-1 md:overflow-y-auto" scroll-region>
             <div class="container-head">
               <div class="ch-left">
-                <h1 class="page-title">{{ __(title) }}</h1>
+                <h1 class="page-title">{{ (title) }}</h1>
                 <div class="breadcrumb text-sm">
                   <Link :href="route('dashboard')"><icon class="w-3 h-3" name="home" /></Link>
                   <span class="b-item">/</span>
                   <Link v-if="edit_route" :href="route(edit_route)" class="capitalize">{{ edit_route }}</Link>
                   <span v-if="edit_route" class="b-item">/</span>
-                  <span class="b-item">{{ __(title) }}</span>
+                  <span class="b-item">{{ (title) }}</span>
                 </div>
               </div>
               <div class="ch-right cursor-pointer">

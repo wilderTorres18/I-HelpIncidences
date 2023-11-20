@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>  
     <Head :title="__(title)" />
     <div class="mb-6 flex justify-between items-center">
       <search-input v-model="form.search" class="w-full max-w-md mr-4" @reset="reset" />
@@ -37,7 +37,7 @@
           </td>
         </tr>
         <tr v-if="roles.data.length === 0">
-          <td class="border-t px-6 py-4" colspan="4">No roles found.</td>
+          <td class="border-t px-6 py-4" colspan="4">Roles no encontrados</td>
         </tr>
       </table>
     </div>

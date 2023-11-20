@@ -104,11 +104,11 @@
       <div class="flex gap-5 flex-col lg:flex-row lg:w-10/12">
         <div class="w-full">
           <div class="r__wrapper flex flex-col p-5 bg-white rounded-lg shadow-lg rd">
-            <h2 class="th__ttl font-bold text-lg pt-3">{{ __('Ticket history') }}</h2>
+            <h2 class="th__ttl font-bold text-lg pt-3">{{ ('Historial de incidencias') }}</h2>
             <div class="th__info flex">
               <span class="text-2xl font-bold"> {{ chart_line.this_month }} </span>
-              <span class="pt-2 text-xs pl-1 pr-1">/ {{ __('this month') }}</span>
-              <span class="pt-2 text-xs font-bold pl-2 pr-2">{{ __('last month') }} {{ chart_line.last_month }}</span>
+              <span class="pt-2 text-xs pl-1 pr-1">/ {{ ('Este mes') }}</span>
+              <span class="pt-2 text-xs font-bold pl-2 pr-2">{{ ('Último mes') }} {{ chart_line.last_month }}</span>
             </div>
             <div v-if="months.length" class="flex w-full justify-center c__wrapper ">
               <div v-for="cl in months" class="c__line flex flex-col w-full items-center gap-3">
@@ -119,7 +119,7 @@
           </div>
         </div>
         <div class=" rd w-full lg:w-2/5">
-          <div class="r__wrapper flex flex-col pl-5 pr-5 pb-5 bg-white rounded-lg shadow-lg rd">
+          <!-- <div class="r__wrapper flex flex-col pl-5 pr-5 pb-5 bg-white rounded-lg shadow-lg rd">
             <div class="res__info">
               <span class="title">{{ __('First Response Time') }}</span>
               <span class="res_avg">{{ __('Average') }}</span>
@@ -146,10 +146,10 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
-      <div class="flex gap-5 flex-col lg:w-2/12">
+      <!-- <div class="flex gap-5 flex-col lg:w-2/12">
         <div class="badge__item h-32 w-full cursor-pointer" @click="goToLink(route('users'))">
           <div class="l__items bg-white rounded-lg shadow-lg flex justify-between w-full">
             <div class="badge__info">
@@ -172,7 +172,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- Loading Process -->
     <div v-if="loading" class="processing-overlay">

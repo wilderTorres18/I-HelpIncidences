@@ -21,11 +21,11 @@ class RolesController extends Controller {
             'title' => 'Crear un nuevo rol'
         ]);
     }
-
+  
     public function index(): Response
     {
         return Inertia::render('Roles/Index', [
-            'title' => 'User Roles',
+            'title' => 'Roles de usuario',
             'filters' => Request::all(['search', 'role_id']),
             'roles' => Role::orderByName()
                 ->filter(Request::all(['search']))

@@ -100,7 +100,7 @@ export default {
 
         const settingSubmenus = [];
         if(this.user.role.slug === 'admin'){
-            settingSubmenus.push({'name': 'User Roles', 'route': 'roles', 'url': 'settings/roles', 'icon': 'user_role'})
+            settingSubmenus.push({'name': 'Roles de usuario', 'route': 'roles', 'url': 'settings/roles', 'icon': 'user_role'})
         }
 
         if(user_access.global.read || user_access.global.update || user_access.global.create || user_access.global.delete){
@@ -127,9 +127,9 @@ export default {
             settingSubmenus.push({'name': 'Types', 'route': 'types', 'url': 'settings/types', 'icon': 'types'})
         }
 
-        if(user_access.language.read || user_access.language.update || user_access.language.create || user_access.language.delete){
+        /* if(user_access.language.read || user_access.language.update || user_access.language.create || user_access.language.delete){
             settingSubmenus.push({'name': 'Languages', 'route': 'languages', 'url': 'settings/languages', 'icon': 'edit'})
-        }
+        } */
 
         if(user_access.email_template.read || user_access.email_template.update || user_access.email_template.create || user_access.email_template.delete){
             settingSubmenus.push({'name': 'Email Templates', 'route': 'templates', 'url': 'settings/templates', 'icon': 'email'})
@@ -153,7 +153,7 @@ export default {
 
 
 
-        if(user_access.front_page.read || user_access.front_page.update || user_access.front_page.create || user_access.front_page.delete){
+        /* if(user_access.front_page.read || user_access.front_page.update || user_access.front_page.create || user_access.front_page.delete){
             this.menu_items.push(
                 {'name': 'Front Pages', 'route': '', 'url': 'front_pages', 'icon': 'gear',
                     'submenu': [
@@ -166,7 +166,7 @@ export default {
                     ]
                 },
             )
-        }
+        } */
     }
 }
 </script>

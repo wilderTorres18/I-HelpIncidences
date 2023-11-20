@@ -14,19 +14,19 @@
                 <thead class="border-b">
                   <tr>
                     <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                      Functions
+                      Funciones
                     </th>
                     <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                      Read
+                      Leer
                     </th>
                     <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                      Update
+                      Editar
                     </th>
                     <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                      Create
+                      Crear
                     </th>
                     <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                      Delete
+                      Eliminar
                     </th>
                   </tr>
                 </thead>
@@ -76,8 +76,8 @@
           </div>
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
-          <button v-if="!['admin','manager','customer'].includes(role.slug)" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">{{ __('Delete') }}</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">{{ __('Update') }}</loading-button>
+          <button v-if="!['admin','manager','customer'].includes(role.slug)" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">{{ __('Eliminar') }}</button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">{{ __('Actualizar') }}</loading-button>
         </div>
       </form>
     </div>

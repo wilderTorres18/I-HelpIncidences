@@ -21,12 +21,12 @@
           <td class="border-t">
             <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('customers.edit',user.id)">
               <img v-if="user.photo" class="block -my-2 mr-2 w-5 h-5 rounded-full" :src="user.photo" />
-              {{ user.name }}
+              <span class="uppercase">{{ user.name }}</span>
             </Link>
           </td>
           <td class="border-t">
             <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('customers.edit',user.id)">
-              {{ user.company }}
+              {{ user.organization }}
             </Link>
           </td>
           <td class="border-t">
@@ -41,7 +41,7 @@
           </td>
           <td class="border-t">
             <Link class="flex items-center px-6 py-4" :href="route('customers.edit',user.id)" tabindex="-1">
-              {{ __(user.city) }}
+              <span class="uppercase">   {{ __(user.city) }}</span>
             </Link>
           </td>
           <td class="border-t">

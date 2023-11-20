@@ -9,7 +9,6 @@
           <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Email')" />
           <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Phone')" />
           <text-input v-model="form.city" :error="form.errors.city" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('City')" />
-          <text-input v-model="form.company" :error="form.errors.company" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Company')" />
           <select-input v-model="form.organization_id" :error="form.errors.organization_id" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('Organization')">
             <option :value="null" />
             <option v-for="organization in organizations" :key="organization.id" :value="organization.id">{{ organization.name }}</option>
@@ -67,7 +66,6 @@ export default {
         _method: 'put',
         first_name: this.user.first_name,
         last_name: this.user.last_name,
-        company: this.user.company,
         email: this.user.email,
         organization_id: this.user.organization_id,
         phone: this.user.phone,

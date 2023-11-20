@@ -127,13 +127,13 @@ class User extends Authenticatable
         return $this->hasMany(Ticket::class);
     }
 
-    public function organizations(): HasMany
+/*    public function organizations(): HasMany
     {
         return $this->hasMany(Organization::class);
-    }
+    }*/
     public function organization(): BelongsTo
     {
-        return $this->belongsTo(Organization::class);
+        return $this->belongsTo(Organization::class, 'organization_id');
     }
 
 

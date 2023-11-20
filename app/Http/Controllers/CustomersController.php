@@ -27,9 +27,10 @@ class CustomersController extends Controller {
     {
         $customerRole = Role::where('slug', 'customer')->first();
         return Inertia::render('Customers/Index', [
-            'title' => 'Customers',
+            'title' => 'Usuarios',
             'filters' => Request::all(['search']),
-            'users' => User::orderByName()
+            'users' => User::with('organization')
+                ->orderByName()
                 ->whereRoleId($customerRole ? $customerRole->id : 0)
                 ->filter(Request::all(['search']))
                 ->paginate(10)
@@ -38,7 +39,8 @@ class CustomersController extends Controller {
                     'id' => $user->id,
                     'name' => $user->name,
                     'city' => $user->city,
-                    'country' => $user->country_id ? $user->country->name: null,
+                    //'country' => $user->country_id ? $user->country->name: null,
+                    'organization' => $user->organization ? $user->organization->name : null,
                     'email' => $user->email,
                     'phone' => $user->phone,
                     'company'=>$user->company,
@@ -71,10 +73,9 @@ class CustomersController extends Controller {
         $userRequest = Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
-            'company' => ['required', 'max:50'],
             'phone' => ['nullable', 'max:25'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')],
-            'organization_id' => ['nullable', Rule::exists('organizations', 'id')],
+            'organization_id' => ['required', Rule::exists('organizations', 'id')],
             'password' => ['nullable'],
             'city' => ['nullable'],
             'address' => ['nullable'],
@@ -107,7 +108,6 @@ class CustomersController extends Controller {
                 'id' => $user->id,
                 'first_name' => $user->first_name,
                 'last_name' => $user->last_name,
-                'company' => $user->company,
                 'email' => $user->email,
                 'organization_id' => $user->organization_id,
                 'phone' => $user->phone,
@@ -142,11 +142,10 @@ class CustomersController extends Controller {
         Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
-            'company' => ['required', 'max:50'],
             'phone' => ['nullable', 'max:25'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')->ignore($user->id)],
             'organization_id' => [
-                'nullable',
+                'required',
                 Rule::exists('organizations', 'id'),
             ],
             'password' => ['nullable'],
@@ -157,7 +156,7 @@ class CustomersController extends Controller {
             'photo' => ['nullable', 'image'],
         ]);
 
-        $user->update(Request::only('first_name', 'last_name','company', 'phone', 'email', 'city', 'address', 'country_id', 'role_id','password','organization_id'));
+        $user->update(Request::only('first_name', 'last_name','company', 'phone', 'email', 'city', 'address', 'role_id','password','organization_id'));
 
         if(Request::file('photo')){
             if(isset($user->photo_path) && !empty($user->photo_path) && File::exists(public_path($user->photo_path))){

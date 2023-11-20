@@ -47,7 +47,7 @@
     "Password": "Contraseña",
     "Role": "Papel",
     "Photo": "Foto",
-    "New Tickets": "Nuevas Incidencias",
+    "New Tickets": "Incidencias de Hoy",
     "Open Tickets": "Incidencias Abiertos",
     "Closed Tickets": "Incidencias Cerradas",
     "Unassigned Tickets": "Incidencias sin Asignar",
@@ -209,5 +209,6 @@
     "Organization Email": "Correo de la Empresa",
     "pagination.next":"Siguiente",
     "pagination.previous":"Anterior",
+    "No customers found.": "No se encontraron Usuarios.",
     "Faqs": null
 }

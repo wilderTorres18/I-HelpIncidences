@@ -21,12 +21,12 @@
           <tr v-for="organization in organizations.data" :key="organization.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
             <td class="border-t">
               <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('organizations.edit', organization.id)">
-                {{ organization.name }}
+                <span class="uppercase">{{ organization.name }}</span>
               </Link>
             </td>
             <td class="border-t">
               <Link class="flex items-center px-6 py-4" :href="route('organizations.edit', organization.id)" tabindex="-1">
-                {{ organization.city }}
+                <span class="uppercase"> {{ organization.city }}</span>
               </Link>
             </td>
             <td class="border-t">

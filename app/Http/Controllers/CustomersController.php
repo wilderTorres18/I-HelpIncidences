@@ -75,7 +75,7 @@ class CustomersController extends Controller {
             'last_name' => ['required', 'max:50'],
             'phone' => ['nullable', 'max:25'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')],
-            'organization_id' => ['nullable', Rule::exists('organizations', 'id')],
+            'organization_id' => ['required', Rule::exists('organizations', 'id')],
             'password' => ['nullable'],
             'city' => ['nullable'],
             'address' => ['nullable'],
@@ -145,7 +145,7 @@ class CustomersController extends Controller {
             'phone' => ['nullable', 'max:25'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')->ignore($user->id)],
             'organization_id' => [
-                'nullable',
+                'required',
                 Rule::exists('organizations', 'id'),
             ],
             'password' => ['nullable'],
@@ -156,7 +156,7 @@ class CustomersController extends Controller {
             'photo' => ['nullable', 'image'],
         ]);
 
-        $user->update(Request::only('first_name', 'last_name','company', 'phone', 'email', 'city', 'address', 'country_id', 'role_id','password','organization_id'));
+        $user->update(Request::only('first_name', 'last_name','company', 'phone', 'email', 'city', 'address', 'role_id','password','organization_id'));
 
         if(Request::file('photo')){
             if(isset($user->photo_path) && !empty($user->photo_path) && File::exists(public_path($user->photo_path))){

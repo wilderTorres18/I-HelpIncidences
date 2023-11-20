@@ -9,7 +9,7 @@
           <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Email')" />
           <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Phone')" />
           <text-input v-model="form.city" :error="form.errors.city" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('City')" />
-          <text-input v-model="form.company" :error="form.errors.company" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Company')" />
+          <!--          <text-input v-model="form.company" :error="form.errors.company" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Company')" />-->
 
           <!--          <select-input v-model="form.country_id" :error="form.errors.country_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Country')">
             <option :value="null" />

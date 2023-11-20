@@ -52,13 +52,19 @@ class DashboardController extends Controller {
         $top_clients = Ticket::selectRaw("user_id, count(id) as total")
             ->groupBy('user_id')
             ->orderBy('total','DESC')
-            ->limit('3')
+            ->limit('4')
             ->get();
         $top_creators = [];
         $top_creator_tickets = 0;
         foreach ($top_clients as $client){
             $top_creator_tickets+= $client->total;
-            $top_creators[] = ['name' => $client->user? $client->user->first_name.' '.$client->user->last_name : '', 'count' => $client->total];
+            $top_creators[] = [
+                'name' => $client->user
+                    ? ($client->user->first_name .
+                        ($client->user->organization ? ' - ' . $client->user->organization->name : ''))
+                    : '',
+                'count' => $client->total
+            ];
         }
         $top_creators = $this->generateColorCount($top_creators, $top_creator_tickets);
 
@@ -194,7 +200,11 @@ class DashboardController extends Controller {
     }
 
     private function generateColorCount($items, $maxCount){
-        $colors = ['#c25ef1','#7562ca','#2980b9','#c0392b','#43c0dc','#7366ff','#800081','#2c3e50','#f39c12','#16a085','#27ae60'];
+        $colors = ['#27ae60','#7562ca','#2980b9','#c0392b','#43c0dc','#7366ff','#800081','#2c3e50','#f39c12','#16a085','#c25ef1',
+            '#ff6b6b', '#badc58', '#0abde3', '#ffbe76',
+            '#ff7979', '#a29bfe', '#ff9f43', '#2d3436', '#fd79a8',
+            '#74b9ff'
+        ];
         foreach ($items as $itemKey => &$itemValue){
             $itemValue['value'] = ($itemValue['count'] * 100)/$maxCount;
             $itemValue['label'] = $itemValue['name'].' '.round($itemValue['value'], 2).'% ('.$itemValue['count'].')';

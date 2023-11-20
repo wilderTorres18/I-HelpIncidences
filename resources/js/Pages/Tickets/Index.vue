@@ -59,9 +59,9 @@
             <span class="s__details flex flex-col">
               <span class="subject_t">{{ ticket.subject }}</span>
               <span class="user__d flex text-xs items-center pt-1">
-                <span v-if="ticket.company" class="user__n flex items-center pr-4">
+                <span v-if="ticket.organization" class="user__n flex items-center pr-4">
                   <icon name="user" class="flex-shrink-0 h-3 fill-gray-400 pr-1" />
-                  {{ ticket.company }}
+                  {{ ticket.organization }}
                 </span>
                 <span class="user__c flex items-center">
                   <icon name="folder" class="flex-shrink-0 h-3 fill-gray-400 pr-1" />

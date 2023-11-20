@@ -97,7 +97,7 @@ class OrganizationsController extends Controller
                 'country' => $organization->country,
                 'postal_code' => $organization->postal_code,*/
                 'deleted_at' => $organization->deleted_at,
-                'contacts' => $organization->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
+                'users' => $organization->users()->orderByName()->get()->map->only('id', 'first_name','last_name', 'email', 'phone'),
             ],
         ]);
     }

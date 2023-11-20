@@ -210,5 +210,10 @@
     "pagination.next":"Siguiente",
     "pagination.previous":"Anterior",
     "No customers found.": "No se encontraron Usuarios.",
+    "Associated Users": "Usuarios asociados",
+    "First name": "Nombres",
+    "Last name": "Apellidos",
+    "User email": "Correo de usuario",
+    "Functions": "Funciones",
     "Faqs": null
 }

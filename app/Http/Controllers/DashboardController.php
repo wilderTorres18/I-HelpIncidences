@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use App\Models\Contact;
+use App\Models\Organization;
 use App\Models\Country;
 use App\Models\Role;
 use App\Models\Status;
@@ -159,7 +160,7 @@ class DashboardController extends Controller {
             $totalCustomers = User::where('role_id', $customer_role->id)->count();
         }
 
-        $totalContacts = Contact::count();
+        $totalOrganizations = Organization::count();
 
         return Inertia::render('Dashboard/Index', [
             'title' => 'Dashboard',
@@ -176,7 +177,7 @@ class DashboardController extends Controller {
             'top_types' => $top_types,
             'top_departments' => $top_departments,
             'total_customer' => $totalCustomers ?? 0,
-            'total_contacts' => $totalContacts,
+            'total_organizations' => $totalOrganizations ?? 0,
             'chart_line' => [
                 'months' => $months,
                 'previousMonths' => $previousMonths,

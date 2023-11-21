@@ -23,7 +23,7 @@ class OrganizationsController extends Controller
     public function index(): Response
     {
         return Inertia::render('Organizations/Index', [
-            'title' => 'Organizations',
+            'title' => 'Empresa',
             'filters' => Request::all('search'),
             'organizations' => Organization::orderBy('name')
                 ->filter(Request::only('search'))

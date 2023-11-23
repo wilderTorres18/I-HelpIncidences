@@ -17,7 +17,7 @@ class DepartmentsController extends Controller
 
     public function index(){
         return Inertia::render('Departments/Index', [
-            'title' => 'Departments',
+            'title' => 'Departmentos',
             'filters' => Request::all(['search']),
             'departments' => Department::orderBy('name')
                 ->filter(Request::all(['search']))

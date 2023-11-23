@@ -84,7 +84,7 @@ class TicketsController extends Controller
         }
 
         return Inertia::render('Tickets/Index', [
-            'title' => 'Tickets',
+            'title' => 'Incidencias',
             'filters' => Request::all(),
             'hidden_fields' => $hiddenFields && $hiddenFields->value ? json_decode($hiddenFields->value) : null ,
             'priorities' => Priority::orderBy('name')

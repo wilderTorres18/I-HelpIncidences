@@ -19,7 +19,7 @@ class CategoriesController extends Controller
     public function index()
     {
         return Inertia::render('Categories/Index', [
-            'title' => 'Categories',
+            'title' => 'Categorias',
             'filters' => Request::all(['search']),
             'categories' => Category::orderBy('name')
                 ->filter(Request::all(['search']))

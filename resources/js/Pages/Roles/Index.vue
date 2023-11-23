@@ -29,7 +29,7 @@
             <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('roles.edit', role.id)">
               {{ role.slug }}
             </Link>
-          </td>
+          </td>  
           <td class="border-t w-px">
             <Link class="px-4 flex items-center" :href="route('roles.edit', role.id)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />

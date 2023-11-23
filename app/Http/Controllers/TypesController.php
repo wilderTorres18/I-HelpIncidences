@@ -17,7 +17,7 @@ class TypesController extends Controller
 
     public function index(){
         return Inertia::render('Types/Index', [
-            'title' => 'Ticket Types',
+            'title' => 'Tipos de incidencia',
             'filters' => Request::all(['search']),
             'types' => Type::orderBy('name')
                 ->filter(Request::all(['search']))

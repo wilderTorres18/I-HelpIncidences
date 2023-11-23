@@ -116,7 +116,7 @@
                 <span class="cl__n text-xs">{{ cl.month }}</span>
               </div>
             </div>
-          </div>
+          </div>  
         </div>
         <div class=" rd w-full lg:w-2/5">
           <!-- <div class="r__wrapper flex flex-col pl-5 pr-5 pb-5 bg-white rounded-lg shadow-lg rd">

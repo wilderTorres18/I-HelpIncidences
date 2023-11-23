@@ -17,7 +17,7 @@ class PrioritiesController extends Controller
 
     public function index(){
         return Inertia::render('Priorities/Index', [
-            'title' => 'Priorities',
+            'title' => 'Prioridades',
             'filters' => Request::all(['search']),
             'priorities' => Priority::orderBy('name')
                 ->filter(Request::all(['search']))

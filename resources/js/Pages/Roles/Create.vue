@@ -4,8 +4,8 @@
     <div class="bg-white rounded-md shadow overflow-hidden w-full">
       <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" :label="__('Name')" />
-          <text-input v-model="form.slug" :error="form.errors.slug" class="pr-6 pb-8 w-full lg:w-1/2" :label="__('Slug')" />
+          <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" :label="('Nombre')" />
+          <text-input v-model="form.slug" :error="form.errors.slug" class="pr-6 pb-8 w-full lg:w-1/2" :label="('Slug')" />
         </div>
         <div class="py-8 -mr-6 -mb-8 flex flex-wrap overflow-x-auto">
           <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
-          <loading-button :loading="form.processing" class="btn-indigo" type="submit">{{ __('Create Role') }}</loading-button>
+          <loading-button :loading="form.processing" class="btn-indigo" type="submit">{{ ('Crear rol') }}</loading-button>
         </div>
       </form>
     </div>
@@ -113,26 +113,26 @@ export default {
   },
     created() {
         this.form.access = {
-            'faq': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'blog': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'chat': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'smtp': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'type': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'user': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            // 'faq': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            // 'blog': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            'Chat': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            // 'smtp': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            'Tipo': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            'Roles': { 'read': false, 'create': false, 'delete': false, 'update': false },
             'global': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'pusher': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'status': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'ticket': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'contact': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'category': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'customer': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'language': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'priority': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'department': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'organization': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'email_template': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'knowledge_base': { 'read': false, 'create': false, 'delete': false, 'update': false },
-            'front_page': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            // 'pusher': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            'Estado': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            'Incidencia': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            'Contacto': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            'Categoria': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            'Usuario': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            // 'language': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            'Prioridades': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            'Departamentos': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            'Empresas': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            // 'email_template': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            // 'knowledge_base': { 'read': false, 'create': false, 'delete': false, 'update': false },
+            // 'front_page': { 'read': false, 'create': false, 'delete': false, 'update': false },
         }
     },
   methods: {

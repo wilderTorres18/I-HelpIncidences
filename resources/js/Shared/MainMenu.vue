@@ -79,19 +79,19 @@ export default {
         }
 
         if(user_access.customer.read || user_access.customer.update || user_access.customer.create || user_access.customer.delete){
-            this.menu_items.push({'name': 'Customers', 'route': 'customers', 'url': 'customers', 'icon': 'all_users'})
+            this.menu_items.push({'name': 'Usuarios', 'route': 'customers', 'url': 'customers', 'icon': 'all_users'})
         }
 
         if(enable_option.note){
-            this.menu_items.push( {'name': 'Notes', 'route': 'notes', 'url': 'notes', 'icon': 'notes'} )
+            this.menu_items.push( {'name': 'Notas', 'route': 'notes', 'url': 'notes', 'icon': 'notes'} )
         }
 
         if(enable_option.contact && (user_access.contact.read || user_access.contact.update || user_access.contact.create || user_access.contact.delete)){
-            this.menu_items.push({'name': 'Contacts', 'route': 'contacts', 'url': 'contacts', 'icon': 'contact'})
+            this.menu_items.push({'name': 'Contactos', 'route': 'contacts', 'url': 'contacts', 'icon': 'contact'})
         }
 
         if(enable_option.organization && (user_access.organization.read || user_access.organization.update || user_access.organization.create || user_access.organization.delete)){
-            this.menu_items.push({'name': 'Organizations', 'route': 'organizations', 'url': 'organizations', 'icon': 'office'})
+            this.menu_items.push({'name': 'Empresas', 'route': 'organizations', 'url': 'organizations', 'icon': 'office'})
         }
 
         if(user_access.user.read || user_access.user.update || user_access.user.create || user_access.user.delete){
@@ -108,23 +108,23 @@ export default {
         }
 
         if(user_access.category.read || user_access.category.update || user_access.category.create || user_access.category.delete){
-            settingSubmenus.push({'name': 'Categories', 'route': 'categories', 'url': 'settings/categories', 'icon': 'category'})
+            settingSubmenus.push({'name': 'Categorias', 'route': 'categories', 'url': 'settings/categories', 'icon': 'category'})
         }
 
         if(user_access.status.read || user_access.status.update || user_access.status.create || user_access.status.delete){
-            settingSubmenus.push({'name': 'Status', 'route': 'statuses', 'url': 'settings/statuses', 'icon': 'status'})
+            settingSubmenus.push({'name': 'Estados', 'route': 'statuses', 'url': 'settings/statuses', 'icon': 'status'})
         }
 
         if(user_access.priority.read || user_access.priority.update || user_access.priority.create || user_access.priority.delete){
-            settingSubmenus.push({'name': 'Priorities', 'route': 'priorities', 'url': 'settings/priorities', 'icon': 'priorities'})
+            settingSubmenus.push({'name': 'Prioridades', 'route': 'priorities', 'url': 'settings/priorities', 'icon': 'priorities'})
         }
 
         if(user_access.department.read || user_access.department.update || user_access.department.create || user_access.department.delete){
-            settingSubmenus.push({'name': 'Departments', 'route': 'departments', 'url': 'settings/departments', 'icon': 'departments'})
+            settingSubmenus.push({'name': 'Departamentos', 'route': 'departments', 'url': 'settings/departments', 'icon': 'departments'})
         }
 
         if(user_access.type.read || user_access.type.update || user_access.type.create || user_access.type.delete){
-            settingSubmenus.push({'name': 'Types', 'route': 'types', 'url': 'settings/types', 'icon': 'types'})
+            settingSubmenus.push({'name': 'Tipos', 'route': 'types', 'url': 'settings/types', 'icon': 'types'})
         }
 
         /* if(user_access.language.read || user_access.language.update || user_access.language.create || user_access.language.delete){
@@ -148,7 +148,7 @@ export default {
         }
 
         if(settingSubmenus.length){
-            this.menu_items.push({'name': 'Settings', 'route': '', 'url': 'settings', 'icon': 'settings', 'submenu': settingSubmenus })
+            this.menu_items.push({'name': 'Configuración', 'route': '', 'url': 'settings', 'icon': 'settings', 'submenu': settingSubmenus })
         }
 
 

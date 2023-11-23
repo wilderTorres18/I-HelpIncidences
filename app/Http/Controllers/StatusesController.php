@@ -16,7 +16,7 @@ class StatusesController extends Controller
 
     public function index(){
         return Inertia::render('Statuses/Index', [
-            'title' => 'Statuses',
+            'title' => 'Estados',
             'filters' => Request::all(['search', 'trashed']),
             'statuses' => Status::orderBy('name')
                 ->filter(Request::all(['search', 'trashed']))
@@ -35,7 +35,7 @@ class StatusesController extends Controller
     public function create()
     {
         return Inertia::render('Statuses/Create',[
-            'title' => 'Crear estados nuevos nuevos',
+            'title' => 'Crear nuevo estado',
         ]);
     }
 
@@ -48,7 +48,7 @@ class StatusesController extends Controller
 
         Status::create([ 'name' => $request_data['name'], 'slug' => $slug ]);
 
-        return Redirect::route('statuses')->with('success', 'Estados creados');
+        return Redirect::route('statuses')->with('success', 'Estado creado');
     }
 
     public function edit(Status $status)
@@ -73,16 +73,16 @@ class StatusesController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Estados actualizados.');
+        return Redirect::back()->with('success', 'Estado actualizado.');
     }
 
     public function destroy(Status $status){
         $status->delete();
-        return Redirect::route('statuses')->with('success', 'Estados eliminados.');
+        return Redirect::route('statuses')->with('success', 'Estado eliminado.');
     }
 
     public function restore(Status $status){
         $status->restore();
-        return Redirect::back()->with('success', 'Estados restaurados.');
+        return Redirect::back()->with('success', 'Estado restaurado.');
     }
 }

@@ -37,7 +37,7 @@ class UsersController extends Controller{
     public function index(): Response
     {
         return Inertia::render('Users/Index', [
-            'title' => 'Users',
+            'title' => 'Usuarios',
             'filters' => Request::all(['search','role_id']),
             'roles' => Role::orderBy('name')
                 ->get()

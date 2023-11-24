@@ -36,7 +36,7 @@ class DepartmentsController extends Controller
     public function create()
     {
         return Inertia::render('Departments/Create',[
-            'title' => 'Create a new department',
+            'title' => 'Crear un nuevo departamento',
         ]);
     }
 
@@ -48,7 +48,7 @@ class DepartmentsController extends Controller
             ])
         );
 
-        return Redirect::route('departments')->with('success', 'Department created.');
+        return Redirect::route('departments')->with('success', 'Departamento creado exitosamente.');
     }
 
     public function edit(Department $department){
@@ -70,16 +70,16 @@ class DepartmentsController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Department updated.');
+        return Redirect::back()->with('success', 'Departmento actualizado.');
     }
 
     public function destroy(Department $department) {
         $department->delete();
-        return Redirect::route('departments')->with('success', 'Department deleted.');
+        return Redirect::route('departments')->with('success', 'Departamento eliminado.');
     }
 
     public function restore(Department $department){
         $department->restore();
-        return Redirect::back()->with('success', 'Department restored.');
+        return Redirect::back()->with('success', 'Departamento restaurado.');
     }
 }

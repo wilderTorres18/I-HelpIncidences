@@ -8,8 +8,8 @@
 <!--              <text-input v-model="form.color" :error="form.errors.color" class="pr-6 pb-8 w-full lg:w-1/2" label="Color" />-->
           </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
-          <button v-if="!category.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Category</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Category</loading-button>
+          <button v-if="!category.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Eliminar categoria</button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Actualizar categoria</loading-button>
         </div>
       </form>
     </div>
@@ -51,12 +51,12 @@ export default {
       this.form.put(this.route('categories.update', this.category.id))
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this category?')) {
+      if (confirm('¿Estás seguro de que deseas eliminar esta categoria?')) {
         this.$inertia.delete(this.route('categories.destroy', this.category.id))
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this category?')) {
+      if (confirm('¿Estás seguro de que deseas restaurar esta categoria?')) {
         this.$inertia.put(this.route('categories.restore', this.category.id))
       }
     },

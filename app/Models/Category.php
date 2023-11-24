@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
@@ -17,11 +18,13 @@ class Category extends Model
         return $this->where($field ?? 'id', $value)->firstOrFail();
     }
 
-    public function tickets(){
+    public function tickets(): HasMany
+    {
         return $this->hasMany(Ticket::class);
     }
 
-    public function scopeFilter($query, array $filters){
+    public function scopeFilter($query, array $filters): void
+    {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
                 $query->where('name', 'like', '%'.$search.'%');

@@ -11,7 +11,7 @@
                 <option :value="0">Inactive</option>
             </select-input>
 
-            <textarea-input id="ticketDetails" name="content" v-model="form.details" :error="form.errors.details" class="pr-6 pb-8 w-full" placeholder="Faq Description"></textarea-input>
+            <!-- <textarea-input id="ticketDetails" name="content" v-model="form.details" :error="form.errors.details" class="pr-6 pb-8 w-full" placeholder="Faq Description"></textarea-input> -->
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create FAQ</loading-button>

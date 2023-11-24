@@ -12,6 +12,6 @@ class SubscriptionController extends Controller {
             'email' => ['required', 'email']
         ]);
         Contact::create($request);
-        return Redirect::back()->with('success', 'You just subscribed for the latest news. Thank You!');
+        return Redirect::back()->with('success', 'Acabas de suscribirte para recibir las últimas noticias. ¡Gracias!');
     }
 }

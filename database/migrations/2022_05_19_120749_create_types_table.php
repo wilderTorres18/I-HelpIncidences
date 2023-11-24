@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateTypesTable extends Migration
@@ -19,6 +20,12 @@ class CreateTypesTable extends Migration
             $table->string('name');
             $table->softDeletes();
         });
+
+        DB::table('types')->insert([
+            ['name' => 'Error en la aplicación'], ['name' => 'Problema de rendimiento'],
+            ['name' => 'Problemas con exportación '], ['name' => 'Problemas de acceso'],
+            ['name' => 'Consulta general'] ,['name' => 'Otros']
+        ]);
     }
 
     /**

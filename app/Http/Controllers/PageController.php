@@ -204,7 +204,7 @@ class PageController extends Controller {
         ]);
 
         event(new ContactMessage(['email' => $contact_data['email'], 'name' => $contact_data['name'], 'phone' => $contact_data['phone'], 'message' => $contact_data['message']]));
-        return Redirect::back()->with('success', 'Your message has been sent!');
+        return Redirect::back()->with('success', '¡Tu mensaje ha sido enviado!');
     }
 
     public function getFlag($code){

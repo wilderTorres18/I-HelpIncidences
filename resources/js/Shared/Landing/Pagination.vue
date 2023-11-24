@@ -9,7 +9,7 @@
             </template>
         </div>
     </div>
-</template>
+</template>   
 
 <script>
 import {Link} from '@inertiajs/inertia-vue3'

@@ -4,16 +4,20 @@
     <div class="max-w-full bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="store">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
-          <text-input v-model="form.first_name" :error="form.errors.first_name" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('First name')" />
-          <text-input v-model="form.last_name" :error="form.errors.last_name" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Last name')" />
+          <text-input v-model="form.first_name" :error="form.errors.first_name" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Nombres completos')" />
+          <text-input v-model="form.last_name" :error="form.errors.last_name" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Apellidos completos')" />
           <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Email')" />
           <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('Phone')" />
           <text-input v-model="form.city" :error="form.errors.city" class="pb-8 pr-6 w-full lg:w-1/2" :label="__('City')" />
-          <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Address')" />
+          <select-input v-model="form.organization_id" :error="form.errors.organization_id" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Organization')">
+            <option :value="null" />
+            <option v-for="organization in organizations" :key="organization.id" :value="organization.id">{{ organization.name }}</option>
+          </select-input>
+          <!--          <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full lg:w-1/3" :label="__('Address')" />
           <select-input v-model="form.country_id" :error="form.errors.country_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Country')">
             <option :value="null" />
             <option v-for="c in countries" :key="c.id" :value="c.id">{{ __(c.name) }}</option>
-          </select-input>
+          </select-input>-->
           <text-input v-model="form.password" :error="form.errors.password" class="pb-8 pr-6 w-full lg:w-1/3" type="password" autocomplete="new-password" :label="__('Password')" />
           <file-input v-model="form.photo" :error="form.errors.photo" class="pb-8 pr-6 w-full lg:w-1/2" type="file" accept="image/*" :label="__('Photo')" />
         </div>
@@ -45,6 +49,7 @@ export default {
   layout: Layout,
   props: {
     countries: Array,
+    organizations: Array,
     cities: Array,
     title: String,
   },
@@ -58,6 +63,7 @@ export default {
         email: '',
         city: null,
         address: '',
+        organization_id: null,
         country_id: null,
         password: '',
         role_id: null,

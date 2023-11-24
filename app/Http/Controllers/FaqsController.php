@@ -37,7 +37,7 @@ class FaqsController extends Controller {
     public function create()
     {
         return Inertia::render('Faqs/Create',[
-            'title' => 'Create a new FAQ',
+            'title' => 'Crear nueva pregunta',
         ]);
     }
 
@@ -51,7 +51,7 @@ class FaqsController extends Controller {
             ])
         );
 
-        return Redirect::route('faqs')->with('success', 'Faq created.');
+        return Redirect::route('faqs')->with('success', 'Pregunta creada.');
     }
 
     public function edit(Faq $faq) {
@@ -76,11 +76,11 @@ class FaqsController extends Controller {
             ])
         );
 
-        return Redirect::back()->with('success', 'Faq updated.');
+        return Redirect::back()->with('success', 'Pregunta actualizada.');
     }
 
     public function destroy(Faq $faq) {
         $faq->delete();
-        return Redirect::route('faqs')->with('success', 'Faq deleted.');
+        return Redirect::route('faqs')->with('success', 'Pregunta eliminada.');
     }
 }

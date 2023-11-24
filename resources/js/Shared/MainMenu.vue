@@ -1,19 +1,23 @@
 <template>
   <div>
-    <div class="menu-item" v-for="(menu_item, m_index) in menu_items" :key="m_index"
-         :class="isUrl(menu_item.url) ? ' active' : ''" v-on="menu_item.submenu?{click: (e) => addActiveClass(e)}:{}">
+    <div
+      v-for="(menu_item, m_index) in menu_items" :key="m_index" class="menu-item"
+      :class="isUrl(menu_item.url) ? ' active' : ''" v-on="menu_item.submenu?{click: (e) => addActiveClass(e)}:{}"
+    >
       <Link class="flex items-center group py-3 menu-link" :href="menu_item.route?route(menu_item.route):'#'" :class="{'have-sub-menu': menu_item.submenu}">
         <icon :name="menu_item.icon" class="w-6 h-6 mr-3 rtl:ml-3 menu__icon" />
         <div class="menu__name">{{ __(menu_item.name) }}</div>
       </Link>
-        <div v-if="menu_item.submenu" class="sub-menu-items">
-            <Link class="sub-menu-item" v-for="(sub_menu_item, s_m_index) in menu_item.submenu" :key="s_m_index"
-                :class="this.isUrl(sub_menu_item.url) ? ' active' : ''" :href="sub_menu_item.param?route(sub_menu_item.route,sub_menu_item.param):route(sub_menu_item.route)">
-                <icon v-if="sub_menu_item.icon" :name="sub_menu_item.icon" class="w-4 h-4 mr-1 rtl:ml-1 menu__icon" />
-                <icon v-else name="dash" class="w-4 h-4 mr-1 rtl:mr-1 menu__icon" />
-                <div class="menu__name">{{ __(sub_menu_item.name) }}</div>
-            </Link>
-        </div>
+      <div v-if="menu_item.submenu" class="sub-menu-items">
+        <Link
+          v-for="(sub_menu_item, s_m_index) in menu_item.submenu" :key="s_m_index" class="sub-menu-item"
+          :class="isUrl(sub_menu_item.url) ? ' active' : ''" :href="sub_menu_item.param?route(sub_menu_item.route,sub_menu_item.param):route(sub_menu_item.route)"
+        >
+          <icon v-if="sub_menu_item.icon" :name="sub_menu_item.icon" class="w-4 h-4 mr-1 rtl:ml-1 menu__icon" />
+          <icon v-else name="dash" class="w-4 h-4 mr-1 rtl:mr-1 menu__icon" />
+          <div class="menu__name">{{ __(sub_menu_item.name) }}</div>
+        </Link>
+      </div>
     </div>
   </div>
 </template>
@@ -34,24 +38,11 @@ export default {
               {'name': 'Dashboard', 'route': 'dashboard', 'url': 'dashboard', 'icon': 'dashboard'},
               {'name': 'Tickets', 'route': 'tickets', 'url': 'tickets', 'icon': 'ticket'},
           ],
-          enable_option : {}
+          enable_option : {},
       }
     },
-  methods: {
-    isUrl(...urls) {
-      let currentUrl = this.$page.url.substr(1)
-        currentUrl = currentUrl.replace('dashboard/','')
-      if (urls[0] === '') {
-        return currentUrl === ''
-      }
-      return urls.filter(url => currentUrl.startsWith(url)).length
-    },
-      addActiveClass(e){
-          e.currentTarget.classList.toggle('hover')
-      }
-  },
     created() {
-      this.user = this.$page.props.auth.user;
+      this.user = this.$page.props.auth.user
       const user_access = this.user.access
 
         let enable_option = {}
@@ -98,7 +89,7 @@ export default {
             this.menu_items.push({'name': 'Manage Users', 'route': 'users', 'url': 'users', 'icon': 'users'})
         }
 
-        const settingSubmenus = [];
+        const settingSubmenus = []
         if(this.user.role.slug === 'admin'){
             settingSubmenus.push({'name': 'User Roles', 'route': 'roles', 'url': 'settings/roles', 'icon': 'user_role'})
         }
@@ -151,9 +142,7 @@ export default {
             this.menu_items.push({'name': 'Settings', 'route': '', 'url': 'settings', 'icon': 'settings', 'submenu': settingSubmenus })
         }
 
-
-
-        if(user_access.front_page.read || user_access.front_page.update || user_access.front_page.create || user_access.front_page.delete){
+ /*       if(user_access.front_page.read || user_access.front_page.update || user_access.front_page.create || user_access.front_page.delete){
             this.menu_items.push(
                 {'name': 'Front Pages', 'route': '', 'url': 'front_pages', 'icon': 'gear',
                     'submenu': [
@@ -163,10 +152,23 @@ export default {
                         {'name': 'Privacy Policy', 'route': 'front_pages.page', 'url': 'front_pages/privacy', 'icon': 'page', 'param': 'privacy'},
                         {'name': 'Terms of services', 'route': 'front_pages.page', 'url': 'front_pages/terms', 'icon': 'page', 'param': 'terms'},
                         {'name': 'Footer', 'route': 'front_pages.page', 'url': 'front_pages/footer', 'icon': 'page', 'param': 'footer'},
-                    ]
+                    ],
                 },
             )
-        }
-    }
+        }*/
+    },
+  methods: {
+    isUrl(...urls) {
+      let currentUrl = this.$page.url.substr(1)
+        currentUrl = currentUrl.replace('dashboard/','')
+      if (urls[0] === '') {
+        return currentUrl === ''
+      }
+      return urls.filter(url => currentUrl.startsWith(url)).length
+    },
+      addActiveClass(e){
+          e.currentTarget.classList.toggle('hover')
+      },
+  },
 }
 </script>

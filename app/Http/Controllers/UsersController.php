@@ -19,6 +19,7 @@ use App\Models\Review;
 use App\Models\Role;
 use App\Models\Ticket;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -27,12 +28,14 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class UsersController extends Controller{
     public function __construct(){
         $this->middleware(RedirectIfNotParmitted::class.':user');
     }
-    public function index(){
+    public function index(): Response
+    {
         return Inertia::render('Users/Index', [
             'title' => 'Users',
             'filters' => Request::all(['search','role_id']),
@@ -58,9 +61,10 @@ class UsersController extends Controller{
         ]);
     }
 
-    public function create(){
+    public function create(): Response
+    {
         return Inertia::render('Users/Create',[
-            'title' => 'Create a new user',
+            'title' => 'Crear un nuevo usuario',
             'roles' => Role::orderBy('name')
                 ->get()
                 ->map
@@ -76,7 +80,8 @@ class UsersController extends Controller{
         ]);
     }
 
-    public function store(){
+    public function store(): RedirectResponse
+    {
         $userRequest = Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
@@ -102,10 +107,11 @@ class UsersController extends Controller{
 
         event(new UserCreated(['id' => $user->id, 'password' => $userRequest['password']]));
 
-        return Redirect::route('users')->with('success', 'User created.');
+        return Redirect::route('users')->with('success', 'Usuario creado.');
     }
 
-    public function edit(User $user) {
+    public function edit(User $user): Response|RedirectResponse
+    {
         $a_user = Auth()->user();
 
         $roles = Role::pluck('id', 'slug')->all();
@@ -150,14 +156,16 @@ class UsersController extends Controller{
         ]);
     }
 
-    public function update(User $user) {
+    public function update(User $user): RedirectResponse
+    {
         if (config('app.demo')) {
-            return Redirect::back()->with('error', 'Updating user is not allowed for the live demo.');
+            return Redirect::back()->with('error', 'No se permite actualizar el usuario para la demostración en vivo.');
         }
 
         Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
+            'company' => ['required', 'max:50'],
             'phone' => ['nullable', 'max:25'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => ['nullable'],
@@ -167,7 +175,7 @@ class UsersController extends Controller{
             'photo' => ['nullable', 'image'],
         ]);
 
-        $user->update(Request::only(['first_name', 'last_name', 'phone', 'email', 'city', 'address', 'country_id']));
+        $user->update(Request::only(['first_name', 'last_name', 'phone', 'email', 'city', 'address', 'country_id','company']));
 
         if(!empty(Request::get('role_id'))){
             $user->update(['role_id' => Request::get('password')]);
@@ -184,27 +192,30 @@ class UsersController extends Controller{
             $user->update(['password' => Request::get('password')]);
         }
 
-        return Redirect::back()->with('success', 'Profile updated.');
+        return Redirect::back()->with('success', 'Perfil actualizado.');
     }
 
-    public function destroy(User $user) {
+    public function destroy(User $user): RedirectResponse
+    {
 
         if (config('app.demo')) {
-            return Redirect::back()->with('error', 'Deleting user is not allowed for the live demo.');
+            return Redirect::back()->with('error', 'No se permite eliminar usuarios para la demostración en vivo.');
         }
 
         $userId = $user->id;
         $user->delete();
         $this->removeUserFromRelatedTables($userId);
 
-        return Redirect::route('users')->with('success', 'User deleted!');
+        return Redirect::route('users')->with('success', 'Usuario eliminado!');
     }
-    public function restore(User $user){
+    public function restore(User $user): RedirectResponse
+    {
         $user->restore();
-        return Redirect::back()->with('success', 'User restored!');
+        return Redirect::back()->with('success', 'Usuario restaurado!');
     }
 
-    private function removeUserFromRelatedTables($userId){
+    private function removeUserFromRelatedTables($userId): void
+    {
         Note::where('user_id', $userId)->update(['user_id' => null]);
         PendingEmail::where('user_id', $userId)->update(['user_id' => null]);
         Review::where('user_id', $userId)->update(['user_id' => null]);

@@ -21,7 +21,7 @@ import TextInput from '@/Shared/TextInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
-  metaInfo: { title: 'Create Status' },
+  metaInfo: { title: 'Crear estados' },
   components: {
     LoadingButton,
     TextInput,

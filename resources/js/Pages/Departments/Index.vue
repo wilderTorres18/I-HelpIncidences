@@ -26,7 +26,7 @@
           </td>
         </tr>
         <tr v-if="departments.data.length === 0">
-          <td class="border-t px-6 py-4" colspan="4">No departments found.</td>
+          <td class="border-t px-6 py-4" colspan="4">Departamentos no encontrados</td>
         </tr>
       </table>
     </div>

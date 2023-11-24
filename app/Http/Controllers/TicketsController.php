@@ -11,6 +11,7 @@ use App\Models\Attachment;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Department;
+use App\Models\Organization;
 use App\Models\PendingEmail;
 use App\Models\Priority;
 use App\Models\Review;
@@ -21,12 +22,15 @@ use App\Models\Ticket;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class TicketsController extends Controller
 {
@@ -35,7 +39,8 @@ class TicketsController extends Controller
         $this->middleware(RedirectIfNotParmitted::class.':ticket');
     }
 
-    public function index(){
+    public function index(): Response
+    {
         $byCustomer = null;
         $byAssign = null;
         $user = Auth()->user();
@@ -58,10 +63,10 @@ class TicketsController extends Controller
         if($type == 'un_assigned'){
             $whereAll[] = ['assigned_to', '=', null];
         }elseif ($type == 'open'){
-            $opened_status = Status::where('slug', 'like', '%cerrado%')->first();
+            $opened_status = Status::where('slug', 'like', '%closed%')->first();
             $whereAll[] = ['status_id', '!=', $opened_status->id];
         }elseif ($type == 'new'){
-            $whereAll[] = ['created_at', '>=', date('Y-m-d').' 00:00:00'];
+            $whereAll[] = ['created_at', '>=', date('Y-m-d')];
         }
 
         $ticketQuery = Ticket::where($whereAll);
@@ -115,26 +120,32 @@ class TicketsController extends Controller
                         'uid' => $ticket->uid,
                         'subject' => $ticket->subject,
                         'user' => $ticket->user ? $ticket->user->first_name.' '.$ticket->user->last_name : null,
+                        'organization' => $ticket->user && $ticket->user->organization ? $ticket->user->organization->name : null,
+                        'company' => $ticket->user ? $ticket->user->company : null,
                         'priority' => $ticket->priority ? $ticket->priority->name : null,
+                        'type' => $ticket->ticketType ? $ticket->ticketType->name : null,
+                        'department' => $ticket->department ? $ticket->department->name : null,
                         'category' => $ticket->category ? $ticket->category->name: null,
                         'rating' => $ticket->review ? $ticket->review->rating : 0,
                         'status' => $ticket->status ? $ticket->status->name : null,
                         'due' => $ticket->due,
                         'assigned_to' => $ticket->assignedTo? $ticket->assignedTo->first_name.' '.$ticket->assignedTo->last_name : null,
-                        'created_at' => $ticket->created_at,
-                        'updated_at' => $ticket->updated_at,
+                        'created_at' => $ticket->created_at->format('Y-m-d'),
+                        'updated_at' => $ticket->updated_at->format('Y-m-d'),
                         'deleted_at' => $ticket->deleted_at
                     ];
                 }),
         ]);
     }
 
-    public function create(){
+    public function create(): Response
+    {
         $user = Auth()->user();
         $roles = Role::pluck('id', 'slug')->all();
         $hiddenFields = Setting::where('slug', 'hide_ticket_fields')->first();
         return Inertia::render('Tickets/Create', [
             'title' => 'Crear una nueva incidencia',
+            'isCustomer' => Auth::user()->role->slug === 'customer',
             'hidden_fields' => $hiddenFields && $hiddenFields->value ? json_decode($hiddenFields->value) : null ,
             'customers' => User::where('role_id', $roles['customer'] ?? 0)->orWhere('id', Request::input('customer_id'))->orderBy('first_name')
                 ->limit(6)
@@ -169,7 +180,8 @@ class TicketsController extends Controller
         ]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request): RedirectResponse
+    {
         $user = Auth()->user();
         $request_data = Request::validate([
             'user_id' => ['nullable', Rule::exists('users', 'id')],
@@ -225,7 +237,8 @@ class TicketsController extends Controller
         return Redirect::route('tickets')->with('success', 'Incidencia Creada');
     }
 
-    public function edit($uid){
+    public function edit($uid): Response
+    {
         $ticket = Ticket::where('uid', $uid)->orWhere('id', $uid)->first();
         $hiddenFields = Setting::where('slug', 'hide_ticket_fields')->first();
         $comment_access = 'read';
@@ -241,6 +254,7 @@ class TicketsController extends Controller
         return Inertia::render('Tickets/Edit', [
             'hidden_fields' => $hiddenFields ? json_decode($hiddenFields->value) : null ,
             'title' => $ticket->subject,
+            'isCustomer' => Auth::user()->role->slug === 'customer',
             'customers' => User::where('role_id', $roles['customer'] ?? 0)->orWhere('id', Request::input('customer_id'))->orderBy('first_name')
                 ->limit(6)
                 ->get()
@@ -304,7 +318,8 @@ class TicketsController extends Controller
         ]);
     }
 
-    public function update(Ticket $ticket){
+    public function update(Ticket $ticket): RedirectResponse
+    {
         $user = Auth()->user();
         $request_data = Request::validate([
             'user_id' => ['nullable', Rule::exists('users', 'id')],
@@ -328,24 +343,24 @@ class TicketsController extends Controller
                 'user_id' => $user['id']
             ]);
             $ticket->update(['review_id' => $review->id]);
-            return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Added the review!');
+            return Redirect::route('tickets.edit', $ticket->uid)->with('success', '¡Agregó la reseña!');
         }
 
-        $closed_status = Status::where('slug', 'like', '%cerrado%')->first();
+        $closed_status = Status::where('slug', 'like', '%closed%')->first();
 
         $update_message = null;
         if($closed_status && ($ticket->status_id != $closed_status->id) && $request_data['status_id'] == $closed_status->id){
             $update_message = 'La incidencia ha sido cerrada.';
         }elseif($ticket->status_id != $request_data['status_id']){
-            $update_message = 'The status has been changed for this ticket.';
+            $update_message = 'El estado ha sido cambiado para esta incidencia.';
         }
 
         if($ticket->priority_id != $request_data['priority_id']){
-            $update_message = 'The priority has been changed for this ticket.';
+            $update_message = 'Se ha cambiado la prioridad para esta incidencia.';
         }
 
         if(empty($ticket->response) && $user['role']['slug'] === 'admin'){
-            $request_data['response'] = date('Y-m-d H:i:s');
+            $request_data['response'] = date('Y-m-d');
         }
 
         if(isset($request_data['due']) && !empty($request_data['due'])){
@@ -395,7 +410,8 @@ class TicketsController extends Controller
         return Redirect::route('tickets.edit', $ticket->uid)->with('success', 'Incidencia Actualizada');
     }
 
-    public function newComment(){
+    public function newComment(): JsonResponse
+    {
         $request = Request::all();
         $ticket = Comment::where('ticket_id', $request['ticket_id'])->count();
         if(empty($ticket)){
@@ -416,18 +432,20 @@ class TicketsController extends Controller
         return response()->json($newComment);
     }
 
-    public function destroy(Ticket $ticket)
+    public function destroy(Ticket $ticket): RedirectResponse
     {
         $ticket->delete();
-        return Redirect::route('tickets')->with('success', 'Ticket deleted.');
+        return Redirect::route('tickets')->with('success', 'Incidencia eliminada.');
     }
 
-    public function restore(Ticket $ticket){
+    public function restore(Ticket $ticket): RedirectResponse
+    {
         $ticket->restore();
-        return Redirect::back()->with('success', 'Ticket restored.');
+        return Redirect::back()->with('success', 'Incidencia restaurada.');
     }
 
-    private function sendMailCron($id, $type = null, $value = null){
+    private function sendMailCron($id, $type = null, $value = null): void
+    {
         PendingEmail::create(['ticket_id' => $id, 'type' => $type, 'value' => $value]);
     }
 }

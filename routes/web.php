@@ -705,8 +705,13 @@ Route::get('/language/{language}', [DashboardController::class, 'setLocale'])
     ->name('language');
 
 /** Site Front-Landing */
-Route::get('/', [HomeController::class, 'index'])
-    ->name('home');
+
+Route::get('/', [AuthenticatedSessionController::class, 'create'])
+    ->name('login')
+    ->middleware('guest');
+
+/*Route::get('/', [HomeController::class, 'index'])
+    ->name('home');*/
 
 Route::get('terms-of-services', [PageController::class, 'terms'])
     ->name('terms_service');

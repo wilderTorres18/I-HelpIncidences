@@ -51,12 +51,12 @@ export default {
       this.form.put(this.route('departments.update', this.department.id))
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this department?')) {
+      if (confirm('¿Está seguro de que desea eliminar este departamento?')) {
         this.$inertia.delete(this.route('departments.destroy', this.department.id))
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this department?')) {
+      if (confirm('¿Está seguro de que desea restaurar este departamento?')) {
         this.$inertia.put(this.route('departments.restore', this.department.id))
       }
     },

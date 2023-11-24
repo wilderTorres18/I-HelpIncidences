@@ -22,7 +22,7 @@ class ImagesController extends Controller
     }
 
     public function ckeImageUpload(Request $request){
-        $file_url  = 'http://127.0.0.1:8000/images/logo.png';
+        $file_url  = '/images/logo.png';
         if($request->file('upload')){
             $file_url = '/files/'.$request->file('upload')->store('kb', ['disk' => 'file_uploads']);
         }

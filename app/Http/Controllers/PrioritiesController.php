@@ -35,7 +35,7 @@ class PrioritiesController extends Controller
 
     public function create(){
         return Inertia::render('Priorities/Create',[
-            'title' => 'Create a new priority',
+            'title' => 'Crear nueva prioridad',
         ]);
     }
 
@@ -47,7 +47,7 @@ class PrioritiesController extends Controller
             ])
         );
 
-        return Redirect::route('priorities')->with('success', 'Priority created.');
+        return Redirect::route('priorities')->with('success', 'Prioridad creada.');
     }
 
     public function edit(Priority $priority)
@@ -70,16 +70,16 @@ class PrioritiesController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Priority updated.');
+        return Redirect::back()->with('success', 'Prioridad actualizada.');
     }
 
     public function destroy(Priority $priority){
         $priority->delete();
-        return Redirect::route('priorities')->with('success', 'Priority deleted.');
+        return Redirect::route('priorities')->with('success', 'Prioridad eliminada.');
     }
 
     public function restore(Priority $priority){
         $priority->restore();
-        return Redirect::back()->with('success', 'Priority restored.');
+        return Redirect::back()->with('success', 'Prioridad restaurada.');
     }
 }

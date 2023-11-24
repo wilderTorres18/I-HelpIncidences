@@ -6,7 +6,7 @@
         <div class="md:flex md:shrink-0 ">
           <div class="md:shrink-0 md:py-2 md:w-60 flex items-center justify-between md:justify-center sidebar-left-top">
             <Link class="mt-1" href="/">
-              <logo class="help-desk-logo" />
+              <logo class="block mx-auto" style="width: 45%;" max-w-xs fill-white />
             </Link>
             <dropdown class=" md:hidden" class-name="small-menu" placement="bottom-end">
               <template #default>
@@ -27,7 +27,7 @@
               </div>
             </div>
             <div class="placement-top-right">
-              <dropdown class="mt-1 rtl:ml-2 language_menu_wrapper" placement="bottom-end">
+              <!-- <dropdown class="mt-1 rtl:ml-2 language_menu_wrapper" placement="bottom-end">
                 <template #default>
                   <div class="flex items-center cursor-pointer group language_menu">
                     <div class=" font-bold mr-1 rtl:mr-0 whitespace-nowrap w-[7rem]">
@@ -43,7 +43,7 @@
                     </Link>
                   </div>
                 </template>
-              </dropdown>
+              </dropdown> -->
               <dropdown class="mt-1 select_user" placement="bottom-end">
                 <template #default>
                   <div class="flex items-center cursor-pointer group">
@@ -152,7 +152,6 @@ export default {
     },
     updated() {
         this.detectCurrentUrl()
-        console.log(this.selected_language)
     },
     created() {
         this.moment = moment
@@ -170,15 +169,15 @@ export default {
         generateGreetings(){
             const currentHour = this.moment().format('HH')
             if (currentHour >= 3 && currentHour < 12){
-                return 'Good Morning'
+                return 'Buenos Dias'
             } else if (currentHour >= 12 && currentHour < 15){
-                return 'Good Noon'
+                return 'Buen Mediodía'
             }else if (currentHour >= 15 && currentHour < 18){
-                return 'Good Afternoon'
+                return 'Buenas Tardes'
             }   else if (currentHour >= 18 && currentHour < 20){
-                return 'Good Evening'
+                return 'Buenas Noches'
             } else {
-                return 'Hello'
+                return 'Hola'
             }
         },
         switchMode(){

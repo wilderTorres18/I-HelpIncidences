@@ -7,9 +7,9 @@
               <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" :label="__('Name')" />
           </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
-          <button v-if="!priority.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">{{ __('Delete Priority') }}
+          <button v-if="!priority.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">{{ __('Eliminar prioridad') }}
             </button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">{{ __('Update Priority') }}
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">{{ __('Actualizar prioridad') }}
             </loading-button>
         </div>
       </form>
@@ -53,12 +53,12 @@ export default {
       this.form.put(this.route('priorities.update', this.priority.id))
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this priority?')) {
+      if (confirm('¿Estás seguro que quieres eliminar esta prioridad?')) {
         this.$inertia.delete(this.route('priorities.destroy', this.priority.id))
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this priority?')) {
+      if (confirm('¿Estás seguro que quieres restaurar esta prioridad?')) {
         this.$inertia.put(this.route('priorities.restore', this.priority.id))
       }
     },

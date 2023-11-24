@@ -2,7 +2,6 @@
 .env
 package-lock.json
 .phpunit.result.cache
-composer.lock
 phpunit.xml
 /vendor
 /.idea

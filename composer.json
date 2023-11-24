@@ -62,7 +62,6 @@
         ],
         "compile": [
             "@php artisan migrate:fresh --seed --force",
-
         ]
     },
     "extra": {

@@ -211,6 +211,7 @@
           </div>
         </form>
       </div>
+      <!-- Chat Soporte     -->
       <div class="max-w-full lg:w-2/5">
         <div class="bg-white rounded-md shadow overflow-hidden ml-2 chat-area comment-box flex-1 flex flex-col">
           <div class="flex-3">

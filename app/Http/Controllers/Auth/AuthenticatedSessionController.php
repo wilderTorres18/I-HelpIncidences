@@ -29,8 +29,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): Response
     {
-        $is_demo = (int)config('app.demo');
-        return Inertia::render('Auth/Login', ['is_demo' => $is_demo]);
+        return Inertia::render('Auth/Login');
     }
 
     public function register(): Response
@@ -98,6 +97,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      *
+     * @param LoginRequest $request
      * @return RedirectResponse
      * @throws ValidationException
      */

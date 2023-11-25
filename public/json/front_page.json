@@ -84,11 +84,11 @@
             "sections": [
                 {
                     "image": "/landing/images/dashboard-helpdesk.png",
-                    "title": "Make your working process easier with <span>HelpDesk</span>",
+                    "title": "Facilite su proceso de trabajo con <span>I-Helpinc</span>",
                     "buttons": [
                         {
                             "link": "/login",
-                            "text": "Login HelpDesk",
+                            "text": "Login I-Helpinc",
                             "new_tab": "0"
                         },
                         {
@@ -97,7 +97,7 @@
                             "new_tab": "0"
                         }
                     ],
-                    "details": "It's much easier now to create, assign, manage and resolve tickets with HelpDesk. You just need to host this web application on any hosting server of your choice and use it.",
+                    "details": "Ahora es mucho más fácil crear, asignar, gestionar y resolver incidencias con I-Helpinc. Sólo necesita establecer esta aplicación web en cualquier servidor de alojamiento de su elección y utilizarla.",
                     "enable_ticket_section": ""
                 },
                 {

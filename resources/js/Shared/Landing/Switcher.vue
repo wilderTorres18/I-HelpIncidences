@@ -11,7 +11,7 @@
     </span>
     </div>
 </template>
-<!-- Switcher -->
+<!-- Switcher --> 
 
 <script>
 export default {

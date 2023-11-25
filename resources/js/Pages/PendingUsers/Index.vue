@@ -2,7 +2,7 @@
   <div>
     <Head :title="__(title)" />
     <div class="flex items-center justify-between mb-6">
-      <search-input v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset"></search-input>
+      <search-input v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset" />
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
@@ -17,27 +17,27 @@
         </tr>
         <tr v-for="user in users" :key="user.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-              {{ user.first_name }} {{ user.last_name }}
+            {{ user.first_name }} {{ user.last_name }}
           </td>
           <td class="border-t">
-              {{ user.email }}
+            {{ user.email }}
           </td>
           <td class="border-t">
-              {{ user.phone }}
+            {{ user.phone }}
           </td>
           <td class="border-t">
-              {{ __(user.city) }}
+            {{ __(user.city) }}
           </td>
           <td class="border-t capitalize">
-              {{ user.address }}
+            {{ user.address }}
           </td>
           <td class="border-t capitalize">
-              {{ moment(user.created_at).fromNow() }}
+            {{ moment(user.created_at).fromNow() }}
           </td>
           <td class="border-t capitalize">
             <div class="action flex ">
-              <icon name="tick" @click="approveAccount(user.id)" class=" ml-2 w-7 h-7 cursor-pointer" />
-              <icon name="cross" @click="removeAccount(user.id)" class=" ml-2 w-7 h-7 cursor-pointer" />
+              <icon name="tick" class=" ml-2 w-7 h-7 cursor-pointer" @click="approveAccount(user.id)" />
+              <icon name="cross" class=" ml-2 w-7 h-7 cursor-pointer" @click="removeAccount(user.id)" />
             </div>
           </td>
         </tr>
@@ -88,23 +88,23 @@ export default {
       }, 150),
     },
   },
+  created() {
+    this.moment = moment
+  },
   methods: {
     approveAccount(id) {
       this.axios.get(this.route('pending.active', { id })).then((res)=>{
-        window.location.reload();
+        window.location.reload()
       })
     },
     removeAccount(id) {
       this.axios.get(this.route('pending.decline', { id })).then((res)=>{
-        window.location.reload();
+        window.location.reload()
       })
     },
     reset() {
       this.form = mapValues(this.form, () => null)
     },
-  },
-  created() {
-    this.moment = moment;
   },
 }
 </script>

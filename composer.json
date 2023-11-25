@@ -8,6 +8,7 @@
         "php": "^8.1",
         "ext-exif": "*",
         "ext-gd": "*",
+        "beyondcode/laravel-websockets": "^1.14",
         "doctrine/dbal": "^3.5",
         "fakerphp/faker": "^1.9.1",
         "fideloper/proxy": "^4.4",
@@ -16,7 +17,6 @@
         "inertiajs/inertia-laravel": "^0.5.3",
         "jackiedo/dotenv-editor": "^2.0",
         "laravel/framework": "^8.65",
-        "laravel/passport": "^10.4",
         "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.5",
         "league/glide-laravel": "^1.0",
@@ -61,7 +61,7 @@
             "@php artisan key:generate --ansi"
         ],
         "compile": [
-            "@php artisan migrate:fresh --seed"
+            "@php artisan config:cache"
         ]
     },
     "extra": {

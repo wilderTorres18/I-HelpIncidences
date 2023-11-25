@@ -1,18 +1,18 @@
 <template>
-    <div>
-        <Head :title="__(title)" />
-        <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
-            <form @submit.prevent="update">
-                <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-                    <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" :label="__('Name')" />
-                </div>
-                <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
-                    <button v-if="!type.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">{{ __('Delete') }}</button>
-                    <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">{{ __('Update') }}</loading-button>
-                </div>
-            </form>
+  <div>
+    <Head :title="__(title)" />
+    <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
+      <form @submit.prevent="update">
+        <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
+          <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" :label="__('Name')" />
         </div>
+        <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
+          <button v-if="!type.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">{{ __('Delete') }}</button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">{{ __('Update') }}</loading-button>
+        </div>
+      </form>
     </div>
+  </div>
 </template>
 
 <script>
@@ -49,12 +49,12 @@ export default {
             this.form.put(this.route('types.update', this.type.id))
         },
         destroy() {
-            if (confirm('Are you sure you want to delete this type?')) {
+            if (confirm('¿Está seguro de que desea eliminar este tipo?')) {
                 this.$inertia.delete(this.route('types.destroy', this.type.id))
             }
         },
         restore() {
-            if (confirm('Are you sure you want to restore this type?')) {
+            if (confirm('¿Estás seguro de que quieres restaurar este tipo?')) {
                 this.$inertia.put(this.route('types.restore', this.type.id))
             }
         },

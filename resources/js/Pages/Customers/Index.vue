@@ -2,7 +2,7 @@
   <div>
     <Head :title="__('Customers')" />
     <div class="flex items-center justify-between mb-6">
-      <search-input v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset"></search-input>
+      <search-input v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset" />
       <Link class="btn-indigo" :href="route('customers.create')">
         <span>{{ __('Create New') }}</span>
       </Link>
@@ -11,16 +11,22 @@
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
           <th class="pb-4 pt-6 px-6">{{ __('Name') }}</th>
+          <th class="pb-4 pt-6 px-6">{{ __('Company') }}</th>
           <th class="pb-4 pt-6 px-6">{{ __('Email') }}</th>
           <th class="pb-4 pt-6 px-6">{{ __('Phone') }}</th>
-            <th class="pb-4 pt-6 px-6">{{ __('City') }}</th>
-            <th class="pb-4 pt-6 px-6">{{ __('Created') }}</th>
+          <th class="pb-4 pt-6 px-6">{{ __('City') }}</th>
+          <th class="pb-4 pt-6 px-6">{{ __('Created') }}</th>
         </tr>
         <tr v-for="user in users.data" :key="user.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('customers.edit',user.id)">
               <img v-if="user.photo" class="block -my-2 mr-2 w-5 h-5 rounded-full" :src="user.photo" />
-              {{ user.name }}
+              <span class="uppercase">{{ user.name }}</span>
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('customers.edit',user.id)">
+              {{ user.organization }}
             </Link>
           </td>
           <td class="border-t">
@@ -33,16 +39,16 @@
               {{ user.phone }}
             </Link>
           </td>
-            <td class="border-t">
-                <Link class="flex items-center px-6 py-4" :href="route('customers.edit',user.id)" tabindex="-1">
-                    {{ __(user.city) }}
-                </Link>
-            </td>
-            <td class="border-t">
-                <Link class="flex items-center px-6 py-4" :href="route('customers.edit',user.id)" tabindex="-1">
-                    {{ __(user.created_at) }}
-                </Link>
-            </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="route('customers.edit',user.id)" tabindex="-1">
+              <span class="uppercase">   {{ __(user.city) }}</span>
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="route('customers.edit',user.id)" tabindex="-1">
+              {{ __(user.created_at) }}
+            </Link>
+          </td>
           <td class="w-px border-t">
             <Link class="flex items-center px-4" :href="route('customers.edit',user.id)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
@@ -50,11 +56,11 @@
           </td>
         </tr>
         <tr v-if="users.data.length === 0">
-          <td class="px-6 py-4 border-t" colspan="4">{{__('No customers found.')}}</td>
+          <td class="px-6 py-4 border-t" colspan="4">{{ __('No customers found.') }}</td>
         </tr>
       </table>
     </div>
-      <pagination class="mt-6" :links="users.links" />
+    <pagination class="mt-6" :links="users.links" />
   </div>
 </template>
 

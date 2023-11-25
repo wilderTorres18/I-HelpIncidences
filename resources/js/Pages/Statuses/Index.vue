@@ -32,7 +32,7 @@
           </td>
         </tr>
         <tr v-if="statuses.data.length === 0">
-          <td class="border-t px-6 py-4" colspan="4">No statuses found.</td>
+          <td class="border-t px-6 py-4" colspan="4">Estados no encontrados</td>
         </tr>
       </table>
     </div>

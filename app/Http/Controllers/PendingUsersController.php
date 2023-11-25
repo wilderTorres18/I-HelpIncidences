@@ -69,7 +69,7 @@ class PendingUsersController extends Controller {
         $pendingUser = PendingUser::where('id', $id)->first();
         if(!empty($pendingUser)){
             $pendingUser->delete();
-            return response()->json(['message' => 'Request has been declined!']);
+            return response()->json(['message' => '¡La solicitud ha sido rechazada!']);
         }
     }
 

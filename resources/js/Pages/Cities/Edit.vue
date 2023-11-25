@@ -55,7 +55,7 @@ export default {
       this.form.put(this.route('cities.update', this.city.id))
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this city?')) {
+      if (confirm('¿Estás seguro de que deseas eliminar esta ciudad')) {
         this.$inertia.delete(this.route('cities.destroy', this.city.id))
       }
     },

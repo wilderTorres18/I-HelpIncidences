@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use App\Models\Contact;
+use App\Models\Organization;
 use App\Models\Country;
 use App\Models\Role;
 use App\Models\Status;
@@ -11,12 +12,14 @@ use App\Models\Ticket;
 use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class DashboardController extends Controller {
     public function index() {
@@ -24,12 +27,12 @@ class DashboardController extends Controller {
         if(empty($user['role'])){
             $customerRole = $this->getCustomerRole();
             User::where('id', $user['id'])->update(['role_id' => $customerRole->id]);
-            return Auth::guard('web')->logout()->with('error', 'You need to login again!');
+            return Auth::guard('web')->logout()->with('error', '¡Necesitas iniciar sesión nuevamente!');
         }
         $byUser = null;
         $byAssign = null;
         $avgWhere = [];
-        $opened_status = Status::where('slug', 'like', '%cerrado%')->first();
+        $opened_status = Status::where('slug', 'like', '%close%')->first();
         $newTicketQuery = Ticket::select(DB::raw('*'));
         if(!empty($opened_status)){
             $avgWhere[] = ['status_id', '!=', $opened_status->id];
@@ -50,13 +53,19 @@ class DashboardController extends Controller {
         $top_clients = Ticket::selectRaw("user_id, count(id) as total")
             ->groupBy('user_id')
             ->orderBy('total','DESC')
-            ->limit('3')
+            ->limit('4')
             ->get();
         $top_creators = [];
         $top_creator_tickets = 0;
         foreach ($top_clients as $client){
             $top_creator_tickets+= $client->total;
-            $top_creators[] = ['name' => $client->user? $client->user->first_name.' '.$client->user->last_name : '', 'count' => $client->total];
+            $top_creators[] = [
+                'name' => $client->user
+                    ? ($client->user->first_name .
+                        ($client->user->organization ? ' - ' . $client->user->organization->name : ''))
+                    : '',
+                'count' => $client->total
+            ];
         }
         $top_creators = $this->generateColorCount($top_creators, $top_creator_tickets);
 
@@ -143,7 +152,7 @@ class DashboardController extends Controller {
 
         $unAssignedTicketQuery = Ticket::byUser($byUser)->byAssign($byAssign);
         $openedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->where('status_id', '!=', $opened_status?->id)->count();
-        $closedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->filter(['search' => 'cerrado'])->count();
+        $closedTickets = Ticket::byUser($byUser)->byAssign($byAssign)->filter(['search' => 'close'])->count();
         $totalTickets = Ticket::byUser($byUser)->byAssign($byAssign)->count();
 
         $customer_role = Role::where('slug', 'customer')->first();
@@ -151,7 +160,7 @@ class DashboardController extends Controller {
             $totalCustomers = User::where('role_id', $customer_role->id)->count();
         }
 
-        $totalContacts = Contact::count();
+        $totalOrganizations = Organization::count();
 
         return Inertia::render('Dashboard/Index', [
             'title' => 'Dashboard',
@@ -168,7 +177,7 @@ class DashboardController extends Controller {
             'top_types' => $top_types,
             'top_departments' => $top_departments,
             'total_customer' => $totalCustomers ?? 0,
-            'total_contacts' => $totalContacts,
+            'total_organizations' => $totalOrganizations ?? 0,
             'chart_line' => [
                 'months' => $months,
                 'previousMonths' => $previousMonths,
@@ -179,7 +188,8 @@ class DashboardController extends Controller {
         ]);
     }
 
-    public function setLocale($language){
+    public function setLocale($language): RedirectResponse
+    {
         $rtlCodes = ['sa'];
         $user = Auth()->user();
         Session()->put('locale', $language);
@@ -191,7 +201,11 @@ class DashboardController extends Controller {
     }
 
     private function generateColorCount($items, $maxCount){
-        $colors = ['#c25ef1','#7562ca','#2980b9','#c0392b','#43c0dc','#7366ff','#800081','#2c3e50','#f39c12','#16a085','#27ae60'];
+        $colors = ['#27ae60','#7562ca','#2980b9','#c0392b','#43c0dc','#7366ff','#800081','#2c3e50','#f39c12','#16a085','#c25ef1',
+            '#ff6b6b', '#badc58', '#0abde3', '#ffbe76',
+            '#ff7979', '#a29bfe', '#ff9f43', '#2d3436', '#fd79a8',
+            '#74b9ff'
+        ];
         foreach ($items as $itemKey => &$itemValue){
             $itemValue['value'] = ($itemValue['count'] * 100)/$maxCount;
             $itemValue['label'] = $itemValue['name'].' '.round($itemValue['value'], 2).'% ('.$itemValue['count'].')';
@@ -200,7 +214,8 @@ class DashboardController extends Controller {
         return $items;
     }
 
-    public function editProfile() {
+    public function editProfile(): Response
+    {
         $user_id = Auth()->id();
         $user = User::where('id', $user_id)->first();
 
@@ -215,6 +230,7 @@ class DashboardController extends Controller {
                 'role' => $user->role,
                 'city' => $user->city,
                 'address' => $user->address,
+                'company' => $user->company,
                 'country_id' => $user->country_id,
                 'photo' => $user->photo_path ?? null,
                 'photo_path' => $user->photo_path ?? null,

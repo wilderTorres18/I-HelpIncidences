@@ -36,25 +36,25 @@
                                     <Link :href="route('home')" class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">{{ __('Home') }}</Link>
                                 </li>
                                 <li class="group relative" :class="{'active' : active_menu === 'services'}" @click="active_menu = 'services'">
-                                    <Link :href="route('services')" class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">{{ __('Services') }}</Link>
+                                    <Link :href="route('services')" class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">{{ __('Servicios') }}</Link>
                                 </li>
-                                <li class="group relative" :class="{'active' : active_menu === 'kb'}" @click="active_menu = 'kb'">
+                                <!-- <li class="group relative" :class="{'active' : active_menu === 'kb'}" @click="active_menu = 'kb'">
                                     <Link :href="route('kb')" class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">{{ __('Knowledge') }}</Link>
-                                </li>
-                                <li class="group relative" :class="{'active' : active_menu === 'faq'}" @click="active_menu = 'faq'">
+                                </li> -->
+                                <!-- <li class="group relative" :class="{'active' : active_menu === 'faq'}" @click="active_menu = 'faq'">
                                     <Link :href="route('faq')" class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">{{ __('FAQs') }}</Link>
-                                </li>
-                                <li class="group relative" :class="{'active' : active_menu === 'blog'}" @click="active_menu = 'blog'">
+                                </li> -->
+                                <!-- <li class="group relative" :class="{'active' : active_menu === 'blog'}" @click="active_menu = 'blog'">
                                     <Link :href="route('blog')" class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">{{ __('Blog') }}</Link>
-                                </li>
-                                <li class="group relative" :class="{'active' : active_menu === 'contact'}" @click="active_menu = 'contact'">
+                                </li> -->
+                                <!-- <li class="group relative" :class="{'active' : active_menu === 'contact'}" @click="active_menu = 'contact'">
                                     <Link :href="route('contact')" class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">{{ __('Contact') }}</Link>
-                                </li>
+                                </li> -->
                             </ul>
                         </nav>
                     </div>
                     <div v-if="$page.props.auth && $page.props.auth.user" class="justify-end pr-16 flex lg:pr-0">
-                        <div class="dd__wrapper">
+                        <div class="dd__wrapper"> 
                             <dropdown class="mt-1 select_user" placement="bottom-end">
                                 <template #default>
                                     <div class="flex items-center cursor-pointer group">
@@ -80,7 +80,7 @@
                     </div>
                     <div v-else class="hidden justify-end pr-16 sm:flex lg:pr-0">
                         <a :href="route('login')" class="signUpBtn rounded-lg bg-white bg-opacity-20 py-3 px-6 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
-                            Login
+                            Iniciar sesión
                         </a>
                     </div>
                 </div>

@@ -2,10 +2,10 @@
   <div>
     <Head :title="__(title)" />
     <div class="mb-6 flex justify-between items-center">
-      <search-input v-model="form.search" class="w-full max-w-md mr-4" @reset="reset"></search-input>
-        <Link class="btn-indigo" :href="this.route('languages.create')">
-            <span>{{ __('Add New') }}</span>
-        </Link>
+      <search-input v-model="form.search" class="w-full max-w-md mr-4" @reset="reset" />
+      <Link class="btn-indigo" :href="route('languages.create')">
+        <span>{{ __('Add New') }}</span>
+      </Link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
@@ -15,17 +15,17 @@
         </tr>
         <tr v-for="language in $page.props.languages" :key="language.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="this.route('languages.edit', language.id)">
+            <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('languages.edit', language.id)">
               {{ language.name }}
             </Link>
           </td>
-            <td class="border-t">
-                <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="this.route('languages.edit', language.id)">
-                    {{ language.code }}
-                </Link>
-            </td>
+          <td class="border-t">
+            <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('languages.edit', language.id)">
+              {{ language.code }}
+            </Link>
+          </td>
           <td class="border-t w-px">
-            <div class="px-4 flex items-center cursor-pointer" @click="deleteLanguage(language.id)" tabindex="-1">
+            <div class="px-4 flex items-center cursor-pointer" tabindex="-1" @click="deleteLanguage(language.id)">
               <icon name="trash" class="block w-6 h-6 fill-gray-400" />
             </div>
           </td>

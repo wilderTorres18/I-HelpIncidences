@@ -28,6 +28,8 @@
  * Released under the MIT License.
  */
 
+/*! #__NO_SIDE_EFFECTS__ */
+
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
 //! moment.js

@@ -12,7 +12,7 @@
 @section('container')
 
     <p class="mt-2 max-w-3xl text-center mx-auto">
-        You can login or navigate to the homepage now!
+        ¡Puedes iniciar sesión o navegar a la página de inicio ahora!
     </p>
 
     <div class="buttons">

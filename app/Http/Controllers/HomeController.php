@@ -25,7 +25,7 @@ class HomeController extends Controller
 
     public function index(){
         return Inertia::render('Landing/Home', [
-            'title' => 'Home - Helpdesk',
+            'title' => 'Home - I-Helpinc',
             'page' => FrontPage::where('slug', 'home')->first(),
 //            'footer' => FrontPage::where('slug', 'footer')->first(),
             'departments' => Department::orderBy('name')
@@ -126,7 +126,7 @@ class HomeController extends Controller
         ];
         event(new TicketCreated($variables));
 
-        return Redirect::route('ticket_open')->with('success', 'The ticket has been submitted, we will get a message from us to follow up the ticket update. Please check the spam folder and make sure you got the mail from us.');
+        return Redirect::route('ticket_open')->with('success', 'El ticket ha sido enviado, recibiremos un mensaje nuestro para realizar un seguimiento de la actualización del ticket. Por favor revise la carpeta de spam y asegúrese de haber recibido nuestro correo. ');
     }
 
     private function genRendomPassword() {

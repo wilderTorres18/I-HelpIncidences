@@ -1,74 +1,75 @@
 <template>
-    <div>
-<!--        <h1 class="mb-8 font-bold text-3xl">-->
-<!--            <Link class="text-indigo-400 hover:text-indigo-600" :href="this.route('tickets')">{{ __('Tickets') }}</Link>-->
-<!--            <span class="text-indigo-400 font-medium">/</span> {{ __('Create') }}-->
-<!--        </h1>-->
-        <div class="bg-white rounded-md shadow overflow-hidden max-w-full">
-            <form @submit.prevent="store">
-                <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
+  <div>
+    <!--        <h1 class="mb-8 font-bold text-3xl">-->
+    <!--            <Link class="text-indigo-400 hover:text-indigo-600" :href="this.route('tickets')">{{ __('Tickets') }}</Link>-->
+    <!--            <span class="text-indigo-400 font-medium">/</span> {{ __('Create') }}-->
+    <!--        </h1>-->
+    <div class="bg-white rounded-md shadow overflow-hidden max-w-full">
+      <form @submit.prevent="store">
+        <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
+          <select-input-filter
+            v-if="!isCustomer && user_access.ticket.update" v-model="form.user_id" placeholder="Empezar a escribir"
+            :on-input="doFilter"
+            :items="customers" :error="form.errors.user_id"
+            class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Customer')"
+          />
+          <select-input v-if="user_access.ticket.update" v-model="form.priority_id" :error="form.errors.priority_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Priority')">
+            <option :value="null" />
+            <option v-for="s in priorities" :key="s.id" :value="s.id">{{ s.name }}</option>
+          </select-input>
+          <select-input v-if="user_access.ticket.update" v-model="form.status_id" :error="form.errors.status_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Status')">
+            <option :value="null" />
+            <option v-for="s in statuses" :key="s.id" :value="s.id">{{ s.name }}</option>
+          </select-input>
+          <select-input v-if="!(hidden_fields && hidden_fields.includes('department'))" v-model="form.department_id" :error="form.errors.department_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Department')" :required="true">
+            <option :value="null" />
+            <option v-for="s in departments" :key="s.id" :value="s.id">{{ s.name }}</option>
+          </select-input>
 
+          <select-input-filter
+            v-if="user_access.ticket.update && !(hidden_fields && hidden_fields.includes('assigned_to'))" v-model="form.assigned_to" placeholder="Empezar a escribir"
+            :on-input="doFilterUsersExceptCustomer"
+            :items="usersExceptCustomers" :error="form.errors.assigned_to"
+            class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Assigned to')"
+          />
 
-                    <select-input-filter placeholder="Start typing" :onInput="doFilter" :items="customers"
-                                         v-if="user_access.ticket.update"
-                                         v-model="form.user_id" :error="form.errors.user_id"
-                                         class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Customer')">
-                    </select-input-filter>
-
-
-                    <select-input v-if="user_access.ticket.update" v-model="form.priority_id" :error="form.errors.priority_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Priority')">
-                        <option :value="null" />
-                        <option v-for="s in priorities" :key="s.id" :value="s.id">{{ s.name }}</option>
-                    </select-input>
-                    <select-input v-if="user_access.ticket.update" v-model="form.status_id" :error="form.errors.status_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Status')">
-                        <option :value="null" />
-                        <option v-for="s in statuses" :key="s.id" :value="s.id">{{ s.name }}</option>
-                    </select-input>
-                    <select-input v-if="!(hidden_fields && hidden_fields.includes('department'))" v-model="form.department_id" :error="form.errors.department_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Department')" :required="true">
-                        <option :value="null" />
-                        <option v-for="s in departments" :key="s.id" :value="s.id">{{ s.name }}</option>
-                    </select-input>
-
-                    <select-input-filter placeholder="Start typing" :onInput="doFilterUsersExceptCustomer" :items="usersExceptCustomers"
-                                         v-if="user_access.ticket.update && !(hidden_fields && hidden_fields.includes('assigned_to'))"
-                                         v-model="form.assigned_to" :error="form.errors.assigned_to"
-                                         class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Assigned to')">
-                    </select-input-filter>
-
-                    <select-input v-if="!(hidden_fields && hidden_fields.includes('ticket_type'))" v-model="form.type_id" :error="form.errors.type_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Ticket Type')" :required="true">
-                        <option :value="null" />
-                        <option v-for="s in types" :key="s.id" :value="s.id">{{ s.name }}</option>
-                    </select-input>
-                    <text-input v-model="form.subject" :error="form.errors.subject" class="pr-6 pb-8 w-full lg:w-2/3" :label="__('Subject')" />
-                    <select-input v-if="!(hidden_fields && hidden_fields.includes('category'))" v-model="form.category_id" :error="form.errors.category_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Category')" :required="true">
-                        <option :value="null" />
-                        <option v-for="s in categories" :key="s.id" :value="s.id">{{ s.name }}</option>
-                    </select-input>
-                    <div class="pr-6 pb-8 w-full">
-                        <label class="form-label" >Detalles: </label>
-                        <ckeditor id="ticketDetails" :editor="editor" v-model="form.details" :config="editorConfig"></ckeditor>
-                    </div>
-                    <input ref="file" type="file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf, .zip" class="hidden" multiple="multiple" @change="fileInputChange" />
-                    <div class="pr-6 pb-8 w-full lg:w-full flex-col">
-                        <button type="button" class="btn flex justify-center items-center" @click="fileBrowse">
-                            <icon name="file" class="flex-shrink-0 h-8 fill-gray-400 pr-1" /> <h4>{{ __('Attach files') }}</h4>
-                        </button>
-                        <div v-if="form.files.length" class="flex items-center justify-between pr-6 pt-8 w-full lg:w-1/2" v-for="(file, fi) in form.files" :key="fi">
-                            <div class="flex-1 pr-1">
-                                {{ file.name }} <span class="text-gray-500 text-xs">({{ getFileSize(file.size) }})</span>
-                            </div>
-                            <button type="button" class="btn flex justify-center items-center" @click="fileRemove(file, fi)">
-                                {{ __('Remove') }}</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
-                    <loading-button :loading="form.processing" class="btn-indigo" type="submit">{{ __('Create') }}
-                        {{ __('Ticket') }}</loading-button>
-                </div>
-            </form>
+          <select-input v-if="!(hidden_fields && hidden_fields.includes('ticket_type'))" v-model="form.type_id" :error="form.errors.type_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Ticket Type')" :required="true">
+            <option :value="null" />
+            <option v-for="s in types" :key="s.id" :value="s.id">{{ s.name }}</option>
+          </select-input>
+          <select-input v-if="!(hidden_fields && hidden_fields.includes('category'))" v-model="form.category_id" :error="form.errors.category_id" class="pr-6 pb-8 w-full lg:w-1/3" :label="__('Category')" :required="true">
+            <option :value="null" />
+            <option v-for="s in categories" :key="s.id" :value="s.id">{{ s.name }}</option>
+          </select-input>
+          <text-input v-model="form.subject" :error="form.errors.subject" class="pr-6 pb-8 w-full lg:w-2/3" :label="__('Subject')" />
+          <div class="pr-6 pb-8 w-full">
+            <label class="form-label">Detalles: </label>
+            <ckeditor id="ticketDetails" v-model="form.details" :editor="editor" :config="editorConfig" />
+          </div>
+          <input ref="file" type="file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf, .zip" class="hidden" multiple="multiple" @change="fileInputChange" />
+          <div class="pr-6 pb-8 w-full lg:w-full flex-col">
+            <button type="button" class="btn flex justify-center items-center" @click="fileBrowse">
+              <icon name="file" class="flex-shrink-0 h-8 fill-gray-400 pr-1" /> <h4>{{ __('Attach files') }}</h4>
+            </button>
+            <div v-for="(file, fi) in form.files" v-if="form.files.length" :key="fi" class="flex items-center justify-between pr-6 pt-8 w-full lg:w-1/2">
+              <div class="flex-1 pr-1">
+                {{ file.name }} <span class="text-gray-500 text-xs">({{ getFileSize(file.size) }})</span>
+              </div>
+              <button type="button" class="btn flex justify-center items-center" @click="fileRemove(file, fi)">
+                {{ __('Remove') }}
+              </button>
+            </div>
+          </div>
         </div>
+        <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
+          <loading-button :loading="form.processing" class="btn-indigo" type="submit">
+            {{ __('Create') }}
+            {{ __('Ticket') }}
+          </loading-button>
+        </div>
+      </form>
     </div>
+  </div>
 </template>
 
 <script>
@@ -80,8 +81,8 @@ import SelectInput from '@/Shared/SelectInput'
 import SelectInputFilter from '@/Shared/SelectInputFilter'
 import TextareaInput from '@/Shared/TextareaInput'
 import LoadingButton from '@/Shared/LoadingButton'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import UploadAdapter from '@/Shared/UploadAdapter';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import UploadAdapter from '@/Shared/UploadAdapter'
 
 export default {
     metaInfo: { title: 'Create Ticket' },
@@ -105,6 +106,7 @@ export default {
         categories: Array,
         auth: Object,
         hidden_fields: Object,
+        isCustomer: Boolean,
     },
     remember: false,
     data() {
@@ -114,7 +116,7 @@ export default {
             editorConfig: {
                 toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'insertTable', 'blockQuote', '|', 'imageUpload', 'mediaEmbed', '|', 'undo', 'redo' ],
                 table: {
-                    toolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+                    toolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ],
                 },
                 extraPlugins: [this.uploader],
             },
@@ -140,33 +142,33 @@ export default {
     methods: {
         uploader(editor) {
             editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
-                return new UploadAdapter( loader );
-            };
+                return new UploadAdapter( loader )
+            }
         },
         doFilter(e){
             this.axios.get(this.route('filter.customers', {search: e.target.value})).then((res)=>{
-                this.customers.splice(0, this.customers.length, ...res.data);
+                this.customers.splice(0, this.customers.length, ...res.data)
             })
         },
         doFilterUsersExceptCustomer(e){
             this.axios.get(this.route('filter.users_except_customer', {search: e.target.value})).then((res)=>{
-                this.usersExceptCustomers.splice(0, this.usersExceptCustomers.length, ...res.data);
+                this.usersExceptCustomers.splice(0, this.usersExceptCustomers.length, ...res.data)
             })
         },
         setDefaultValue(arr, key, value){
-            const find = arr.find(i=>i.name.match(new RegExp(value + ".*")))
+            const find = arr.find(i=>i.name.match(new RegExp(value + '.*')))
             if(find){
                 this.form[key] = find['id']
             }
         },
         fileInputChange(e) {
-            let selectedFiles = e.target.files;
+            let selectedFiles = e.target.files
             for (let i = 0; i < selectedFiles.length; i++) {
-                this.form.files.push(selectedFiles[i]);
+                this.form.files.push(selectedFiles[i])
             }
         },
         fileRemove(image, index) {
-            this.form.files.splice(index, 1);
+            this.form.files.splice(index, 1)
         },
         getFileSize(size) {
             const i = Math.floor(Math.log(size) / Math.log(1024))

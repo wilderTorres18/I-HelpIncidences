@@ -23,7 +23,7 @@ return [
 
     /*
      *
-     * Tranducciones de la página de requisitos.
+     * Traducciones de la página de requisitos.
      *
      */
     'requirements' => [

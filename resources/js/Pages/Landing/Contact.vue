@@ -1,4 +1,4 @@
-<!-- <template>
+ <template>
   <div>
     <Head title="Contact" />
     Start Hero
@@ -21,9 +21,9 @@
         </span>
       </div>
     </section>end section
-    End Hero 
+    End Hero
 
-     ====== Contact Section Start 
+    ====== Contact Section Start
     <section class="relative z-10 overflow-hidden bg-white py-20 lg:py-[120px]">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap lg:justify-between">
@@ -133,7 +133,7 @@
         </div>
       </div>
     </section>
-     ====== Contact Section End 
+     ====== Contact Section End
   </div>
 </template>
 <script>
@@ -173,4 +173,3 @@ export default {
     },
 }
 </script>
--->

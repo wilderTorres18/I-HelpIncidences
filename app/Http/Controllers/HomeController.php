@@ -12,6 +12,7 @@ use App\Models\Status;
 use App\Models\Ticket;
 use App\Models\Type;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -19,11 +20,13 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class HomeController extends Controller
 {
 
-    public function index(){
+    public function index(): Response
+    {
         return Inertia::render('Landing/Home', [
             'title' => 'Home - I-Helpinc',
             'page' => FrontPage::where('slug', 'home')->first(),
@@ -43,7 +46,8 @@ class HomeController extends Controller
         ]);
     }
 
-    public function ticketOpen(){
+    public function ticketOpen(): Response|RedirectResponse
+    {
         $home = FrontPage::where('slug', 'home')->first();
         if(!empty($home) && !empty($home->html)){
             $home = json_decode($home->html, true);
@@ -69,7 +73,8 @@ class HomeController extends Controller
         ]);
     }
 
-    public function ticketPublicStore() {
+    public function ticketPublicStore(): RedirectResponse
+    {
         $ticket_data = Request::validate([
             'first_name' => ['required', 'max:40'],
             'last_name' => ['required', 'max:40'],
@@ -129,7 +134,8 @@ class HomeController extends Controller
         return Redirect::route('ticket_open')->with('success', 'El ticket ha sido enviado, recibiremos un mensaje nuestro para realizar un seguimiento de la actualización del ticket. Por favor revise la carpeta de spam y asegúrese de haber recibido nuestro correo. ');
     }
 
-    private function genRendomPassword() {
+    private function genRendomPassword(): string
+    {
         $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
         $pass = array(); //remember to declare $pass as an array
         $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache

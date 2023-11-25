@@ -707,8 +707,7 @@ Route::get('/language/{language}', [DashboardController::class, 'setLocale'])
 /** Site Front-Landing */
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
-    ->name('login')
-    ->middleware('guest');
+    ->name('login');
 
 /*Route::get('/', [HomeController::class, 'index'])
     ->name('home');*/

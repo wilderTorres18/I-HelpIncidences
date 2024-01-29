@@ -27,7 +27,8 @@ class HomeController extends Controller
 
     public function index(): Response
     {
-        return Inertia::render('Landing/Home', [
+        return Inertia::render('Auth/Login');
+/*        return Inertia::render('Landing/Home', [
             'title' => 'Home - I-Helpinc',
             'page' => FrontPage::where('slug', 'home')->first(),
 //            'footer' => FrontPage::where('slug', 'footer')->first(),
@@ -43,7 +44,7 @@ class HomeController extends Controller
                 ->get()
                 ->map
                 ->only('id', 'name'),
-        ]);
+        ]);*/
     }
 
     public function ticketOpen(): Response|RedirectResponse

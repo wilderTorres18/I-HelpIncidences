@@ -706,12 +706,12 @@ Route::get('/language/{language}', [DashboardController::class, 'setLocale'])
 
 /** Site Front-Landing */
 
-Route::get('/', [AuthenticatedSessionController::class, 'create'])
+/*Route::get('/', [AuthenticatedSessionController::class, 'create'])
     ->name('login')
-    ->middleware('guest');
+    ->middleware('guest');*/
 
-/*Route::get('/', [HomeController::class, 'index'])
-    ->name('home');*/
+Route::get('/', [HomeController::class, 'index'])
+    ->name('home');
 
 Route::get('terms-of-services', [PageController::class, 'terms'])
     ->name('terms_service');

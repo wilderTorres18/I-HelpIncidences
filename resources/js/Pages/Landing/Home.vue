@@ -1,53 +1,55 @@
 <template>
-    <div>
-        <!-- Start Hero -->
-        <Head title="Home" />
-        <!-- ====== Hero Section Start -->
-        <div
-            id="home"
-            class="relative overflow-hidden bg-primary pt-[120px] md:pt-[130px] lg:pt-[160px]"
-        >
-            <div class="container">
-                <div class="-mx-4 flex flex-wrap items-center"> 
-                    <div class="w-full px-4">
-                        <div
-                            class="hero-content wow fadeInUp mx-auto max-w-[780px] text-center"
-                            data-wow-delay=".2s"
-                        >
-                            <h1 class="mb-8 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug md:text-[45px] md:leading-snug" v-html="sanitizeHtml(html.sections[0].title)"></h1>
-                            <p class="mx-auto mb-10 max-w-[600px] text-base text-[#e4e4e4] sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed" v-html="sanitizeHtml(html.sections[0].details)"></p>
-                            <ul class="mb-10 flex flex-wrap items-center justify-center gap-6">
-                                <li v-for="(button, bi) in html.sections[0].buttons" :key="bi">
-                                    <Link :href="button.link"
-                                       class="inline-flex items-center justify-center rounded-lg bg-white py-4 px-6 text-center text-base font-medium text-dark transition duration-300 ease-in-out hover:text-primary hover:shadow-lg sm:px-10">
-                                        {{ button.text }}
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="w-full px-4">
-                        <div
-                            class="wow fadeInUp relative z-10 mx-auto max-w-[845px]"
-                            data-wow-delay=".25s"
-                        >
-                            <div class="mt-16">
-                                <img v-if="html.sections[0].image" :src="html.sections[0].image" alt="" class="mx-auto max-w-full rounded-t-xl rounded-tr-xl">
-                                <img v-else src="/landing/images/dashboard-helpdesk.png" alt="" class="mx-auto max-w-full rounded-t-xl rounded-tr-xl">
-                            </div>
-                            <div class="absolute bottom-0 -left-9 z-[-1]">
-                                <img src="/images/svg/dot-1.svg" alt="dot" />
-                            </div>
-                            <div class="absolute -top-6 -right-6 z-[-1]">
-                                <img src="/images/svg/dot-2.svg" alt="dot" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div>
+    <!-- Start Hero -->
+    <Head title="Home" />
+    <!-- ====== Hero Section Start -->
+    <div
+      id="home"
+      class="relative overflow-hidden bg-primary pt-[120px] md:pt-[130px] lg:pt-[160px]"
+    >
+      <div class="container">
+        <div class="-mx-4 flex flex-wrap items-center">
+          <div class="w-full px-4">
+            <div
+              class="hero-content wow fadeInUp mx-auto max-w-[780px] text-center"
+              data-wow-delay=".2s"
+            >
+              <h1 class="mb-8 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug md:text-[45px] md:leading-snug" v-html="sanitizeHtml(html.sections[0].title)" />
+              <p class="mx-auto mb-10 max-w-[600px] text-base text-[#e4e4e4] sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed" v-html="sanitizeHtml(html.sections[0].details)" />
+              <ul class="mb-10 flex flex-wrap items-center justify-center gap-6">
+                <!--                <li v-for="(button, bi) in html.sections[0].buttons" :key="bi">
+                  <Link
+                    :href="button.link"
+                    class="inline-flex items-center justify-center rounded-lg bg-white py-4 px-6 text-center text-base font-medium text-dark transition duration-300 ease-in-out hover:text-primary hover:shadow-lg sm:px-10"
+                  >
+                    {{ button.text }}
+                  </Link>
+                </li>-->
+              </ul>
             </div>
+          </div>
+
+          <div class="w-full px-4">
+            <div
+              class="wow fadeInUp relative z-10 mx-auto max-w-[845px]"
+              data-wow-delay=".25s"
+            >
+              <div class="mt-16">
+                <img v-if="html.sections[0].image" :src="html.sections[0].image" alt="" class="mx-auto max-w-full rounded-t-xl rounded-tr-xl" />
+                <img v-else src="/landing/images/dashboard-helpdesk.png" alt="" class="mx-auto max-w-full rounded-t-xl rounded-tr-xl" />
+              </div>
+              <div class="absolute bottom-0 -left-9 z-[-1]">
+                <img src="/images/svg/dot-1.svg" alt="dot" />
+              </div>
+              <div class="absolute -top-6 -right-6 z-[-1]">
+                <img src="/images/svg/dot-2.svg" alt="dot" />
+              </div>
+            </div>
+          </div>
         </div>
-        <!--<section class="pt-20 pb-8 lg:pt-[120px] lg:pb-[70px]">
+      </div>
+    </div>
+    <!--<section class="pt-20 pb-8 lg:pt-[120px] lg:pb-[70px]">
             <div class="container">
                 <div class="-mx-4 flex flex-wrap">
                     <div class="w-full px-4">
@@ -78,7 +80,7 @@
                 </div>
             </div>
         </section>-->
-        <!-- Start 
+    <!-- Start
         <section v-if="html.sections[2].enable_ticket_section" class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800" id="ticketSubmit">
             <div class="container">
                 <form class="card mt-2 p-4 rounded shadow-xl overflow-hidden" @submit.prevent="store" enctype="multipart/form-data">
@@ -113,7 +115,7 @@
 
                         </div>
 
-                        Attachments 
+                        Attachments
                         <input ref="file" type="file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf, .zip" class="hidden" multiple="multiple" @change="fileInputChange" />
                         <div class="pr-6 rtl:pl-6 pb-8 w-full lg:w-full flex-col">
                             <button type="button" class="btn flex justify-center items-center border-0" @click="fileBrowse">
@@ -127,7 +129,7 @@
                                     {{ __('Remove') }}</button>
                             </div>
                         </div>
-                        Attachments 
+                        Attachments
                     </div>
                     <div class="px-4 py-4 border-t border-gray-100 flex justify-end">
                         <loading-button :loading="form.processing" class="rounded-lg bg-primary py-3 px-6 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-80" type="submit">Submit</loading-button>
@@ -136,9 +138,8 @@
                 </form>
             </div> end container
         </section> end section-->
-        <!-- End -->
-
-    </div>
+    <!-- End -->
+  </div>
 </template>
 
 <script>
@@ -149,12 +150,11 @@ import Icon from '@/Shared/Icon'
 import TextInput from '@/Shared/TextInput'
 import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import sanitizeHtml from "sanitize-html";
-import UploadAdapter from '@/Shared/UploadAdapter';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import sanitizeHtml from 'sanitize-html'
+import UploadAdapter from '@/Shared/UploadAdapter'
 export default {
     metaInfo: { title: 'Home' },
-    layout: Layout,
     components: {
         Logo,
         Icon,
@@ -164,6 +164,7 @@ export default {
         Head,
         Link,
     },
+    layout: Layout,
     props: {
         categories: Array,
         departments: Array,
@@ -179,7 +180,7 @@ export default {
             editorConfig: {
                 toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'insertTable', 'blockQuote', '|', 'imageUpload', 'mediaEmbed', '|', 'undo', 'redo' ],
                 table: {
-                    toolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+                    toolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ],
                 },
                 extraPlugins: [this.uploader],
             },
@@ -194,15 +195,17 @@ export default {
                 details: '',
                 files: [],
             }),
-            sanitizeHtml : sanitizeHtml
+            sanitizeHtml : sanitizeHtml,
         }
+    },
+    created() {
     },
 
     methods: {
         uploader(editor) {
             editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
-                return new UploadAdapter( loader );
-            };
+                return new UploadAdapter( loader )
+            }
         },
         uploadFiles() {
             this.form.files = this.$refs.files.files
@@ -216,13 +219,13 @@ export default {
             })
         },
         fileInputChange(e) {
-            let selectedFiles = e.target.files;
+            let selectedFiles = e.target.files
             for (let i = 0; i < selectedFiles.length; i++) {
-                this.form.files.push(selectedFiles[i]);
+                this.form.files.push(selectedFiles[i])
             }
         },
         fileRemove(image, index) {
-            this.form.files.splice(index, 1);
+            this.form.files.splice(index, 1)
         },
         getFileSize(size) {
             const i = Math.floor(Math.log(size) / Math.log(1024))
@@ -232,8 +235,6 @@ export default {
             this.$refs.file.click()
         },
     },
-    created() {
-    }
 }
 </script>
 

@@ -1,4 +1,4 @@
-Claro, aquí tienes una versión mejorada del README para tu proyecto en GitHub:
+
 
 ---
 

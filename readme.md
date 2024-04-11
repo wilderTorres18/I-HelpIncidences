@@ -32,5 +32,3 @@ A continuación, se presentan vistas previas del sistema:
 [Insertar imagen aquí]
 
 ---
-
-¡Espero que este README sea útil para tu proyecto en GitHub! Si necesitas más ayuda o tienes alguna pregunta, no dudes en contactarme.
